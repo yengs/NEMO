@@ -3,9 +3,28 @@
 
 <mapper namespace="nemo.mapper.MemberMapper">
 	<select id="selectMemberList" resultType="nemo.dto.MemberDto">
-		select m_num, m_name, m_email
-		     , date_format(m_date, '%Y.%m.%d %H:%i:%s') as m_date
+		select member_num, member_name, member_email
+		     , date_format(member_date, '%Y.%m.%d %H:%i:%s') as member_date
 		  from member
+	</select>
+	
+	<insert id="insertMember" parameterType="nemo.dto.MemberDto">
+		insert into member (member_nickname, member_name, member_id, member_pw, member_date, member_phone, member_email, member_address)
+		values (#{member_nickname}, #{member_name}, #{member_id}, #{member_pw}, #{member_date}, #{member_phone}, #{member_email}, #{member_address})
+		<selectKey keyProperty="member_num" resultType="Integer">select last_insert_id()</selectKey>
+	</insert>
+	
+	<update id="updateMember" parameterType="nemo.dto.MemberDto">
+		update member set member_pw = #{mebmer_pw}, member_phone = #{member_phone}, member_nickname = #{member_nickname},
+		where member_num = #{member_num}
+	</update>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete from member where member_num = #{member_num}
+	</delete>
+	
+	<select id="login" parameterType="nemo.dto.MemberDto" resultType="nemo.dto.MemberDto">
+		select * from member where member_num = #{member_num} and member_pw = #{member_pw}
 	</select>
 	
 </mapper>
