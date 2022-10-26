@@ -29,8 +29,10 @@ public class RestMemberApiController {
 	
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
    public void join(@RequestBody MemberDto member) throws Exception {
-	  System.out.println(member);
-      memberService.join(member);
+		int randomMailKey = (int)(Math.random()*100000);
+		String to = Integer.toString(randomMailKey);
+		member.setMemberMailkey(to);
+		memberService.join(member);
    }
 
 }
