@@ -9,5 +9,5 @@ import nemo.dto.MemberDto;
 @Mapper
 public interface MemberMapper {
 	List<MemberDto> selectMemberList() throws Exception;
-	
+	int join(MemberDto member) throws Exception;
 }

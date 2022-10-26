@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import nemo.dto.MemberDto;
@@ -25,5 +26,11 @@ public class RestMemberApiController {
 	public List<MemberDto> openMemberList() throws Exception {
 		return memberService.selectMemberList();
 	}
+	
+	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
+   public void join(@RequestBody MemberDto member) throws Exception {
+	  System.out.println(member);
+      memberService.join(member);
+   }
 
 }
