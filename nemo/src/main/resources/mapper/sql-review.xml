@@ -9,7 +9,7 @@
 		REVIEW_SATISFACTION, REVIEW_IMAGE, REVIEW_CONTENTS, (SELECT item_price
 		FROM item i WHERE i.i_num =
 		r.review_productidx) item_price FROM review
-		r;
+		r WHERE REVIEW_WRITER ORDER BY REVIEW_NUM DESC;
 	</select>
 	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
 	<select id="selectYourReviewList"
@@ -17,7 +17,7 @@
 		SELECT REVIEW_NUM, REVIEW_PRODUCTIDX, REVIEW_IMAGE,
 		REVIEW_ID,
 		REVIEW_SATISFACTION
-		FROM REVIEW
+		FROM REVIEW WHERE REVIEW_ID
 		ORDER BY REVIEW_NUM DESC
 	</select>
 	<!-- 후기 등록 -->

@@ -66,7 +66,6 @@ public class RestReviewApiController {
 		if (reviewDto == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} else {
-			// return ResponseEntity.status(HttpStatus.OK).body(boardDto);
 			return ResponseEntity.ok(reviewDto);
 		}
 	}
