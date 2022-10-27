@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nemo.mapper.ItemMapper">
+   
+   <!--상품조회 -->
+   <select id="selectItemList" resultType="nemo.dto.ItemDto">
+      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
+           ,item_date,item_readcount,item_detail 
+           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,item_etcsize,item_height,item_rentalperiod
+        from item
+       order by item_num desc 
+    </select> 
+
+   <!-- 상품등록 -->
+   <insert id="insertItem" parameterType="nemo.dto.ItemDto">
+      insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
+                    item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
+                    item_topsize,item_bottomsize,item_etcsize,item_height,item_rentalperiod) 
+      values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
+            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},#{itemImage},#{itemImagepath},
+            #{itemTopsize},#{itemBottomsize},#{itemEtcsize} ,#{itemHeight},now())
+   </insert>
+   
+   
+   <!--상품리스트 상세-->
+   <select id="selectItemDetail" parameterType="int" resultType="nemo.dto.ItemDto">
+      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
+           ,item_date,item_readcount,item_detail 
+           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,item_etcsize,item_height,item_rentalperiod
+        from item
+      where item_num =#{itemNum}
+   </select>
+   
+   
+   <!-- 상품 수정 -->
+    <update id="updateItem" parameterType="nemo.dto.ItemDto">
+		update item set item_name = #{itemName}, item_price = #{itemPrice}, item_detail = #{itemDetail}
+		, item_date = now()
+		  where item_num =#{itemNum}
+	</update>
+   
+   <!-- 상품 삭제 -->
+   <delete id="deleteItem" parameterType="int">
+      delete from item where item_num = #{itemNum}
+   </delete>
+   </mapper>
