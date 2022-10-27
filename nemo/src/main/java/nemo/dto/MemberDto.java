@@ -4,18 +4,20 @@ import lombok.Data;
 
 @Data
 public class MemberDto {
-	private int member_num;
-	private String member_nickname;
-	private String member_name;
-	private String member_id;
-	private String member_pw;
-	private String member_date;
-	private String member_user;
-	private String member_phone;
-	private int member_mailauth;
-	private String member_mailkey;
-	private String member_email;
-	private String member_address;
-	private int member_warning;
-	private int member_clean;
+
+	private int memberNum;
+	private String memberNickname;
+	private String memberName;
+	private String memberId;
+	private String memberPw;
+	private String memberDate;
+	private String memberUser;
+	private String memberPhone;
+	private int memberMailauth;
+	private String memberMailkey;
+	private String memberEmail;
+	private String memberAddress;
+	private int memberWarning;
+	private int memberClean;
+
 }

@@ -14,4 +14,5 @@ public interface MemberMapper {
 	int updateMember(MemberDto memberDto) throws Exception;
 	int deleteMember(int member_num) throws Exception;
 	MemberDto login(MemberDto memberDto) throws Exception;
+	int join(MemberDto member) throws Exception;
 }

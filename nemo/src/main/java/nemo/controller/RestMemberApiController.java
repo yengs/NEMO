@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import board.vo.RequestVo;
-import board.vo.ResponseVo;
 import nemo.dto.MemberDto;
 import nemo.service.MemberService;
 
@@ -68,5 +67,13 @@ public class RestMemberApiController {
 			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
 		}
 	}
+	
+	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
+   public void join(@RequestBody MemberDto member) throws Exception {
+		int randomMailKey = (int)(Math.random()*100000);
+		String to = Integer.toString(randomMailKey);
+		member.setMemberMailkey(to);
+		memberService.join(member);
+   }
 
 }

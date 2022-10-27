@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDto> selectMemberList() throws Exception {
 		return memberMapper.selectMemberList();
 	}
+	
 
 	@Override
 	public int insertMember(MemberDto member) throws Exception {
@@ -59,4 +60,8 @@ public class MemberServiceImpl implements MemberService {
 		return responseVo;
 	}
 
+	   public int join(MemberDto member) throws Exception {
+		System.out.println("serviceImpl:::::::::"+member);
+	      return memberMapper.join(member);
+	   }
 }

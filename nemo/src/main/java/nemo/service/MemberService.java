@@ -13,4 +13,5 @@ public interface MemberService {
 	public void updateMember(MemberDto memberDto) throws Exception;
 	public void deleteMember(int member_num) throws Exception;
 	public ResponseVo login(RequestVo requestVo) throws Exception;
+	public int join(MemberDto member) throws Exception;
 }
