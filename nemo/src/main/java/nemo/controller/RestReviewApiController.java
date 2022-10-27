@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import board.dto.BoardDto;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
 import nemo.dto.ReviewDto;
@@ -39,7 +39,7 @@ public class RestReviewApiController {
 	@ApiOperation(value = "후기 작성", notes = "후기를 작성하고 등록")
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
 	public void insertReview(
-			@Parameter(description = "후기 정보", required = true, example = "{ reviewContents: 내용 }") @RequestBody ReviewDto review)
+			@Parameter(description = "후기 정보", required = true, example = "{ reviewContents: 내용 , reviewSatisfaction : 평점 }") @RequestBody ReviewDto review)
 			throws Exception {
 		reviewService.insertReview(review);
 	}
