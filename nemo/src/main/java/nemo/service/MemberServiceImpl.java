@@ -23,5 +23,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 
-
+	@Override
+	   public int join(MemberDto member) throws Exception {
+		System.out.println("serviceImpl:::::::::"+member);
+	      return memberMapper.join(member);
+	   }
 }
