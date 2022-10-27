@@ -18,6 +18,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDto> selectMemberList() throws Exception {
 		return memberMapper.selectMemberList();
 	}
+	
+	
+	
+	
 
 
 }
