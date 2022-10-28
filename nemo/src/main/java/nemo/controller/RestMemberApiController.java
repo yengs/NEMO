@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nemo.dto.MemberDto;
 import nemo.service.MemberService;
+import nemo.vo.MemberRequestVo;
+import nemo.vo.MemberResponseVo;
 
 @RestController
 @RequestMapping("/api")
@@ -34,5 +36,19 @@ public class RestMemberApiController {
 		member.setMemberMailkey(to);
 		memberService.join(member);
    }
+	
+	
+//	jwt위한 추가 10.28 오전 12:04
+	@RequestMapping(value="member/login", method = RequestMethod.POST)
+	public ResponseEntity<MemberResponseVo> login(@RequestBody MemberRequestVo requestVo) throws Exception {
+		MemberResponseVo responseVo = memberService.login(requestVo);
+		if(responseVo == null) {
+			System.out.println(responseVo);
+			System.out.println(requestVo);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		} else {
+			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
+		}
+	}
 
 }
