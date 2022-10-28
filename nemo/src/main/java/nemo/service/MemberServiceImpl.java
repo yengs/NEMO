@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -68,21 +65,6 @@ public class MemberServiceImpl implements MemberService {
 
 		return responseVo;
 	}
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MemberDto memberDto = memberMapper.findByMemberId(username);
-		if (memberDto == null) {
-			throw new UsernameNotFoundException(username);
-		}
-		
-		// String username, String password, boolean enabled, boolean accountNonExpired,
-		// boolean credentialsNonExpired, boolean accountNonLocked,
-		// Collection<? extends GrantedAuthority> authorities
-		return new User(memberDto.getMemberId(), memberDto.getMemberPw(), 
-				true, true, true, true, new ArrayList<>());
-	}
-//	jwt위한 추가 10.28 오전 11:53 END
 
 
 }

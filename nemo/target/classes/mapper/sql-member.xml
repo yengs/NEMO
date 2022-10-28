@@ -18,6 +18,10 @@
 		select * from member
 		 where member_id = #{memberId} and member_pw = #{memberPw}	
 	</select>
+	
+	<select id="findByMemberId" parameterType="nemo.dto.MemberDto" resultType="nemo.dto.MemberDto">
+		select * from member where member_id = #{memberId}
+	</select>
    
 	
 </mapper>
