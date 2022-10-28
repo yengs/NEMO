@@ -33,7 +33,7 @@ public class RestReviewApiController {
 	@ApiOperation(value="타인의 후기 목록 조회", notes = "나의 상품에 타인이 쓴 후기 목록")
 	@RequestMapping(value="/yourReview", method=RequestMethod.GET)
 	public List<ReviewDto> yourReviewList() throws Exception {
-		return reviewService.selectMyReviewList();
+		return reviewService.selectYourReviewList();
 	}
 	
 	@ApiOperation(value = "후기 작성", notes = "후기를 작성하고 등록")
@@ -53,7 +53,6 @@ public class RestReviewApiController {
 		if (reviewDto == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} else {
-			// return ResponseEntity.status(HttpStatus.OK).body(boardDto);
 			return ResponseEntity.ok(reviewDto);
 		}
 	}
@@ -67,7 +66,6 @@ public class RestReviewApiController {
 		if (reviewDto == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} else {
-			// return ResponseEntity.status(HttpStatus.OK).body(boardDto);
 			return ResponseEntity.ok(reviewDto);
 		}
 	}
