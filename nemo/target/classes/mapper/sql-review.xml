@@ -7,7 +7,7 @@
 		resultType="nemo.dto.ReviewDto">
 		SELECT REVIEW_NUM ,REVIEW_PRODUCTIDX, REVIEW_WRITER,
 		REVIEW_SATISFACTION, REVIEW_IMAGE, REVIEW_CONTENTS, (SELECT item_price
-		FROM item i WHERE i.i_num =
+		FROM item i WHERE item_num =
 		r.review_productidx) item_price FROM review
 		r WHERE REVIEW_WRITER ORDER BY REVIEW_NUM DESC;
 	</select>
@@ -35,7 +35,7 @@
 		SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_IMAGE,
 		REVIEW_PRODUCTIDX, REVIEW_CONTENTS, REVIEW_SATISFACTION, (SELECT
 		item_price FROM item i
-		WHERE i.i_num = r.review_productidx) item_price
+		WHERE item_num = r.review_productidx) item_price
 		FROM review r WHERE REVIEW_NUM=#{reviewNum}
 	</select>
 	<!-- 내 상품에 대한 상대방의 후기 상세 페이지 -->
