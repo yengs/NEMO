@@ -5,7 +5,7 @@ import nemo.dto.ItemDto;
 
 public interface ItemService {
 
-   public List<ItemDto> selectItemList() throws Exception;
+   public List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
    public int insertItem(ItemDto item) throws Exception;
    public ItemDto selectItemDetail(int itemNum) throws Exception;
    

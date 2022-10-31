@@ -7,7 +7,7 @@ import nemo.dto.ItemDto;
 @Mapper
 public interface ItemMapper {
    
-    List<ItemDto> selectItemList() throws Exception;
+    List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
     int insertItem(ItemDto item) throws Exception;
     ItemDto selectItemDetail(int itemNum) throws Exception;
     
