@@ -22,6 +22,6 @@ public class ItemDto {
    private String itemTopsize;
    private String itemBottomsize;
    private String itemEtcsize;
-   private String itemHeight;
-   private Date itemRentalperiod;
+   private Date itemRentalstart;
+   private Date itemRentalend;
 }

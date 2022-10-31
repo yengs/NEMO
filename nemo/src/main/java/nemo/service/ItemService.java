@@ -1,9 +1,6 @@
 package nemo.service;
 
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import nemo.dto.ItemDto;
 
 public interface ItemService {
