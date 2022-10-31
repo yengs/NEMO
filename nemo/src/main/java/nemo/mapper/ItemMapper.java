@@ -3,7 +3,6 @@ package nemo.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import nemo.dto.ItemDto;
-import nemo.dto.ItemDto;
 
 @Mapper
 public interface ItemMapper {
