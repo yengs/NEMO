@@ -25,10 +25,17 @@ public class RestItemApiController {
    
    
    // 상품리스트 조회
-   @RequestMapping(value = "/item", method = RequestMethod.GET)
-   public List<ItemDto> selectItemList() throws Exception {
-      return itemService.selectItemList();
+//   @RequestMapping(value = "/item", method = RequestMethod.GET)
+//   public List<ItemDto> selectItemList() throws Exception {
+//      return itemService.selectItemList();
+//   }
+   
+// 상품리스트 조회
+   @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
+   public List<ItemDto> selectItemList(@PathVariable("itemMaincategory") String itemMaincategory) throws Exception {
+      return itemService.selectItemList(itemMaincategory);
    }
+  
 
    //상품 등록 
    @RequestMapping(value = "/item", method = RequestMethod.POST)
@@ -53,7 +60,7 @@ public class RestItemApiController {
       }
    }
    
-   
+ 
    //상품 수정
    @RequestMapping(value = "/item/{itemNum}", method = RequestMethod.PUT)
    public void updateItem(@PathVariable("itemNum") int itemNum, @RequestBody ItemDto boardDto) throws Exception {

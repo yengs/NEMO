@@ -4,13 +4,15 @@
 <mapper namespace="nemo.mapper.ItemMapper">
    
    <!--상품조회 -->
-   <select id="selectItemList" resultType="nemo.dto.ItemDto">
+   <select id="selectItemList" parameterType="String" resultType="nemo.dto.ItemDto">
       select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
            ,item_date,item_readcount,item_detail 
            ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
            item_etcsize,item_rentalstart,item_rentalend
         from item
-       order by item_num desc 
+       where item_maincategory = #{itemMaincategory}
+       order by item_num desc;
+       
     </select> 
 
    <!-- 상품등록 -->
