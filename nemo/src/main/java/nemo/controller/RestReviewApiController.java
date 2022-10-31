@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
 import nemo.dto.ReviewDto;
 import nemo.service.ReviewService;
@@ -24,30 +23,30 @@ public class RestReviewApiController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@ApiOperation(value="나의 후기 목록 조회", notes = "내가 쓴 후기 목록")
+	/* 내가 작성한 후기 목록 */
 	@RequestMapping(value="/myReview", method=RequestMethod.GET)
-	public List<ReviewDto> myReviewList() throws Exception {
-		return reviewService.selectMyReviewList();
+	public List<ReviewDto> myReviewList(String reviewWriter) throws Exception {
+		return reviewService.selectMyReviewList(reviewWriter);
 	}
 	
-	@ApiOperation(value="타인의 후기 목록 조회", notes = "나의 상품에 타인이 쓴 후기 목록")
+	/* 내 상품에 대해 상대방이 쓴 후기 목록 */
 	@RequestMapping(value="/yourReview", method=RequestMethod.GET)
-	public List<ReviewDto> yourReviewList() throws Exception {
-		return reviewService.selectYourReviewList();
+	public List<ReviewDto> yourReviewList(String reviewId) throws Exception {
+		return reviewService.selectYourReviewList(reviewId);
 	}
 	
-	@ApiOperation(value = "후기 작성", notes = "후기를 작성하고 등록")
+	/* 후기 등록 */
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
 	public void insertReview(
-			@Parameter(description = "후기 정보", required = true, example = "{ reviewContents: 내용 , reviewSatisfaction : 평점 }") @RequestBody ReviewDto review)
+			@RequestBody ReviewDto review)
 			throws Exception {
 		reviewService.insertReview(review);
 	}
 	
-	@ApiOperation(value = "나의 후기 상세 조회", notes = "나의 후기 상세 정보를 조회")
+	/* 내가 쓴 후기 상세 페이지 */
 	@RequestMapping(value = "/myReview/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> myReviewDetail(
-			@Parameter(description = "후기 번호", required = true, example = "1") @PathVariable("reviewNum") int reviewNum)
+			 @PathVariable("reviewNum") int reviewNum)
 			throws Exception {
 		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
 		if (reviewDto == null) {
@@ -57,7 +56,7 @@ public class RestReviewApiController {
 		}
 	}
 	
-	@ApiOperation(value = "상대방 후기 상세 조회", notes = "상대방 후기 상세 정보를 조회")
+	/* 내 상품에 대한 상대방의 후기 상세 페이지 */
 	@RequestMapping(value = "/yourReview/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> yourReviewDetail(
 			@Parameter(description = "후기 번호", required = true, example = "1") @PathVariable("reviewNum") int reviewNum)
@@ -69,13 +68,13 @@ public class RestReviewApiController {
 			return ResponseEntity.ok(reviewDto);
 		}
 	}
-	
+	/* 후기 수정 */
 	@RequestMapping(value = "/myReview/{reviewNum}", method = RequestMethod.PUT)
 	public void updateReview(@PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto) throws Exception {
 		reviewDto.setReviewNum(reviewNum);
 		reviewService.updateReview(reviewDto);
 	}
-
+	/* 후기 삭제 */
 	@RequestMapping(value = "/myReview/{reviewNum}", method = RequestMethod.DELETE)
 	public void deleteReview(@PathVariable("reviewNum") int reviewNum) throws Exception {
 		reviewService.deleteReview(reviewNum);
