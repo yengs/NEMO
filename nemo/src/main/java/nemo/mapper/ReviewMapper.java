@@ -8,8 +8,8 @@ import nemo.dto.ReviewDto;
 
 @Mapper
 public interface ReviewMapper {
-	List<ReviewDto> selectMyReviewList() throws Exception;
-	List<ReviewDto> selectYourReviewList() throws Exception;
+	List<ReviewDto> selectMyReviewList(String reviewWriter) throws Exception;
+	List<ReviewDto> selectYourReviewList(String reviewId) throws Exception;
 	void insertReview(ReviewDto review) throws Exception;
 	ReviewDto selectMyReviewDetail(int ReviewNum) throws Exception;
 	ReviewDto selectYourReviewDetail(int ReviewNum) throws Exception;
