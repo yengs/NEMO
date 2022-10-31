@@ -65,10 +65,12 @@ public class ItemServiceImpl implements ItemService{
 //        if(loginId != null && loginId.equals(item.getItemWriter())) {
 //           return item;
 //        }else {
-//           itemMapper.updateReadCount(iNum);
+           itemMapper.updateReadCount(itemNum);
            return itemMapper.selectItemDetail(itemNum);
 //        }
      }
+   
+   
    
    
    @Override

@@ -14,6 +14,11 @@
        order by item_num desc;
        
     </select> 
+    
+    <!--상품 조회수 -->
+    <update id="updateReadCount" parameterType="int">
+		update item set item_readcount = item_readcount + 1  where item_num =#{itemNum}
+	</update>
 
    <!-- 상품등록 -->
    <insert id="insertItem" parameterType="nemo.dto.ItemDto">
