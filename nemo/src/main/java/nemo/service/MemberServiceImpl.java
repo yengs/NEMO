@@ -16,31 +16,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
-//	jwt를 위해 추가 10.28 오후 12:58 START
-//	private BCryptPasswordEncoder passwordEncoder;
-//
-//	public MemberServiceImpl(MemberMapper memberMapper, BCryptPasswordEncoder passwordEncoder) {
-//		this.memberMapper = memberMapper;
-//		this.passwordEncoder = passwordEncoder;
-//	}
-//	jwt를 위해 추가 10.28 오후 12:58 END
 
-	
-	
 	@Override
 	public List<MemberDto> selectMemberList() throws Exception {
 		return memberMapper.selectMemberList();
 	}
 
-	
-//	@Override
-//	public int join(MemberDto member) throws Exception {
-//		member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
-//		return memberMapper.join(member);
-//	}
-
-	
-	
 //	jwt위한 추가 10.28 오전 11:53 START
 	@Override
 	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception {
@@ -65,12 +46,10 @@ public class MemberServiceImpl implements MemberService {
 		return responseVo;
 	}
 
-
 	@Override
 	public int join(MemberDto member) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("serviceImpl:::::::::" + member);
+		return memberMapper.join(member);
 	}
-
 
 }
