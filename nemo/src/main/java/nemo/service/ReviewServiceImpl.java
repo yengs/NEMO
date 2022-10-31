@@ -14,13 +14,13 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewMapper reviewMapper;
 	
 	@Override
-	public List<ReviewDto> selectMyReviewList() throws Exception {
-		return reviewMapper.selectMyReviewList();
+	public List<ReviewDto> selectMyReviewList(String reviewWriter) throws Exception {
+		return reviewMapper.selectMyReviewList(reviewWriter);
 	}
 	
 	@Override
-	public List<ReviewDto> selectYourReviewList() throws Exception {
-		return reviewMapper.selectYourReviewList();
+	public List<ReviewDto> selectYourReviewList(String reviewId) throws Exception {
+		return reviewMapper.selectYourReviewList(reviewId);
 	}
 
 	@Override
