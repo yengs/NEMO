@@ -13,5 +13,4 @@ public interface MemberMapper {
 	
 //	jwt위한 추가 10.28 오전 11:51
 	MemberDto login(MemberDto member) throws Exception;
-	MemberDto findByMemberId(String username);
 }

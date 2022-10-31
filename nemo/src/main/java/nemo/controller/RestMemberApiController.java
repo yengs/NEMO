@@ -48,6 +48,7 @@ public class RestMemberApiController {
 //	jwt위한 추가 10.28 오전 12:04
 	@RequestMapping(value="member/login", method = RequestMethod.POST)
 	public ResponseEntity<MemberResponseVo> login(@RequestBody MemberRequestVo requestVo) throws Exception {
+		System.out.println("로그인되나?");
 		MemberResponseVo responseVo = memberService.login(requestVo);
 		if(responseVo == null) {
 			System.out.println(responseVo);
@@ -57,23 +58,6 @@ public class RestMemberApiController {
 			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
 		}
 	}
-	
-//	@RequestMapping(value="security/generate/token?subject={memberId}", method = RequestMethod.GET)
-//	public Map<String, Object> generateToken(@RequestParam String subject) {
-//		System.out.println("ggg??");
-//		String token = securitySevice.createToken(subject, 1000 * 60 * 60);
-//			Map<String, Object> map = new HashMap<>();
-//			map.put("memberId", subject);
-//			map.put("token", token);
-//			return map;
-//	}
-//	
-//	@RequestMapping(value="security/get/subject", method = RequestMethod.GET)
-////	@GetMapping("security/get/subject")
-//	public String getSubject(@RequestParam String token) {
-//		String subject = securitySevice.getSubject(token);
-//		return subject;
-//	}
 	
 	
 	
