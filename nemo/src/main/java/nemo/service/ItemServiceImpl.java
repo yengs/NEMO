@@ -21,10 +21,15 @@ public class ItemServiceImpl implements ItemService{
    private ItemMapper itemMapper;
    
    
-   //상품 리스트
+   //상품 main 리스트
    @Override
     public List<ItemDto> selectItemList(String itemMaincategory) throws Exception {
         return itemMapper.selectItemList(itemMaincategory);
+     }
+   //상품 sub 리스트
+   @Override
+    public List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception {
+        return itemMapper.selectItemsubList(itemSubcategory);
      }
      
    //상품등록
