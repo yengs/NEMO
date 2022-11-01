@@ -8,9 +8,11 @@ import nemo.dto.ItemDto;
 public interface ItemMapper {
    
     List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
+    void updateReadCount(int itemNum) throws Exception;
     int insertItem(ItemDto item) throws Exception;
     ItemDto selectItemDetail(int itemNum) throws Exception;
     
     int updateItem(ItemDto itemDto) throws Exception;
 	int deleteItem(int itemNum) throws Exception;
+	
 }
