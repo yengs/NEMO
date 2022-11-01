@@ -2,49 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nemo.mapper.ReviewMapper">
+
 	<!-- 내가 작성한 후기 목록 -->
-	<select id="selectMyReviewList"
-		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM ,REVIEW_PRODUCTIDX, REVIEW_WRITER,
-		REVIEW_SATISFACTION, REVIEW_IMAGE, REVIEW_CONTENTS, (SELECT item_price
-		FROM item i WHERE item_num =
-		r.review_productidx) item_price FROM review
-		r WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC;
+	<select id="selectMyReviewList" resultType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM,
+		REVIEW_WRITER,
+		REVIEW_SATISFACTION, REVIEW_IMAGE,
+		REVIEW_CONTENTS FROM
+		review
+		WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC;
 	</select>
+
 	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
 	<select id="selectYourReviewList"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_PRODUCTIDX, REVIEW_IMAGE,
-		REVIEW_ID,
+		SELECT REVIEW_NUM, REVIEW_IMAGE, REVIEW_ID,
 		REVIEW_SATISFACTION
-		FROM REVIEW WHERE REVIEW_ID=#{reviewId}
-		ORDER BY REVIEW_NUM DESC
+		FROM REVIEW
+		WHERE REVIEW_ID=#{reviewId}
+		ORDER BY REVIEW_NUM DESC;
 	</select>
+
 	<!-- 후기 등록 -->
 	<insert id="insertReview" parameterType="nemo.dto.ReviewDto">
 		INSERT INTO REVIEW
-		(REVIEW_PRODUCTIDX, REVIEW_IMAGE, REVIEW_CONTENTS,
+		(REVIEW_IMAGE, REVIEW_CONTENTS,
 		REVIEW_SATISFACTION, REVIEW_WRITER)
-		VALUES ( #{reviewProductIdx},
-		#{reviewImage},#{reviewContents}, #{reviewSatisfaction},
-		#{reviewWriter})
+		VALUES (#{reviewImage}, #{reviewContents}, #{reviewSatisfaction},
+		#{reviewWriter});
 	</insert>
+
 	<!-- 내가 쓴 후기 상세 페이지 -->
 	<select id="selectMyReviewDetail" parameterType="int"
 		resultType="nemo.dto.ReviewDto">
 		SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_IMAGE,
-		REVIEW_PRODUCTIDX, REVIEW_CONTENTS, REVIEW_SATISFACTION, (SELECT
-		item_price FROM item i
-		WHERE item_num = r.review_productidx) item_price
-		FROM review r WHERE REVIEW_NUM=#{reviewNum}
+		REVIEW_CONTENTS, REVIEW_SATISFACTION
+		FROM review
+		WHERE REVIEW_NUM=#{reviewNum}
 	</select>
+
 	<!-- 내 상품에 대한 상대방의 후기 상세 페이지 -->
 	<select id="selectYourReviewDetail" parameterType="int"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_PRODUCTIDX, REVIEW_IMAGE,
+		SELECT REVIEW_NUM, REVIEW_IMAGE,
 		REVIEW_ID, REVIEW_CONTENTS,
 		REVIEW_SATISFACTION
-		FROM REVIEW WHERE REVIEW_NUM=#{reviewNum}
+		FROM REVIEW WHERE
+		REVIEW_NUM=#{reviewNum}
 	</select>
 	<!-- 후기 수정 -->
 	<update id="updateReview" parameterType="nemo.dto.ReviewDto">
