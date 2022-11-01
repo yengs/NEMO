@@ -30,7 +30,9 @@ public class RestItemApiController {
 //      return itemService.selectItemList();
 //   }
    
-// 상품리스트 조회
+   // 
+   
+   //상품리스트 조회
    @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
    public List<ItemDto> selectItemList(@PathVariable("itemMaincategory") String itemMaincategory) throws Exception {
       return itemService.selectItemList(itemMaincategory);
