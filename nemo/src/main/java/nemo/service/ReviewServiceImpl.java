@@ -9,15 +9,16 @@ import nemo.dto.ReviewDto;
 import nemo.mapper.ReviewMapper;
 
 @Service
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
+
 	@Autowired
 	private ReviewMapper reviewMapper;
-	
+
 	@Override
 	public List<ReviewDto> selectMyReviewList(String reviewWriter) throws Exception {
 		return reviewMapper.selectMyReviewList(reviewWriter);
 	}
-	
+
 	@Override
 	public List<ReviewDto> selectYourReviewList(String reviewId) throws Exception {
 		return reviewMapper.selectYourReviewList(reviewId);
@@ -37,10 +38,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public ReviewDto selectYourReviewDetail(int reviewNum) throws Exception {
 		return reviewMapper.selectYourReviewDetail(reviewNum);
 	}
-	
+
 	@Override
 	public void updateReview(ReviewDto reviewDto) throws Exception {
-		reviewMapper.updateReview(reviewDto);		
+		reviewMapper.updateReview(reviewDto);
 	}
 
 	@Override
@@ -48,4 +49,3 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewMapper.deleteReview(reviewNum);
 	}
 }
-
