@@ -37,6 +37,8 @@ public class RestReviewApiController {
 	/* 후기 등록 */
 	@RequestMapping(value = "/reivew/reviewWrite", method = RequestMethod.POST)
 	public void insertReview(@RequestBody ReviewDto review) throws Exception {
+		review.setReviewId("민주");
+		review.setReviewWriter("슬기");
 		reviewService.insertReview(review);
 	}
 
