@@ -10,7 +10,7 @@
 		REVIEW_SATISFACTION, REVIEW_IMAGE,
 		REVIEW_CONTENTS FROM
 		review
-		WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC;
+		WHERE REVIEW_WRITER="슬기" ORDER BY REVIEW_NUM DESC;
 	</select>
 
 	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
@@ -19,8 +19,9 @@
 		SELECT REVIEW_NUM, REVIEW_IMAGE, REVIEW_ID,
 		REVIEW_SATISFACTION
 		FROM REVIEW
-		WHERE REVIEW_ID=#{reviewId}
-		ORDER BY REVIEW_NUM DESC;
+		WHERE REVIEW_ID="민주"
+		ORDER BY REVIEW_NUM
+		DESC;
 	</select>
 
 	<!-- 후기 등록 -->
@@ -29,7 +30,7 @@
 		(REVIEW_IMAGE, REVIEW_CONTENTS,
 		REVIEW_SATISFACTION, REVIEW_WRITER)
 		VALUES (#{reviewImage}, #{reviewContents}, #{reviewSatisfaction},
-		#{reviewWriter});;
+		#{reviewWriter});
 	</insert>
 
 	<!-- 내가 쓴 후기 상세 페이지 -->
@@ -38,7 +39,8 @@
 		SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_IMAGE,
 		REVIEW_CONTENTS, REVIEW_SATISFACTION
 		FROM review
-		WHERE REVIEW_NUM=#{reviewNum}
+		WHERE
+		REVIEW_NUM=#{reviewNum}
 	</select>
 
 	<!-- 내 상품에 대한 상대방의 후기 상세 페이지 -->
@@ -50,6 +52,7 @@
 		FROM REVIEW WHERE
 		REVIEW_NUM=#{reviewNum}
 	</select>
+
 	<!-- 후기 수정 -->
 	<update id="updateReview" parameterType="nemo.dto.ReviewDto">
 		UPDATE REVIEW SET
@@ -59,10 +62,12 @@
 		where REVIEW_NUM =
 		#{reviewNum}
 	</update>
+
 	<!-- 후기 삭제 -->
 	<delete id="deleteReview" parameterType="int">
 		DELETE FROM REVIEW
 		WHERE
 		REVIEW_NUM=#{reviewNum}
 	</delete>
+
 </mapper>
