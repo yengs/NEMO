@@ -31,6 +31,12 @@ public class ItemServiceImpl implements ItemService{
     public List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception {
         return itemMapper.selectItemsubList(itemSubcategory);
      }
+   
+   //내 상품 리스트
+   @Override
+   public List<ItemDto> myItemList() throws Exception {
+       return itemMapper.myItemList();
+    }
      
    //상품등록
    @Override
