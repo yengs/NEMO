@@ -25,6 +25,17 @@
        order by item_num desc;
     </select> 
     
+    <!--내상품조회 -->
+   <select id="myItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
+           ,item_date,item_readcount,item_detail 
+           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
+           item_etcsize,item_rentalstart,item_rentalend
+        from item
+      	<!-- where item_writer = #{itemWriter} -->
+       order by item_num desc;
+    </select>
+    
     <!--상품 조회수 -->
     <update id="updateReadCount" parameterType="int">
 		update item set item_readcount = item_readcount + 1  where item_num =#{itemNum}
@@ -64,3 +75,6 @@
       delete from item where item_num = #{itemNum}
    </delete>
    </mapper>
+   
+   
+   
