@@ -24,4 +24,5 @@ public class ItemDto {
    private String itemEtcsize;
    private Date itemRentalstart;
    private Date itemRentalend;
+   private String files;
 }

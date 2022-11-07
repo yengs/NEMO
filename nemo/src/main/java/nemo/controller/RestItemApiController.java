@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,8 +55,8 @@ public class RestItemApiController {
 
    //상품 등록 
    @RequestMapping(value = "/item", method = RequestMethod.POST)
-      public ResponseEntity<String> insertItem(@RequestBody ItemDto item, MultipartFile file) throws Exception {
-         int itemNum = itemService.insertItem(item);
+      public ResponseEntity<String> insertItem(@RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
+         int itemNum = itemService.insertItem(item,files);
          if (itemNum > 0) {
             return ResponseEntity.status(HttpStatus.OK).body("등록성공");
          } else {

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import nemo.dto.ItemDto;
@@ -40,30 +41,23 @@ public class ItemServiceImpl implements ItemService{
      
    //상품등록
    @Override
-     public int insertItem(ItemDto item) throws Exception {
+     public int insertItem( @RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
 	   
-	   
-//	   String projectpath = System.getProperty("user.dir")+"/src/main/resources/static/files";
-//	   UUID uuid = UUID.randomUUID();
-//	   String itemImage = uuid+"_"+file.getOriginalFilename();
-//	   File saveFile = new File(projectpath,itemImage);
-//	   try {
-//	         file.transferTo(saveFile);
-//	      } catch (IllegalStateException e) {
-//	         // TODO Auto-generated catch block
-//	         e.printStackTrace();
-//	      } catch (IOException e) {
-//	         // TODO Auto-generated catch block
-//	         e.printStackTrace();
-//	      }
-//	         item.setItemImage(itemImage);
-//	         item.setItemImagepath("/files/"+itemImage);
+	   String projectpath = "C:/react/NEMO-react/nemo-project/public/files";
+	   UUID uuid = UUID.randomUUID();
+	   String filename = uuid+"_"+files.getOriginalFilename();
+	   File saveFile = new File(projectpath,filename);
+	   try {
+	         files.transferTo(saveFile);
+	      } catch (IllegalStateException e) {
+	         e.printStackTrace();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
 	         
 	         
-	   //        item.setIDate(new Date()); 
+	   // item.setIDate(new Date()); 
         item.setItemWriter("잠시안녕");
-        item.setItemImage("asdsa");
-        item.setItemImagepath("asfasf");
         return itemMapper.insertItem(item);
      }
   
