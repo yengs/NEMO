@@ -30,7 +30,7 @@
       select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
            ,item_date,item_readcount,item_detail 
            ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
-           item_etcsize,item_rentalstart,item_rentalend,,files
+           item_etcsize,item_rentalstart,item_rentalend,files
         from item
       	<!-- where item_writer = #{itemWriter} -->
        order by item_num desc;
@@ -47,7 +47,7 @@
                     item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
                     item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
       values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
-            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},#{itemImage},#{itemImagepath},
+            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},"1","1",
             #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
    </insert>
    
