@@ -115,7 +115,10 @@ public class RestMemberApiController {
 		}
 	}
 	
-	
+	@RequestMapping(value="/member/update", method = RequestMethod.PUT)
+	public String updateMember(MemberDto member) throws Exception {
+		return memberService.updateMember(member);
+	}
 	
 
 }

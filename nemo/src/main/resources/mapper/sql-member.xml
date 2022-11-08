@@ -19,5 +19,10 @@
 		 where member_id = #{memberId} and member_pw = #{memberPw}	
 	</select>
    
+   
+   <update id="memberUpdate" parameterType="nemo.dto.MemberDto">
+   		update member set member_nickame = #{memberNickname}, member_pw = #{memberPw}, member_phone = #{memberPhone}, member_address = #{memberAddress}
+   		where member_id = #{memberId}
+   </update>
 	
 </mapper>
