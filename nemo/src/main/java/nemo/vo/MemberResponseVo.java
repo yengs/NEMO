@@ -15,5 +15,6 @@ public class MemberResponseVo {
 	private String memberEmail;
 	private String memberAddress;
 	private int memberClean;
+	private int memberWarning;
 	
 }
