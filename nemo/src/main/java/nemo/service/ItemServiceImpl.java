@@ -47,6 +47,7 @@ public class ItemServiceImpl implements ItemService{
 	   UUID uuid = UUID.randomUUID();
 	   String filename = uuid+"_"+files.getOriginalFilename();
 	   File saveFile = new File(projectpath,filename);
+	   item.setFiles(filename);
 	   try {
 	         files.transferTo(saveFile);
 	      } catch (IllegalStateException e) {
