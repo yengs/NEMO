@@ -13,4 +13,6 @@ public interface MemberService {
 	
 //	jwt위한 추가 10.28 오전 11:51
 	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception; 
+	
+	public String updateMember(MemberDto member) throws Exception;
 }
