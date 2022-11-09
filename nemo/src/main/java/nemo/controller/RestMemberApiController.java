@@ -42,15 +42,16 @@ public class RestMemberApiController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
 	private Environment env;
 	
 	@Autowired
 	private MailSenderRunner mail;
 	
 	
-	public RestMemberApiController (Environment env) {
-		this.env = env;
-	}
+//	public RestMemberApiController (Environment env) {
+//		this.env = env;
+//	}
 
 	
 //	@Autowired
