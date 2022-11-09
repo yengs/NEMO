@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,6 +60,7 @@ public class RestMemberApiController {
 		member.setMemberMailkey(to);
 		memberService.join(member);
    }
+	
 	
 	
 //	jwt위한 추가 10.28 오전 12:04
@@ -113,9 +115,20 @@ public class RestMemberApiController {
 			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
 			
 		}
+		
 	}
 	
-	
-	
+	// 회원가입 로그인 중복여부
+	@RequestMapping(value = "/member/join/checkId", method = RequestMethod.POST)
+	public String checkMemberId(@ModelAttribute("memberId") String memberId) throws Exception {
+		System.out.println(memberId);
+		int result = memberService.checkMemberId(memberId);
+		if (result > 0) {
+			return "fail";
+		} else {
+			return "success";
+		}
+	}
 
+	
 }

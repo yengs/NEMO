@@ -12,5 +12,9 @@ public interface MemberService {
 	public int join(MemberDto member) throws Exception;
 	
 //	jwt위한 추가 10.28 오전 11:51
-	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception; 
+	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception;
+	
+	// 아이디 중복
+	public int checkMemberId(String memberId);
+	
 }

@@ -19,5 +19,8 @@
 		 where member_id = #{memberId} and member_pw = #{memberPw}	
 	</select>
    
-	
+   <!-- 아이디 중복 -->
+   	<select id="checkMemberId" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
 </mapper>

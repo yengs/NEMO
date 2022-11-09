@@ -52,4 +52,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.join(member);
 	}
 
+	@Override
+	public int checkMemberId(String memberId) {
+		return memberMapper.checkMemberId(memberId);
+	}
 }

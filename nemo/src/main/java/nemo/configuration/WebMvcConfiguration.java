@@ -22,21 +22,22 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		registry.addInterceptor(new LoggerInterceptor());
 		registry.addInterceptor(new AuthorizationInterceptor(env))
 				.excludePathPatterns("/api/member/login")
-				.excludePathPatterns("/api/member/join")
+				.excludePathPatterns("/api/member/join/**")
 //				.excludePathPatterns("/api/item/**")
-				.excludePathPatterns("/userstoreinfo");
+				.excludePathPatterns("/userstoreinfo")
+				.excludePathPatterns("/api/review/**");
 	}
 
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
+        		.allowedMethods("GET", "POST", "PUT", "DELETE") 
                 .allowedOrigins("http://localhost:3000")
                 .allowedHeaders("*")
                 .exposedHeaders("jwtToken");
     }
 	
 
-	
 //	@Override 
 //	public void addCorsMappings(CorsRegistry registry) {
 //		
