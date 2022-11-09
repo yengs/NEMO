@@ -8,11 +8,15 @@ import nemo.dto.MemberDto;
 
 @Mapper
 public interface MemberMapper {
-	List<MemberDto> selectMemberList() throws Exception;
+//	List<MemberDto> selectMemberList() throws Exception;
+	
+	
 	int join(MemberDto member) throws Exception;
 	
 //	jwt위한 추가 10.28 오전 11:51
 	MemberDto login(MemberDto member) throws Exception;
+
+	MemberDto selectMemberInfo(int memberNum) throws Exception;
 	
-	String updateMember(MemberDto member) throws Exception;
+	void memberUpdate(MemberDto memberDto) throws Exception;
 }
