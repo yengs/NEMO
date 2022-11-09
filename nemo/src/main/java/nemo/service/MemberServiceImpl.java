@@ -55,6 +55,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 //	회원정보 조회
 	public MemberDto selectMemberInfo(int memberNum) throws Exception {
+		MemberDto memberDto = new MemberDto();
+		System.out.println("서비스 멤버정보확인::::::::::::"+memberDto);
 		return memberMapper.selectMemberInfo(memberNum);
 	}
 	
