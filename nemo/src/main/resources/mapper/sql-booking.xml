@@ -5,9 +5,8 @@
 
 <!-- 대여하기 -->
 <insert id="insertBooking" parameterType="nemo.dto.BookingDto">
-		INSERT INTO Booking
-		(booking_itemnum, booking_write,
-		booking_date)
-		VALUES (#{bookingItemnum}, #{bookingWrite}, #{bookingDate});
+		INSERT INTO booking
+				(booking_itemnum, booking_member,booking_date)
+		VALUES (#{bookingItemnum}, #{bookingMember}, #{bookingDate});
 	</insert>
 </mapper>
