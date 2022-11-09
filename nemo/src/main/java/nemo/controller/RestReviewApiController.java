@@ -1,7 +1,6 @@
 package nemo.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import nemo.dto.ReviewDto;
 import nemo.service.ReviewService;
 
@@ -77,4 +75,19 @@ public class RestReviewApiController {
 	public void deleteReview(@PathVariable("reviewNum") int reviewNum) throws Exception {
 		reviewService.deleteReview(reviewNum);
 	}
+
+	// -------------
+
+	// 내 상품에 대한 리뷰 중 가장 최근 리뷰 1개
+	@RequestMapping(value = "/mypage/review1", method = RequestMethod.GET)
+	public List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception {
+		return reviewService.mostRecentReviewOfMyStore(reviewId);
+	}
+
+	// 내가 작성한 리뷰 중 가장 최근 리뷰 2개
+	@RequestMapping(value = "/mypage/review2", method = RequestMethod.GET)
+	public List<ReviewDto> twoOfMyMostRecentReviews(String reviewWriter) throws Exception {
+		return reviewService.twoOfMyMostRecentReviews(reviewWriter);
+	}
+
 }

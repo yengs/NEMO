@@ -59,8 +59,7 @@
 		REVIEW_CONTENTS = #{reviewContents}, REVIEW_SATISFACTION =
 		#{reviewSatisfaction},
 		REVIEW_IMAGE = #{reviewImage}
-		where REVIEW_NUM =
-		#{reviewNum}
+		where REVIEW_NUM = #{reviewNum}
 	</update>
 
 	<!-- 후기 삭제 -->
@@ -69,5 +68,25 @@
 		WHERE
 		REVIEW_NUM=#{reviewNum}
 	</delete>
+	
+	<!-- 내 상점 리뷰 중 가장 최근 후기 하나 -->
+	<select id="mostRecentReviewOfMyStore" parameterType="nemo.dto.ReviewDto"> 
+		SELECT REVIEW_NUM, REVIEW_IMAGE, REVIEW_ID,
+		REVIEW_SATISFACTION
+		FROM REVIEW
+		WHERE REVIEW_ID="민주"
+		ORDER BY REVIEW_NUM
+		DESC LIMIT 1;
+	</select>
+	
+	<!-- 내가 쓴 후기 중 가장 최근 후기 둘 -->
+	<select id="twoOfMyMostRecentReviews" parameterType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM,
+		REVIEW_WRITER,
+		REVIEW_SATISFACTION, REVIEW_IMAGE,
+		REVIEW_CONTENTS FROM
+		review
+		WHERE REVIEW_WRITER="슬기" ORDER BY REVIEW_NUM DESC ;
+	</select>
 
 </mapper>
