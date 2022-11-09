@@ -4,6 +4,6 @@ import nemo.dto.SingoDto;
 
 public interface SingoService {
 
-	public int insertSingo(SingoDto singoDto) throws Exception;
+	public void insertSingo(SingoDto singoDto) throws Exception;
 	
 }

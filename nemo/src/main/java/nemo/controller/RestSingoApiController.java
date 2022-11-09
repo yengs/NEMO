@@ -21,9 +21,10 @@ public class RestSingoApiController {
 	private SingoService singoService;
 	
 	@RequestMapping(value = "/singo/take", method = RequestMethod.POST)
-	public int insertBooking(@RequestBody SingoDto singoDto) {
-		System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::"+singoDto);
-		return insertBooking(singoDto);
+	public void insertSingo(@RequestBody SingoDto singoDto) {
+		System.out.println("::::::"+singoDto);
+		log.debug("와이라노");
+		insertSingo(singoDto);
 	}
 
 }
