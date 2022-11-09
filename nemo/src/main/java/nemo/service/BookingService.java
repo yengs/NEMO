@@ -4,6 +4,6 @@ import nemo.dto.BookingDto;
 
 public interface BookingService {
 
-	public int insertBooking(BookingDto booking) throws Exception; // 대여하기
+	public void insertBooking(BookingDto booking) throws Exception; // 대여하기
 	
 }

@@ -58,7 +58,7 @@ public class ItemServiceImpl implements ItemService{
 	         
 	         
 	   // item.setIDate(new Date()); 
-        item.setItemWriter("잠시안녕");
+//        item.setItemWriter("잠시안녕");
         return itemMapper.insertItem(item);
      }
   
