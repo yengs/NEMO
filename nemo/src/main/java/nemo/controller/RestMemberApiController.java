@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,10 +47,11 @@ public class RestMemberApiController {
 	
 //	@Autowired
 //	private SecurityService securitySevice;
-
-	@RequestMapping(value = "/member", method = RequestMethod.GET)
-	public List<MemberDto> openMemberList() throws Exception {
-		return memberService.selectMemberList();
+	
+	@RequestMapping(value = "/member/info/{memberNum}", method = RequestMethod.GET)
+	public MemberDto selectMemberInfo(@PathVariable("memberNum") int memberNum) throws Exception {
+		System.out.println(memberNum);
+		return memberService.selectMemberInfo(memberNum);
 	}
 	
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
@@ -115,7 +117,16 @@ public class RestMemberApiController {
 		}
 	}
 	
-	
+	@RequestMapping(value="/member/update/{memberNum}", method = RequestMethod.PUT)
+	public void updateMember(@PathVariable("memberNum") int memberNum, @RequestBody MemberDto memberDto) throws Exception {
+		System.out.println("회원정보 업데이트 컨트롤러");
+		memberDto.setMemberNum(memberNum);
+//		memberDto.setMemberDate(memberDto.getMemberDate());
+//		memberDto.setMemberUser(memberDto.getMemberUser());
+//		memberDto.setMemberMailkey(memberDto.getMemberMailkey());
+		System.out.println(memberDto);
+		memberService.memberUpdate(memberDto);
+	}
 	
 
 }
