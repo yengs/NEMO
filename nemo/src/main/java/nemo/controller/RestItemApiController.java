@@ -47,10 +47,9 @@ public class RestItemApiController {
    }
    
    // 내 상품리스트 조회
-
-   @RequestMapping(value = "/mypage", method = RequestMethod.GET)
-   public List<ItemDto> myItemList() throws Exception {
-      return itemService.myItemList();
+   @RequestMapping(value = "/mypage/mypageitem/{itemWriter}", method = RequestMethod.GET)
+   public List<ItemDto> myItemList(@PathVariable("itemWriter") String itemWriter) throws Exception {
+      return itemService.myItemList(itemWriter);
    }
   
 
