@@ -1,6 +1,7 @@
 package nemo.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,15 +27,37 @@ public class RestItemApiController {
    
    
    // 상품리스트 조회
-   @RequestMapping(value = "/item", method = RequestMethod.GET)
-   public List<ItemDto> selectItemList() throws Exception {
-      return itemService.selectItemList();
+//   @RequestMapping(value = "/item", method = RequestMethod.GET)
+//   public List<ItemDto> selectItemList() throws Exception {
+//      return itemService.selectItemList();
+//   }
+   
+   
+   // 상품리스트 main 조회
+
+   @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
+   public List<ItemDto> selectItemList(@PathVariable("itemMaincategory") String itemMaincategory) throws Exception {
+      return itemService.selectItemList(itemMaincategory);
    }
+   
+   // 상품리스트 sub 조회
+   @RequestMapping(value = "/item/cate/sub/{itemSubcategory}", method = RequestMethod.GET)
+   public List<ItemDto> selectItemsubList(@PathVariable("itemSubcategory") String itemSubcategory) throws Exception {
+      return itemService.selectItemsubList(itemSubcategory);
+   }
+   
+   // 내 상품리스트 조회
+
+   @RequestMapping(value = "/mypage", method = RequestMethod.GET)
+   public List<ItemDto> myItemList() throws Exception {
+      return itemService.myItemList();
+   }
+  
 
    //상품 등록 
    @RequestMapping(value = "/item", method = RequestMethod.POST)
-      public ResponseEntity<String> insertItem(@RequestBody ItemDto item, MultipartFile file) throws Exception {
-         int itemNum = itemService.insertItem(item);
+      public ResponseEntity<String> insertItem(@RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
+         int itemNum = itemService.insertItem(item,files);
          if (itemNum > 0) {
             return ResponseEntity.status(HttpStatus.OK).body("등록성공");
          } else {
@@ -53,7 +77,7 @@ public class RestItemApiController {
       }
    }
    
-   
+ 
    //상품 수정
    @RequestMapping(value = "/item/{itemNum}", method = RequestMethod.PUT)
    public void updateItem(@PathVariable("itemNum") int itemNum, @RequestBody ItemDto boardDto) throws Exception {

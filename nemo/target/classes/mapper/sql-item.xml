@@ -3,24 +3,52 @@
 
 <mapper namespace="nemo.mapper.ItemMapper">
    
-   <!--상품조회 -->
-   <select id="selectItemList" resultType="nemo.dto.ItemDto">
+   <!--상품 main 조회 -->
+   <select id="selectItemList" parameterType="String" resultType="nemo.dto.ItemDto">
       select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
            ,item_date,item_readcount,item_detail 
            ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
-           item_etcsize,item_rentalstart,item_rentalend
+           item_etcsize,item_rentalstart,item_rentalend,files
         from item
-       order by item_num desc 
+       where item_maincategory = #{itemMaincategory}
+       order by item_num desc;
+    </select>
+    
+    <!--상품 sub 조회 -->
+   <select id="selectItemsubList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
+           ,item_date,item_readcount,item_detail 
+           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
+           item_etcsize,item_rentalstart,item_rentalend,files
+        from item
+       where item_subcategory = #{itemSubcategory}
+       order by item_num desc;
     </select> 
+    
+    <!--내상품조회 -->
+   <select id="myItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
+           ,item_date,item_readcount,item_detail 
+           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
+           item_etcsize,item_rentalstart,item_rentalend,files
+        from item
+      	<!-- where item_writer = #{itemWriter} -->
+       order by item_num desc;
+    </select>
+    
+    <!--상품 조회수 -->
+    <update id="updateReadCount" parameterType="int">
+		update item set item_readcount = item_readcount + 1  where item_num =#{itemNum}
+	</update>
 
    <!-- 상품등록 -->
    <insert id="insertItem" parameterType="nemo.dto.ItemDto">
       insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
                     item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
-                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend) 
+                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
       values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
-            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},#{itemImage},#{itemImagepath},
-            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend})
+            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},"1","1",
+            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
    </insert>
    
    
@@ -29,7 +57,7 @@
       select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
            ,item_date,item_readcount,item_detail 
            ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
-           item_etcsize,item_rentalstart,item_rentalend
+           item_etcsize,item_rentalstart,item_rentalend,files
         from item
       where item_num =#{itemNum}
    </select>
@@ -47,3 +75,6 @@
       delete from item where item_num = #{itemNum}
    </delete>
    </mapper>
+   
+   
+   
