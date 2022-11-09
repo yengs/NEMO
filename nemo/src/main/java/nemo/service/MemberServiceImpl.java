@@ -16,11 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
-
-	@Override
-	public List<MemberDto> selectMemberList() throws Exception {
-		return memberMapper.selectMemberList();
-	}
+	
 
 //	jwt위한 추가 10.28 오전 11:53 START
 	@Override
@@ -48,8 +44,20 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int join(MemberDto member) throws Exception {
-		System.out.println("serviceImpl:::::::::" + member);
 		return memberMapper.join(member);
 	}
+	
+	@Override
+	public void memberUpdate(MemberDto memberDto) throws Exception {
+		memberMapper.memberUpdate(memberDto);
+	}
 
+	@Override
+//	회원정보 조회
+	public MemberDto selectMemberInfo(int memberNum) throws Exception {
+		return memberMapper.selectMemberInfo(memberNum);
+	}
+	
+	
 }
+
