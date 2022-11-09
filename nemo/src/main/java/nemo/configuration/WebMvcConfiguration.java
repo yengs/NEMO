@@ -25,6 +25,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //				.excludePathPatterns("/api/member/login")
 //				.excludePathPatterns("/api/member/join")
 //				.excludePathPatterns("/api/item/**")
+//				.excludePathPatterns("/api/reivew/reviewWrite")
+//				.excludePathPatterns("/api/reivew/reviewWrite")
 //				.excludePathPatterns("/userstoreinfo");
 	}
 
@@ -34,7 +36,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .exposedHeaders("jwtToken");
+                .exposedHeaders("jwtToken", "memberInfo");
     }
 	
 
