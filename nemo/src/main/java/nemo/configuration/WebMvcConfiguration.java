@@ -21,10 +21,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoggerInterceptor());
 		registry.addInterceptor(new AuthorizationInterceptor(env))
-				.excludePathPatterns("/api/member/login")
-				.excludePathPatterns("/api/member/join")
+				.excludePathPatterns("/**");
+//				.excludePathPatterns("/api/member/login")
+//				.excludePathPatterns("/api/member/join")
 //				.excludePathPatterns("/api/item/**")
-				.excludePathPatterns("/userstoreinfo");
+//				.excludePathPatterns("/userstoreinfo");
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedHeaders("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .exposedHeaders("jwtToken");
     }
 	
