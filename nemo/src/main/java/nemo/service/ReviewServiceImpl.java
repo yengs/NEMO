@@ -1,5 +1,6 @@
 package nemo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private ReviewMapper reviewMapper;
-
+	
+	// 내가 쓴 리뷰 전체 불러오기 
 	@Override
 	public List<ReviewDto> selectMyReviewList(String reviewWriter) throws Exception {
 		return reviewMapper.selectMyReviewList(reviewWriter);
