@@ -5,7 +5,7 @@
 
 <!-- 신고하기 -->
 <insert id="insertSingo" parameterType="nemo.dto.SingoDto">
-		INSERT INTO SINGO(singo_writer, singo_reason, singo_content, singo_date, singo_image)
-		VALUES (#{singoWriter}, #{singoReason}, #{singoContent}, now(), #{singoImage} );
+		insert into singo(singo_writer, singo_reason, singo_content, singo_date, singo_image)
+		values(#{singoWriter}, #{singoReason}, #{singoContent}, now(), #{singoImage})
 	</insert>
 </mapper>

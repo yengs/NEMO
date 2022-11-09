@@ -13,9 +13,9 @@ public class SingoServiceImpl implements SingoService {
 	private SingoMapper singoMapper;
 	
 	@Override
-	public int insertSingo(SingoDto singoDto) throws Exception {
+	public void insertSingo(SingoDto singoDto) throws Exception {
 		System.out.println("서비스 타나??? 신고신고");
-		return singoMapper.insertSingo(singoDto);
+		singoMapper.insertSingo(singoDto);
 	}
 	
 

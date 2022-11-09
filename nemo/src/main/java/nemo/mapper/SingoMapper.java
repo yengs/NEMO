@@ -7,6 +7,6 @@ import nemo.dto.SingoDto;
 @Mapper
 public interface SingoMapper {
 	
-	int insertSingo(SingoDto singoDto) throws Exception;
+	void insertSingo(SingoDto singoDto) throws Exception;
 
 }
