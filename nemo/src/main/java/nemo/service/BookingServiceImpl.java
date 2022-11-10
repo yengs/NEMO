@@ -1,6 +1,8 @@
 package nemo.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +15,24 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingMapper bookingMapper;
 	
-//	 @Autowired
-//     private ItemService service2;
-	
 	 //상품등록
 	   @Override
 	     public void insertBooking(BookingDto booking) throws Exception {
-//		   ItemDto item = service2.selectItemDetail(itemNum);
-//		   	booking.setBookingItemnum(item);
-//	        booking.setBookingWrite("loginId");
-		   
 	       bookingMapper.insertBooking(booking);
 	     }
+	
+	 //빌려줬어요
+	   @Override
+		public List<BookingDto> myLendList(String bookingItemwriter) throws Exception {
+			return bookingMapper.myLendList(bookingItemwriter);
+	   }
 	   
-//	   @Override
-//	   public int insertBItem()
+	 //빌려왔어요
+	      @Override
+	      public List<BookingDto> myBookingList(String bookingMember) throws Exception {
+	          return bookingMapper.myBookingList(bookingMember);
+	       }
+	   
+	   
 
 }
