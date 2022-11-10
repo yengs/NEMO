@@ -20,30 +20,14 @@ import nemo.controller.RestMemberApiController;
 public class MailSenderRunner implements ApplicationRunner {
 	private final JavaMailSender mailSender;
 	
-//	public MailSenderRunner(JavaMailSender mailSender) {
-//		super();
-//		this.mailSender = mailSender;
-//	}
-	
-
-//	private int num = new Random().nextInt(10000) + 10000;
-//	private String joinCode = String.valueOf(num);
-//	
-//	public String getJoinCode() {
-//		return this.joinCode;
-//	}
-	
-	
 	@Value("${spring.mail.username}")
 	private String from;
 
 	public void run(ApplicationArguments args, String memberEmail) throws Exception {
 		
-//		MailCode code = new MailCode();
-//		String joinCode = code.getJoinCode();
 		
 		RestMemberApiController code = new RestMemberApiController();
-		String joinCode = code.code();
+		String joinCode =code.getJoinCode();
 		
 		MimeMessage m = mailSender.createMimeMessage();
 		MimeMessageHelper h = new MimeMessageHelper(m, "UTF-8");

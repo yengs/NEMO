@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nemo.mapper.SingoMapper">
+
+
+<!-- 신고하기 -->
+<insert id="insertSingo" parameterType="nemo.dto.SingoDto">
+		insert into singo(singo_writer, singo_reason, singo_content, singo_date, singo_image)
+		values(#{singoWriter}, #{singoReason}, #{singoContent}, now(), #{singoImage})
+	</insert>
+</mapper>
