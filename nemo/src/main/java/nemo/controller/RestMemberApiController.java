@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -25,15 +26,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import nemo.dto.MemberDto;
-import nemo.service.MailCode;
 import nemo.service.MailSenderRunner;
 import nemo.service.MemberService;
 //import nemo.service.SecurityService;
 import nemo.vo.MemberRequestVo;
 import nemo.vo.MemberResponseVo;
 
+@Data
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -147,24 +149,29 @@ public class RestMemberApiController {
 	@Autowired
 	private ApplicationArguments applicationArguments;
 	
+	//이메일 받는
 	@RequestMapping(value="/mail")
 	public void tomail(@RequestParam String memberEmail) throws Exception {
 		
 		   System.out.println("aaaaaaaaaaaaaaaaa:"+memberEmail);
 		mail.run(applicationArguments,memberEmail);
 	}
-
 	
-
+	//코드 생성
+	static private int num = new Random().nextInt(10000) + 10000;
+	private String joinCode = String.valueOf(num);
+	
+	
+	//코드 보내는
 	@RequestMapping(value="/code")
-
 	public String code() throws Exception {
-		MailCode code = new MailCode();
-		String joinCode = code.getJoinCode();
-		
 		System.out.println("asmfdlkamflk" + joinCode);
 		return joinCode;
 		
+	}
+
+	public String getJoinCode() {
+		return this.joinCode;
 	}
 
 }
