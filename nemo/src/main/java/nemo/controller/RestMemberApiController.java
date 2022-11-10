@@ -12,18 +12,23 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import nemo.dto.MemberDto;
+import nemo.service.MailCode;
+import nemo.service.MailSenderRunner;
 import nemo.service.MemberService;
 //import nemo.service.SecurityService;
 import nemo.vo.MemberRequestVo;
@@ -37,19 +42,30 @@ public class RestMemberApiController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
 	private Environment env;
 	
-	public RestMemberApiController (Environment env) {
-		this.env = env;
-	}
+	@Autowired
+	private MailSenderRunner mail;
+	
+	
+//	public RestMemberApiController (Environment env) {
+//		this.env = env;
+//	}
 
 	
 //	@Autowired
 //	private SecurityService securitySevice;
+	
+	public RestMemberApiController() {
+		
+	}
 
-	@RequestMapping(value = "/member", method = RequestMethod.GET)
-	public List<MemberDto> openMemberList() throws Exception {
-		return memberService.selectMemberList();
+
+	@RequestMapping(value = "/member/info/{memberNum}", method = RequestMethod.GET)
+	public MemberDto selectMemberInfo(@PathVariable("memberNum") int memberNum) throws Exception {
+		System.out.println(memberNum);
+		return memberService.selectMemberInfo(memberNum);
 	}
 	
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
@@ -115,7 +131,40 @@ public class RestMemberApiController {
 		}
 	}
 	
+	@RequestMapping(value="/member/update/{memberNum}", method = RequestMethod.PUT)
+	public void updateMember(@PathVariable("memberNum") int memberNum, @RequestBody MemberDto memberDto) throws Exception {
+		System.out.println("회원정보 업데이트 컨트롤러");
+		memberDto.setMemberNum(memberNum);
+//		memberDto.setMemberDate(memberDto.getMemberDate());
+//		memberDto.setMemberUser(memberDto.getMemberUser());
+//		memberDto.setMemberMailkey(memberDto.getMemberMailkey());
+		System.out.println(memberDto);
+		memberService.memberUpdate(memberDto);
+	}
 	
 	
+	
+	@Autowired
+	private ApplicationArguments applicationArguments;
+	
+	@RequestMapping(value="/mail")
+	public void tomail(@RequestParam String memberEmail) throws Exception {
+		
+		   System.out.println("aaaaaaaaaaaaaaaaa:"+memberEmail);
+		mail.run(applicationArguments,memberEmail);
+	}
+
+	
+
+	@RequestMapping(value="/code")
+
+	public String code() throws Exception {
+		MailCode code = new MailCode();
+		String joinCode = code.getJoinCode();
+		
+		System.out.println("asmfdlkamflk" + joinCode);
+		return joinCode;
+		
+	}
 
 }

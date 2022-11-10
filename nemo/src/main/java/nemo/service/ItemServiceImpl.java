@@ -35,15 +35,15 @@ public class ItemServiceImpl implements ItemService{
    
    //내 상품 리스트
    @Override
-   public List<ItemDto> myItemList() throws Exception {
-       return itemMapper.myItemList();
+   public List<ItemDto> myItemList(String itemWriter) throws Exception {
+       return itemMapper.myItemList(itemWriter);
     }
      
    //상품등록
    @Override
      public int insertItem( @RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
 	   
-	   String projectpath = "C:/nemo/git/NEMO-react/NEMO-react/nemo-project/public/files";
+	   String projectpath = "C:\\Users\\hi\\git\\NEMO-react\\nemo-project\\public\\files";
 	   UUID uuid = UUID.randomUUID();
 	   String filename = uuid+"_"+files.getOriginalFilename();
 	   File saveFile = new File(projectpath,filename);
@@ -58,7 +58,6 @@ public class ItemServiceImpl implements ItemService{
 	         
 	         
 	   // item.setIDate(new Date()); 
-        item.setItemWriter("잠시안녕");
         return itemMapper.insertItem(item);
      }
   

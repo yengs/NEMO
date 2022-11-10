@@ -50,4 +50,15 @@ public class ReviewServiceImpl implements ReviewService {
 	public void deleteReview(int reviewNum) throws Exception {
 		reviewMapper.deleteReview(reviewNum);
 	}
+
+	@Override
+	public List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception {
+		return reviewMapper.mostRecentReviewOfMyStore(reviewId);
+	}
+
+	@Override
+	public List<ReviewDto> twoOfMyMostRecentReviews(String reviewWriter) throws Exception {
+		return reviewMapper.twoOfMyMostRecentReviews(reviewWriter);
+	}
+	
 }
