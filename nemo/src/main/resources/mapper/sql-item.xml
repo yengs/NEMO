@@ -32,7 +32,7 @@
            ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
            item_etcsize,item_rentalstart,item_rentalend,files
         from item
-      	<!-- where item_writer = #{itemWriter} -->
+      	where item_writer = #{itemWriter}
        order by item_num desc;
     </select>
     
