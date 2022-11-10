@@ -78,6 +78,7 @@ public class RestReviewApiController {
 
 	// -------------
 
+	// 어디가 슬기야
 	// 내 상품에 대한 리뷰 중 가장 최근 리뷰 1개
 	@RequestMapping(value = "/mypage/review1", method = RequestMethod.GET)
 	public List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception {
