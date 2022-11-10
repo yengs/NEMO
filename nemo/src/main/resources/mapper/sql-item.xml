@@ -65,8 +65,12 @@
    
    <!-- 상품 수정 -->
     <update id="updateItem" parameterType="nemo.dto.ItemDto">
-		update item set item_name = #{itemName}, item_price = #{itemPrice}, item_detail = #{itemDetail}
-		, item_date = now()
+		update item set item_name = #{itemName}, item_weather = #{itemWeather}
+		,item_maincategory = #{itemMaincategory}, item_subcategory = #{itemSubcategory}
+		,item_price = #{itemPrice}, item_deposit = #{itemDeposit}
+		,item_topsize = #{itemTopsize}, item_bottomsize = #{itemBottomsize}, item_etcsize = #{itemEtcsize}
+		,item_detail = #{itemDetail}, item_rentalstart = #{itemRentalstart}, item_rentalend = #{itemRentalend}
+		,item_date = now()
 		  where item_num =#{itemNum}
 	</update>
    
