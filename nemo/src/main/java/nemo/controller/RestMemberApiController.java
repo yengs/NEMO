@@ -17,6 +17,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -173,5 +174,32 @@ public class RestMemberApiController {
 	public String getJoinCode() {
 		return this.joinCode;
 	}
+	
+	// 회원가입 로그인 중복여부
+	@RequestMapping(value = "/member/join/checkid", method = RequestMethod.POST)
+	public String checkMemberId(@ModelAttribute("memberId") String memberId) throws Exception {
+		System.out.println(memberId);
+		int result = memberService.checkMemberId(memberId);
+		System.out.println(result);
+		if (result > 0) {
+			return "fail";
+		}else{
+			return "success";
+		}
+	}
+	
+	// 회원가입 이메일 중복여부
+		@RequestMapping(value = "/member/join/checkemail", method = RequestMethod.POST)
+		public String checkEmail(@ModelAttribute("memberEmail") String memberEmail) throws Exception {
+			System.out.println(memberEmail);
+			int email = memberService.checkEmail(memberEmail);
+			System.out.println(email);
+			if (email > 0) {
+				return "fail";
+			} else {
+				return "success";
+			}
+		}
+		
 
 }
