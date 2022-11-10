@@ -15,5 +15,22 @@
 	</insert>
 	
 	
+	<!-- 빌려줬어요 -->
+	<select id="myLendList" parameterType="String" resultType="nemo.dto.BookingDto">
+      select booking_date, booking_itemfiles, booking_itemname
+      , booking_itemprice, booking_member, booking_depositstate, booking_bookingstate, booking_itemfiles
+        from booking
+      	where booking_itemwriter = #{bookingItemwriter}
+       order by booking_date desc;
+    </select>
+    
+    <!-- 빌려왔어요 -->
+    <select id="myBookingList" parameterType="String" resultType="nemo.dto.BookingDto">
+            select * from booking
+               where booking_member = #{bookingMember}
+                order by booking_date desc;
+    </select>
+	
+	
 	
 </mapper>
