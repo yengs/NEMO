@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import nemo.dto.ItemDto;
 import nemo.dto.ReviewDto;
 import nemo.service.ReviewService;
 
@@ -19,7 +20,7 @@ public class RestReviewApiController {
 
 	@Autowired
 	private ReviewService reviewService;
-
+	
 	/* 내가 작성한 후기 목록 */
 	@RequestMapping(value = "/review/myReview", method = RequestMethod.GET)
 	public List<ReviewDto> myReviewList(String reviewWriter) throws Exception {
@@ -27,16 +28,16 @@ public class RestReviewApiController {
 	}
 
 	/* 내 상품에 대해 상대방이 쓴 후기 목록 */
-	@RequestMapping(value = "/review/yourReview", method = RequestMethod.GET)
-	public List<ReviewDto> yourReviewList(String reviewId) throws Exception {
+	@RequestMapping(value = "/review/yourReview/{reviewWriter}", method = RequestMethod.GET)
+	public List<ReviewDto> yourReviewList(@PathVariable String reviewId) throws Exception {
 		return reviewService.selectYourReviewList(reviewId);
 	}
 
 	/* 후기 등록 */
 	@RequestMapping(value = "/reivew/reviewWrite", method = RequestMethod.POST)
 	public void insertReview(@RequestBody ReviewDto review) throws Exception {
-		review.setReviewId("민주");
-		review.setReviewWriter("슬기");
+//		review.setReviewId("민주");
+//		review.setReviewWriter("슬기");
 		reviewService.insertReview(review);
 	}
 
@@ -78,15 +79,14 @@ public class RestReviewApiController {
 
 	// -------------
 
-	// 어디가 슬기야
 	// 내 상품에 대한 리뷰 중 가장 최근 리뷰 1개
-	@RequestMapping(value = "/mypage/review1", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/review1/{reviewWriter}", method = RequestMethod.GET)
 	public List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception {
 		return reviewService.mostRecentReviewOfMyStore(reviewId);
 	}
 
 	// 내가 작성한 리뷰 중 가장 최근 리뷰 2개
-	@RequestMapping(value = "/mypage/review2", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/review2/{reviewWriter}", method = RequestMethod.GET)
 	public List<ReviewDto> twoOfMyMostRecentReviews(String reviewWriter) throws Exception {
 		return reviewService.twoOfMyMostRecentReviews(reviewWriter);
 	}
