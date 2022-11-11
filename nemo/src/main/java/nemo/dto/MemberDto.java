@@ -19,5 +19,8 @@ public class MemberDto {
 	private int memberWarning;
 	private int memberClean;
 	private String memberZipCode;
+	
+	private String lat;
+	private String lon;
 
 }
