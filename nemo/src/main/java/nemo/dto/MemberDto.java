@@ -18,5 +18,6 @@ public class MemberDto {
 	private String memberAddress;
 	private int memberWarning;
 	private int memberClean;
+	private String memberZipCode;
 
 }
