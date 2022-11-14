@@ -44,7 +44,7 @@
 	<!-- 예약중->대여중 -->
     <update id="updateBookingstate" parameterType="nemo.dto.BookingDto">
         update booking set booking_bookingstate ="대여중" 
-        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d')
+        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d');
     </update>
 
     <!-- 대여중->기간만료 -->
@@ -58,7 +58,7 @@
      <select id="allBooking" parameterType="int" resultType="nemo.dto.BookingDto">
             select booking_date
             from booking
-            where booking_itemnum  = #{bookingItemnum}
+            where booking_itemnum  = #{bookingItemnum} and booking_yn = 'N';
     </select>
 	
 	
