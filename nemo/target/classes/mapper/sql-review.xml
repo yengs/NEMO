@@ -7,19 +7,19 @@
 	<select id="selectMyReviewList" resultType="nemo.dto.ReviewDto">
 		SELECT REVIEW_NUM,
 		REVIEW_WRITER,
-		REVIEW_SATISFACTION, REVIEW_IMAGE,
-		REVIEW_CONTENTS FROM
+		REVIEW_SATISFACTION
+		REVIEW_CONTENTS, REVIEW_FILES FROM
 		review
-		WHERE REVIEW_WRITER="슬기" ORDER BY REVIEW_NUM DESC;
+		WHERE REVIEW_WRITER= #{reviewWriter} ORDER BY REVIEW_NUM DESC;
 	</select>
 
 	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
 	<select id="selectYourReviewList"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_IMAGE, REVIEW_ID,
-		REVIEW_SATISFACTION
+		SELECT REVIEW_NUM, REVIEW_ID,
+		REVIEW_SATISFACTION, REVIEW_FILES
 		FROM REVIEW
-		WHERE REVIEW_ID="민주"
+		WHERE REVIEW_ID= #{reviewId}
 		ORDER BY REVIEW_NUM
 		DESC;
 	</select>
@@ -27,16 +27,16 @@
 	<!-- 후기 등록 -->
 	<insert id="insertReview" parameterType="nemo.dto.ReviewDto">
 		INSERT INTO REVIEW
-		(REVIEW_IMAGE, REVIEW_CONTENTS,
-		REVIEW_SATISFACTION, REVIEW_WRITER)
-		VALUES (#{reviewImage}, #{reviewContents}, #{reviewSatisfaction},
-		#{reviewWriter});
+		(REVIEW_CONTENTS,
+		REVIEW_SATISFACTION, REVIEW_WRITER, REVIEW_FILES)
+		VALUES (#{reviewContents}, #{reviewSatisfaction},
+		#{reviewWriter}, #{reviewFiles});
 	</insert>
 
 	<!-- 내가 쓴 후기 상세 페이지 -->
 	<select id="selectMyReviewDetail" parameterType="int"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_IMAGE,
+		SELECT REVIEW_NUM, REVIEW_WRITER,
 		REVIEW_CONTENTS, REVIEW_SATISFACTION
 		FROM review
 		WHERE
@@ -46,7 +46,7 @@
 	<!-- 내 상품에 대한 상대방의 후기 상세 페이지 -->
 	<select id="selectYourReviewDetail" parameterType="int"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_IMAGE,
+		SELECT REVIEW_NUM,
 		REVIEW_ID, REVIEW_CONTENTS,
 		REVIEW_SATISFACTION
 		FROM REVIEW WHERE
@@ -58,7 +58,7 @@
 		UPDATE REVIEW SET
 		REVIEW_CONTENTS = #{reviewContents}, REVIEW_SATISFACTION =
 		#{reviewSatisfaction},
-		REVIEW_IMAGE = #{reviewImage}
+		REVIEW_FILES = #{reviewFiles}
 		where REVIEW_NUM =
 		#{reviewNum}
 	</update>
