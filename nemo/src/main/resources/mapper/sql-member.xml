@@ -15,9 +15,9 @@
 		insert into member(member_nickname, member_name, member_id, member_pw,
 		member_date, member_user, member_phone, member_mailauth,
 		member_mailkey, member_email, member_address, member_warning,
-		member_clean)
+		member_clean, member_zipcode, member_sigungu)
 		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw}, now(), 1, #{memberPhone}, 0,
-		#{memberMailkey}, #{memberEmail}, #{memberAddress}, 0, 50)
+		#{memberMailkey}, #{memberEmail}, #{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu})
 	</insert>
 
 	<!-- 로그인 -->

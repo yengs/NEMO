@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
 		responseVo.setMemberEmail(resultDto.getMemberEmail());
 		responseVo.setMemberAddress(resultDto.getMemberAddress());
 		responseVo.setMemberClean(resultDto.getMemberClean());
+		responseVo.setMemberZipCode(resultDto.getMemberZipCode());
 
 		return responseVo;
 	}

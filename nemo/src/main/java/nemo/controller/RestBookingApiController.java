@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import nemo.dto.BookingDto;
 import nemo.dto.ItemDto;
+import nemo.dto.MemberDto;
 import nemo.service.BookingService;
 
 @RestController
@@ -21,8 +22,8 @@ public class RestBookingApiController {
 	
 	//대여하기
 	@RequestMapping(value="/booking/bookingWrite", method = RequestMethod.POST)
-	public void insertBooking(@RequestBody BookingDto booking) throws Exception {
-		bookingService.insertBooking(booking);
+	public void insertBooking(@RequestBody BookingDto bookingDto) throws Exception {
+		bookingService.insertBooking(bookingDto);
 	}
 	
 	//빌려줬어요
@@ -36,6 +37,36 @@ public class RestBookingApiController {
     public List<BookingDto> myBookingList(@PathVariable("bookingMember") String bookingMember) throws Exception {
        return bookingService.myBookingList(bookingMember);
     }
+    
+    //예약취소
+    @RequestMapping(value = "/mypage/mybooking/{bookingNum}", method = RequestMethod.DELETE)
+    public void bookingCancel(@PathVariable("bookingNum") int bookingNum) throws Exception {
+    	bookingService.bookingCancel(bookingNum);
+    }
+    
+    //보증금상태 수정
+    @RequestMapping(value="/mypage/mybooking/{bookingNum}", method = RequestMethod.PUT)
+	public void updateBooking(@PathVariable("bookingNum") int bookingNum, @RequestBody BookingDto bookingDto) throws Exception {
+		bookingDto.setBookingNum(bookingNum);
+		bookingService.updateBooking(bookingDto);
+	}
+    
+  //예약중 -> 대여중
+    //대여중 -> 기간만료
+    @RequestMapping(value = "/bookingState")
+    public void updateBookingstate()
+            throws Exception {
+        bookingService.updateBookingstate();
+        bookingService.updateBookingstate2();
+    }
+
+
+  //모든 대여날짜
+    @RequestMapping(value = "/allbooking/{bookingItemnumber}", method = RequestMethod.GET)
+       public List<BookingDto> allBooking(@PathVariable("bookingItemnumber") int bookingItemnum) throws Exception {
+          return bookingService.allBooking(bookingItemnum);
+       }
+    
 
 
 }
