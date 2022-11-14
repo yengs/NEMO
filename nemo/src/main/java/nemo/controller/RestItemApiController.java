@@ -79,9 +79,9 @@ public class RestItemApiController {
  
    //상품 수정
    @RequestMapping(value = "/item/{itemNum}", method = RequestMethod.PUT)
-   public void updateItem(@PathVariable("itemNum") int itemNum, @RequestBody ItemDto boardDto) throws Exception {
-      boardDto.setItemNum(itemNum);
-      itemService.updateItem(boardDto);
+   public void updateItem(@PathVariable("itemNum") int itemNum, @RequestPart("data") ItemDto itemDto, @RequestPart(value = "files", required = false) MultipartFile files) throws Exception {
+      itemDto.setItemNum(itemNum);
+      itemService.updateItem(itemDto,files);
    }
 
    
