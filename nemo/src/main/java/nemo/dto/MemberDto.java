@@ -20,7 +20,9 @@ public class MemberDto {
 	private int memberClean;
 	private String memberZipCode;
 	
-	private String lat;
-	private String lon;
+	private String memberLat;
+	private String memberLon;
+	
+	private String memberSigungu;
 
 }
