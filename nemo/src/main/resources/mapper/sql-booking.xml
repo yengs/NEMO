@@ -17,9 +17,7 @@
 	
 	<!-- 빌려줬어요 -->
 	<select id="myLendList" parameterType="String" resultType="nemo.dto.BookingDto">
-      select booking_date, booking_itemfiles, booking_itemname
-      , booking_itemprice, booking_member, booking_depositstate, booking_bookingstate, booking_itemfiles
-        from booking
+      select * from booking
       	where booking_itemwriter = #{bookingItemwriter}
        order by booking_date desc;
     </select>
@@ -30,7 +28,38 @@
                where booking_member = #{bookingMember}
                 order by booking_date desc;
     </select>
+    
+    <!-- 예약취소 -->
+    <delete id="bookingCancel" parameterType="int">
+		update booking set booking_yn = 'y', booking_bookingstate = '예약취소', booking_depositstate = '반환완료(예약취소)'
+		where booking_num = #{bookingNum};
+	</delete>
 	
+	<!-- 보증금상태 수정 -->
+	<update id="updateBooking" parameterType="nemo.dto.BookingDto">
+		update booking set booking_depositstate = #{bookingDepositstate}
+		  where booking_num = #{bookingNum};
+	</update>
+	
+	<!-- 예약중->대여중 -->
+    <update id="updateBookingstate" parameterType="nemo.dto.BookingDto">
+        update booking set booking_bookingstate ="대여중" 
+        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d')
+    </update>
+
+    <!-- 대여중->기간만료 -->
+    <update id="updateBookingstate2" parameterType="nemo.dto.BookingDto">
+        update booking set booking_bookingstate ="기간만료" 
+        where DATE_FORMAT(now(),'%Y-%m-%d') > booking_date 
+    </update>
+
+
+    <!-- 모든 대여날짜 -->
+     <select id="allBooking" parameterType="int" resultType="nemo.dto.BookingDto">
+            select booking_date
+            from booking
+            where booking_itemnum  = #{bookingItemnum}
+    </select>
 	
 	
 </mapper>

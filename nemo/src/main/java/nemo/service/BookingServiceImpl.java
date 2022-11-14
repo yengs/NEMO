@@ -17,8 +17,8 @@ public class BookingServiceImpl implements BookingService {
 	
 	 //상품등록
 	   @Override
-	     public void insertBooking(BookingDto booking) throws Exception {
-	       bookingMapper.insertBooking(booking);
+	     public void insertBooking(BookingDto bookingDto) throws Exception {
+	       bookingMapper.insertBooking(bookingDto);
 	     }
 	
 	 //빌려줬어요
@@ -32,6 +32,39 @@ public class BookingServiceImpl implements BookingService {
 	      public List<BookingDto> myBookingList(String bookingMember) throws Exception {
 	          return bookingMapper.myBookingList(bookingMember);
 	       }
+	      
+	 //예약취소
+		@Override
+		public void bookingCancel(int bookingNum) throws Exception {
+			bookingMapper.bookingCancel(bookingNum);
+		}
+		
+	 //보증금 상태 수정
+		@Override
+		public void updateBooking(BookingDto bookingDto) throws Exception {
+			int count = bookingMapper.updateBooking(bookingDto);
+			System.out.println("***************** " + count);
+		}
+		
+		//예약중->대여중
+        @Override
+          public void updateBookingstate() throws Exception {
+            bookingMapper.updateBookingstate();
+          }
+
+
+     //대여중 -> 기간만료
+        @Override
+          public void updateBookingstate2() throws Exception {
+            bookingMapper.updateBookingstate2();
+          }
+
+
+      //모든 대여날짜
+        @Override
+        public List<BookingDto> allBooking(int bookingItemnum) throws Exception {
+            return bookingMapper.allBooking(bookingItemnum);
+       }
 	   
 	   
 
