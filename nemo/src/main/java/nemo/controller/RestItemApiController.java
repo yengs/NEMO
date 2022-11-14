@@ -26,11 +26,11 @@ public class RestItemApiController {
    private ItemService itemService;
    
    
-   // 상품리스트 조회
-//   @RequestMapping(value = "/item", method = RequestMethod.GET)
-//   public List<ItemDto> selectItemList() throws Exception {
-//      return itemService.selectItemList();
-//   }
+   //날씨별 상품리스트 조회
+   @RequestMapping(value = "/item/cate/{itemWeather}", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListByWeather(@PathVariable("itemWeather") String itemWeather) throws Exception {
+      return itemService.selectItemListByWeather(itemWeather);
+   }
    
    
    // 상품리스트 main 조회
