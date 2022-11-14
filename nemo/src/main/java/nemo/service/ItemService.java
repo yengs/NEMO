@@ -16,7 +16,7 @@ public interface ItemService {
    public int insertItem(@RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception;
    public ItemDto selectItemDetail(int itemNum) throws Exception;
    
-   public void updateItem(ItemDto itemDto) throws Exception;
+   public void updateItem(@RequestPart("data") ItemDto itemDto, @RequestPart("files") MultipartFile files) throws Exception;
    public void deleteItem(int itemNum) throws Exception;
    
 }
