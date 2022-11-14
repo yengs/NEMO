@@ -21,6 +21,11 @@ public class ItemServiceImpl implements ItemService{
    @Autowired
    private ItemMapper itemMapper;
    
+   //상품 날씨별 리스트
+   @Override
+    public List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception {
+        return itemMapper.selectItemList(itemWeather);
+     }
    
    //상품 main 리스트
    @Override
