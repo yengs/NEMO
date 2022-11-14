@@ -18,4 +18,10 @@ public interface MemberService {
 	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception; 
 	
 	public void memberUpdate(MemberDto memberDto) throws Exception;
+	
+	// 아이디 중복
+	public int checkMemberId(String memberId) throws Exception;
+	
+	// 이메일 중복
+	public int checkEmail(String memberEmail) throws Exception;
 }

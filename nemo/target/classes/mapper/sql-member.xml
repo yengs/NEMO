@@ -4,27 +4,48 @@
 <mapper namespace="nemo.mapper.MemberMapper">
 
 	<!-- 회원 정보 조회 -->
-	<select id="selectMemberInfo" resultType="nemo.dto.MemberDto" parameterType="nemo.dto.MemberDto">
+	<select id="selectMemberInfo" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
 		select * from member where member_num = #{memberNum}
-<!-- 		     , date_format(m_date, '%Y.%m.%d %H:%i:%s') as m_date -->
+		<!-- , date_format(m_date, '%Y.%m.%d %H:%i:%s') as m_date -->
 	</select>
-	
+
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="nemo.dto.MemberDto">
-      insert into member(member_nickname, member_name, member_id, member_pw, member_date, member_user, member_phone, member_mailauth, member_mailkey, member_email, member_address, member_warning, member_clean)
-         values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw}, now(), 1, #{memberPhone}, 0, #{memberMailkey}, #{memberEmail}, #{memberAddress}, 0, 50)
-   </insert>
-   
-   <!-- 로그인 -->
-   <select id="login" parameterType="nemo.dto.MemberDto" resultType="nemo.dto.MemberDto">
+		insert into member(member_nickname, member_name, member_id, member_pw,
+		member_date, member_user, member_phone, member_mailauth,
+		member_mailkey, member_email, member_address, member_warning,
+		member_clean)
+		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw}, now(), 1, #{memberPhone}, 0,
+		#{memberMailkey}, #{memberEmail}, #{memberAddress}, 0, 50)
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="nemo.dto.MemberDto"
+		resultType="nemo.dto.MemberDto">
 		select * from member
-		 where member_id = #{memberId} and member_pw = #{memberPw}	
+		where member_id = #{memberId} and member_pw = #{memberPw}
 	</select>
-   
-   <!-- 회원정보 수정 -->
-   <update id="memberUpdate" parameterType="nemo.dto.MemberDto">
-   		update member set member_nickname = #{memberNickname}, member_pw = #{memberPw}, member_phone = #{memberPhone}, member_address = #{memberAddress}
-   		where member_num = #{memberNum}
-   </update>
-	
+
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdate" parameterType="nemo.dto.MemberDto">
+		update member set member_nickname = #{memberNickname}, member_pw =
+		#{memberPw}, member_phone = #{memberPhone}, member_address =
+		#{memberAddress}
+		where member_num = #{memberNum}
+	</update>
+
+
+	<!-- 아이디 중복 -->
+	<select id="checkMemberId" resultType="int">
+		SELECT COUNT(*) FROM
+		MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
+
+	<!-- 이메일 중복 -->
+	<select id="checkEmail" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
+
 </mapper>
