@@ -18,4 +18,9 @@ public class MemberResponseVo {
 	private int memberWarning;
 	private String memberZipCode;
 	
+	private String memberLat;
+	private String memberLon;
+	
+	private String memberSigungu;
+	
 }
