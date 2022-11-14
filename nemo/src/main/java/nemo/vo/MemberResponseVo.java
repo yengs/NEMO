@@ -16,5 +16,11 @@ public class MemberResponseVo {
 	private String memberAddress;
 	private int memberClean;
 	private int memberWarning;
+	private String memberZipCode;
+	
+	private String memberLat;
+	private String memberLon;
+	
+	private String memberSigungu;
 	
 }
