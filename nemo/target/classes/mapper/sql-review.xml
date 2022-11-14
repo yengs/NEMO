@@ -69,5 +69,4 @@
 		WHERE REVIEW_WRITER="슬기" ORDER BY REVIEW_NUM DESC ;
 	</select>
 
-
 </mapper>
