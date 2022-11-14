@@ -19,14 +19,14 @@
 	<select id="myLendList" parameterType="String" resultType="nemo.dto.BookingDto">
       select * from booking
       	where booking_itemwriter = #{bookingItemwriter}
-       order by booking_date desc;
+       order by booking_num desc;
     </select>
     
     <!-- 빌려왔어요 -->
     <select id="myBookingList" parameterType="String" resultType="nemo.dto.BookingDto">
             select * from booking
                where booking_member = #{bookingMember}
-                order by booking_date desc;
+                order by booking_num desc;
     </select>
     
     <!-- 예약취소 -->
@@ -37,7 +37,7 @@
 	
 	<!-- 보증금상태 수정 -->
 	<update id="updateBooking" parameterType="nemo.dto.BookingDto">
-		update booking set booking_depositstate = #{bookingDepositstate}
+		update booking set booking_depositstate = #{bookingDepositstate} 
 		  where booking_num = #{bookingNum};
 	</update>
 	
