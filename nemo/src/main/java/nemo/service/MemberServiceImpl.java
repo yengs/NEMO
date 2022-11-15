@@ -16,6 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
+	private MemberDto memberDto;
 
 //	jwt위한 추가 10.28 오전 11:53 START
 	@Override
@@ -68,5 +69,56 @@ public class MemberServiceImpl implements MemberService {
 	// 이메일 중복
 	public int checkEmail(String memberEmail) throws Exception {
 		return memberMapper.checkEmail(memberEmail);
+	}
+
+	// 아이디 비밀번호 찾기 ---------------------------------------------------------
+	// 아이디 찾기 입력창
+	@Override
+	public MemberResponseVo findId(MemberRequestVo requestVo) throws Exception {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMemberName(requestVo.getMemberName());
+		memberDto.setMemberEmail(requestVo.getMemberEmail());
+
+		MemberDto resultDto = memberMapper.findId(memberDto);
+		if (resultDto == null) {
+			return null;
+		}
+
+		MemberResponseVo responseVo = new MemberResponseVo();
+		responseVo.setMemberName(resultDto.getMemberName());
+		responseVo.setMemberEmail(resultDto.getMemberEmail());
+
+		return responseVo;
+	}
+
+	// 아이디 찾기 결과창
+	@Override
+	public MemberDto findResult(String memberEmail) throws Exception {
+		return memberMapper.findResult(memberEmail);
+	}
+
+	// 비밀번호 찾기 입력창
+	@Override
+	public MemberResponseVo findPw(MemberRequestVo requestVo) throws Exception {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMemberId(requestVo.getMemberId());
+		memberDto.setMemberEmail(requestVo.getMemberEmail());
+
+		MemberDto resultDto = memberMapper.findPw(memberDto);
+		if (resultDto == null) {
+			return null;
+		}
+
+		MemberResponseVo responseVo = new MemberResponseVo();
+		responseVo.setMemberId(resultDto.getMemberId());
+		responseVo.setMemberEmail(resultDto.getMemberEmail());
+
+		return responseVo;
+	}
+
+	// 비밀번호 찾기 결과창
+	@Override
+	public MemberDto findPwResult(String memberId) throws Exception {
+		return memberMapper.findPwResult(memberId);
 	}
 }
