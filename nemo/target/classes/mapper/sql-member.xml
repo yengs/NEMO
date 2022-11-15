@@ -33,13 +33,10 @@
 
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate" parameterType="nemo.dto.MemberDto">
-		update member set
-		member_nickname = #{memberNickname}, member_pw =
-		#{memberPw},
-		member_phone = #{memberPhone}, member_address =
-		#{memberAddress}
-		where
-		member_num = #{memberNum}
+		update member set member_nickname = #{memberNickname}, member_pw =
+		#{memberPw}, member_phone = #{memberPhone}, member_address =
+		#{memberAddress}, member_zipcode = #{memberZipCode}, member_sigungu = #{memberSigungu}
+		where member_num = #{memberNum}
 	</update>
 
 
