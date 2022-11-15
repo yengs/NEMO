@@ -25,7 +25,6 @@ public class RestReviewApiController {
 	/* 내가 작성한 후기 목록 */
 	@RequestMapping(value = "/review/myReview/{reviewWriter}", method = RequestMethod.GET)
 	public List<ReviewDto> myReviewList(@PathVariable("reviewWriter") String reviewWriter) throws Exception {
-		System.out.println(reviewWriter);
 		return reviewService.selectMyReviewList(reviewWriter);
 	}
 
@@ -73,9 +72,9 @@ public class RestReviewApiController {
 	}
 
 	/* 후기 삭제 */
-	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.DELETE)
-	public void deleteReview(@PathVariable("reviewNum") int reviewNum) throws Exception {
-		reviewService.deleteReview(reviewNum);
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.DELETE)
+	public void deleteReview(@PathVariable("reviewWriter") String reviewWriter, @PathVariable("reviewNum") int reviewNum) throws Exception {
+		reviewService.deleteReview(reviewWriter, reviewNum);
 	}
 
 	// -------------
