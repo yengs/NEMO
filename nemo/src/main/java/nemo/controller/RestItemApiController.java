@@ -27,7 +27,7 @@ public class RestItemApiController {
    
    
    //날씨별 상품리스트 조회
-   @RequestMapping(value = "/item/cate/{itemWeather}", method = RequestMethod.GET)
+   @RequestMapping(value = "/item/cate/weather/{itemWeather}", method = RequestMethod.GET)
    public List<ItemDto> selectItemListByWeather(@PathVariable("itemWeather") String itemWeather) throws Exception {
       return itemService.selectItemListByWeather(itemWeather);
    }
