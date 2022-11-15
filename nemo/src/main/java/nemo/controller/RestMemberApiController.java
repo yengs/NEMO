@@ -201,5 +201,45 @@ public class RestMemberApiController {
 			}
 		}
 		
+		// 아이디 비밀번호 찾기 ----------------------------------------------------
+		// 아이디 찾기 입력창
+		@RequestMapping(value = "/member/id", method = RequestMethod.POST)
+		public ResponseEntity<MemberResponseVo> findId(@RequestBody MemberRequestVo requestVo, HttpServletResponse response) throws Exception{
+			MemberResponseVo responseVo = memberService.findId(requestVo);
+			if(responseVo == null) {
+				System.out.println(responseVo);
+				System.out.println(requestVo);
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}else {
+				return ResponseEntity.status(HttpStatus.OK).body(responseVo);
+			}
+		}
+		
+		// 아이디 찾기 결과창
+		@RequestMapping(value = "/member/id/find/{memberEmail}", method = RequestMethod.GET)
+		public MemberDto findResult(@PathVariable String memberEmail) throws Exception{
+			System.out.println(memberEmail);
+			return memberService.findResult(memberEmail);
+		}
+		
+		// 비밀번호 찾기 입력창
+		@RequestMapping(value = "/member/pw", method = RequestMethod.POST)
+		public ResponseEntity<MemberResponseVo> findPw(@RequestBody MemberRequestVo requestVo, HttpServletResponse response) throws Exception{
+			MemberResponseVo responseVo = memberService.findPw(requestVo);
+			if(responseVo == null) {
+				System.out.println(responseVo);
+				System.out.println(requestVo);
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}else {
+				return ResponseEntity.status(HttpStatus.OK).body(responseVo);
+			}
+		}
+		
+		// 비밀번호 찾기 결과창
+		@RequestMapping(value = "/member/pw/find/{memberId}", method = RequestMethod.GET)
+		public MemberDto findPwResult(@PathVariable String memberId) throws Exception{
+			System.out.println(memberId);
+			return memberService.findPwResult(memberId);
+		}
 
 }
