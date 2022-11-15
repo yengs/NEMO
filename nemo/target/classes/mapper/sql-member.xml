@@ -31,7 +31,7 @@
 	<update id="memberUpdate" parameterType="nemo.dto.MemberDto">
 		update member set member_nickname = #{memberNickname}, member_pw =
 		#{memberPw}, member_phone = #{memberPhone}, member_address =
-		#{memberAddress}
+		#{memberAddress}, member_zipcode = #{memberZipCode}, member_sigungu = #{memberSigungu}
 		where member_num = #{memberNum}
 	</update>
 

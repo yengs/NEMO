@@ -48,7 +48,7 @@ public class ItemServiceImpl implements ItemService{
    @Override
      public int insertItem( @RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
 	   
-	   String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files";
+	   String projectpath = "C:/nemo/git/NEMO-react/NEMO-react/nemo-project/public/files";
 	   
 	   UUID uuid = UUID.randomUUID();
 	   String filename = uuid+"_"+files.getOriginalFilename();
