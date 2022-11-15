@@ -19,4 +19,8 @@ public interface MemberMapper {
 	MemberDto selectMemberInfo(int memberNum) throws Exception;
 	
 	void memberUpdate(MemberDto memberDto) throws Exception;
+	
+	int checkMemberId(String memberId) throws Exception;
+
+	int checkEmail(String memberEmail) throws Exception;
 }

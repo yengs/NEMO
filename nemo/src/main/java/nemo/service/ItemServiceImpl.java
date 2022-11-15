@@ -44,6 +44,7 @@ public class ItemServiceImpl implements ItemService{
      public int insertItem( @RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
 	   
 	   String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files";
+	   
 	   UUID uuid = UUID.randomUUID();
 	   String filename = uuid+"_"+files.getOriginalFilename();
 	   File saveFile = new File(projectpath,filename);
@@ -79,16 +80,34 @@ public class ItemServiceImpl implements ItemService{
    
    
    @Override
-	public void updateItem(ItemDto itemDto) throws Exception {
-		int count = itemMapper.updateItem(itemDto);
+	public void updateItem(@RequestPart("data") ItemDto itemDto, @RequestPart("files") MultipartFile files) throws Exception {
+		
+	   if ( files != null) {
+	      String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files";
+		   
+		   UUID uuid = UUID.randomUUID();
+		   String filename = uuid+"_"+files.getOriginalFilename();
+		   File saveFile = new File(projectpath,filename);
+		   itemDto.setFiles(filename);
+		   try {
+		         files.transferTo(saveFile);
+		      } catch (IllegalStateException e) {
+		         e.printStackTrace();
+		      } catch (IOException e) {
+		         e.printStackTrace();
+		      }	
+	   }
+	   int count = itemMapper.updateItem(itemDto);
 		System.out.println("***************** " + count);
 	}
+   
 
 	@Override
 	public void deleteItem(int itemNum) throws Exception {
 		int count = itemMapper.deleteItem(itemNum);
 		System.out.println("***************** " + count);
 	}
+	
     
 
   

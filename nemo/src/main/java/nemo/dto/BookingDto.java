@@ -13,5 +13,11 @@ import lombok.Data;
         private String bookingBookingstate;
         private String bookingDepositstate;
         private Date bookingDate;
+        private String bookingItemname;
+        private int bookingItemprice;
+        private String bookingItemwriter;
+        private String bookingItemfiles;
+        private String bookingYn;
+        
 
 }

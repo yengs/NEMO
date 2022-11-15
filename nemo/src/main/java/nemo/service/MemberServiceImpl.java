@@ -16,7 +16,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
-	
 
 //	jwt위한 추가 10.28 오전 11:53 START
 	@Override
@@ -38,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
 		responseVo.setMemberEmail(resultDto.getMemberEmail());
 		responseVo.setMemberAddress(resultDto.getMemberAddress());
 		responseVo.setMemberClean(resultDto.getMemberClean());
+		responseVo.setMemberZipCode(resultDto.getMemberZipCode());
 
 		return responseVo;
 	}
@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 	public int join(MemberDto member) throws Exception {
 		return memberMapper.join(member);
 	}
-	
+
 	@Override
 	public void memberUpdate(MemberDto memberDto) throws Exception {
 		memberMapper.memberUpdate(memberDto);
@@ -56,10 +56,17 @@ public class MemberServiceImpl implements MemberService {
 //	회원정보 조회
 	public MemberDto selectMemberInfo(int memberNum) throws Exception {
 		MemberDto memberDto = new MemberDto();
-		System.out.println("서비스 멤버정보확인::::::::::::"+memberDto);
+		System.out.println("서비스 멤버정보확인::::::::::::" + memberDto);
 		return memberMapper.selectMemberInfo(memberNum);
 	}
-	
-	
-}
 
+	// 아이디 중복
+	public int checkMemberId(String memberId) throws Exception {
+		return memberMapper.checkMemberId(memberId);
+	}
+
+	// 이메일 중복
+	public int checkEmail(String memberEmail) throws Exception {
+		return memberMapper.checkEmail(memberEmail);
+	}
+}
