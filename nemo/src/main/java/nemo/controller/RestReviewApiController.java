@@ -36,8 +36,8 @@ public class RestReviewApiController {
 	}
 
 	/* 후기 등록 */
-	@RequestMapping(value = "/reivew/reviewWrite", method = RequestMethod.POST)
-	public void insertReview(@RequestPart("reviewData") ReviewDto review, @RequestPart("reviewFiles") MultipartFile files) throws Exception {
+	@RequestMapping(value = "/review/reviewWrite", method = RequestMethod.POST)
+	public void insertReview(@RequestPart(value="reviewData",required=false) ReviewDto review, @RequestPart(value="reviewFiles",required=false) MultipartFile files) throws Exception {
 		reviewService.insertReview(review, files);
 	}
 

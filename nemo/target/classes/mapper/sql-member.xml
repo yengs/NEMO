@@ -12,27 +12,34 @@
 
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="nemo.dto.MemberDto">
-		insert into member(member_nickname, member_name, member_id, member_pw,
+		insert into
+		member(member_nickname, member_name, member_id, member_pw,
 		member_date, member_user, member_phone, member_mailauth,
 		member_mailkey, member_email, member_address, member_warning,
 		member_clean, member_zipcode, member_sigungu)
-		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw}, now(), 1, #{memberPhone}, 0,
-		#{memberMailkey}, #{memberEmail}, #{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu})
+		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw},
+		now(), 1, #{memberPhone}, 0,
+		#{memberMailkey}, #{memberEmail},
+		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu})
 	</insert>
 
 	<!-- 로그인 -->
 	<select id="login" parameterType="nemo.dto.MemberDto"
 		resultType="nemo.dto.MemberDto">
 		select * from member
-		where member_id = #{memberId} and member_pw = #{memberPw}
+		where member_id = #{memberId} and
+		member_pw = #{memberPw}
 	</select>
 
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate" parameterType="nemo.dto.MemberDto">
-		update member set member_nickname = #{memberNickname}, member_pw =
-		#{memberPw}, member_phone = #{memberPhone}, member_address =
+		update member set
+		member_nickname = #{memberNickname}, member_pw =
+		#{memberPw},
+		member_phone = #{memberPhone}, member_address =
 		#{memberAddress}
-		where member_num = #{memberNum}
+		where
+		member_num = #{memberNum}
 	</update>
 
 
@@ -46,6 +53,32 @@
 	<select id="checkEmail" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
+
+	<!-- 아이디 찾기 입력창 -->
+	<select id="findId" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select * from member where member_name = #{memberName} and member_email =
+		#{memberEmail}
+	</select>
+
+	<!-- 아이디 찾기 결과창 -->
+	<select id="findResult" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select member_id from member where member_email = #{memberEmail}
+	</select>
+
+	<!-- 비밀번호 찾기 입력창 -->
+	<select id="findPw" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select * from member where member_id = #{memberId} and member_email =
+		#{memberEmail}
+	</select>
+
+	<!-- 비밀번호 찾기 결과창 -->
+	<select id="findPwResult" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select member_pw from member where member_id = #{memberId}
 	</select>
 
 </mapper>
