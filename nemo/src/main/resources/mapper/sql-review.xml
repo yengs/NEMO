@@ -67,7 +67,7 @@
 	<delete id="deleteReview" parameterType="nemo.dto.ReviewDto">
 		DELETE FROM REVIEW
 		WHERE
-		REVIEW_WRITER=#{reivewWriter} and REVIEW_NUM=#{reviewNum}
+		REVIEW_WRITER=#{reviewWriter} and REVIEW_NUM=#{reviewNum}
 	</delete>
 	
 	<!-- 내 상점 리뷰 중 가장 최근 후기 하나 -->
