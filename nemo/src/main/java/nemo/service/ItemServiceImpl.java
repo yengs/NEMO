@@ -24,7 +24,7 @@ public class ItemServiceImpl implements ItemService{
    //상품 날씨별 리스트
    @Override
     public List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception {
-        return itemMapper.selectItemList(itemWeather);
+        return itemMapper.selectItemListByWeather(itemWeather);
      }
    
    //상품 main 리스트
