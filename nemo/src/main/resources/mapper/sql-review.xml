@@ -7,7 +7,7 @@
 	<select id="selectMyReviewList" resultType="nemo.dto.ReviewDto">
 		SELECT REVIEW_NUM,
 		REVIEW_WRITER,
-		REVIEW_SATISFACTION
+		REVIEW_SATISFACTION,
 		REVIEW_CONTENTS, REVIEW_FILES FROM
 		review
 		WHERE REVIEW_WRITER= #{reviewWriter} ORDER BY REVIEW_NUM DESC;
