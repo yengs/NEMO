@@ -27,14 +27,14 @@ public class RestItemApiController {
    
    
    //날씨별 상품리스트 조회
-   @RequestMapping(value = "/item/cate/weather/{itemWeather}", method = RequestMethod.GET)
+   @RequestMapping(value = "/item/weather/{itemWeather}", method = RequestMethod.GET)
    public List<ItemDto> selectItemListByWeather(@PathVariable("itemWeather") String itemWeather) throws Exception {
-      return itemService.selectItemListByWeather(itemWeather);
+      System.out.println("itemWeather:::::::::::::::::::::::::::::::::::::::" + itemWeather);
+	   return itemService.selectItemListByWeather(itemWeather);
    }
    
    
    // 상품리스트 main 조회
-
    @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
    public List<ItemDto> selectItemList(@PathVariable("itemMaincategory") String itemMaincategory) throws Exception {
       return itemService.selectItemList(itemMaincategory);
