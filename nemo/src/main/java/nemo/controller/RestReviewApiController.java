@@ -46,7 +46,7 @@ public class RestReviewApiController {
 	}
 
 	/* 내가 쓴 후기 상세 페이지 */
-	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> myReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
 		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
 		if (reviewDto == null) {
@@ -57,7 +57,7 @@ public class RestReviewApiController {
 	}
 
 	/* 내 상품에 대한 상대방의 후기 상세 페이지 */
-	@RequestMapping(value = "/review/yourReview/{reviewId}/{reviewNum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/review/yourReview/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> yourReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
 		ReviewDto reviewDto = reviewService.selectYourReviewDetail(reviewNum);
 		if (reviewDto == null) {
