@@ -43,10 +43,10 @@
 	</update>
 
 	<!-- 후기 삭제 -->
-	<delete id="deleteReview" parameterType="int">
+	<delete id="deleteReview" parameterType="nemo.dto.ReviewDto">
 		DELETE FROM REVIEW
 		WHERE
-		REVIEW_NUM=#{reviewNum}
+		REVIEW_WRITER=#{reivewWriter} and REVIEW_NUM=#{reviewNum}
 	</delete>
 	
 	<!-- 내 상점 리뷰 중 가장 최근 후기 하나 -->
@@ -54,7 +54,7 @@
 		SELECT REVIEW_NUM, REVIEW_IMAGE, REVIEW_ID,
 		REVIEW_SATISFACTION
 		FROM REVIEW
-		WHERE REVIEW_ID="민주"
+		WHERE REVIEW_ID=#{reviewId}
 		ORDER BY REVIEW_NUM
 		DESC LIMIT 1;
 	</select>
@@ -66,7 +66,7 @@
 		REVIEW_SATISFACTION, REVIEW_IMAGE,
 		REVIEW_CONTENTS FROM
 		review
-		WHERE REVIEW_WRITER="슬기" ORDER BY REVIEW_NUM DESC ;
+		WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC ;
 	</select>
 
 </mapper>
