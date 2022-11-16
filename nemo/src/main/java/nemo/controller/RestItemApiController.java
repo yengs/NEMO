@@ -26,10 +26,15 @@ public class RestItemApiController {
    private ItemService itemService;
    
    
+   //메인페이지 로그인 안되어있을 때 날씨추천리스트에 랜덤으로 띄워줄 데이터조회
+   @RequestMapping(value = "/item/random", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListRandom() throws Exception {
+	   return itemService.selectItemListRandom();
+   }
+   
    //날씨별 상품리스트 조회
    @RequestMapping(value = "/item/weather/{itemWeather}", method = RequestMethod.GET)
    public List<ItemDto> selectItemListByWeather(@PathVariable("itemWeather") String itemWeather) throws Exception {
-      System.out.println("itemWeather:::::::::::::::::::::::::::::::::::::::" + itemWeather);
 	   return itemService.selectItemListByWeather(itemWeather);
    }
    
