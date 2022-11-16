@@ -11,7 +11,7 @@
 
 <!-- 주간베스트아이템 조회 -->
 <select id="selectItemListWeeklyBest" resultType="nemo.dto.ItemDto" parameterType="String">
-select *, count(booking_itemnum) from booking where YEARWEEK(booking_date) = YEARWEEK(now()) group by booking_itemnum;
+select *, count(booking_itemnum) from item LEFT JOIN booking on item.item_num = booking.booking_itemnum where YEARWEEK(booking_date) = YEARWEEK(now()) group by booking_itemnum;
 </select>
 
 <!-- 기온별 상품 조회 -->
