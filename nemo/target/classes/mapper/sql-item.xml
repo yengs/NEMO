@@ -9,6 +9,13 @@
        order by RAND();
 </select>
 
+<!-- 주간베스트아이템 조회 -->
+<!-- <select id="selectItemListRandom" resultType="nemo.dto.ItemDto"> -->
+<!-- select * from item  -->
+<!-- WHERE YEARWEEK(item_rentalstart) = YEARWEEK(now()) -->
+<!-- order by item_rentcount; -->
+<!-- </select> -->
+
 <!-- 기온별 상품 조회 -->
 <select id="selectItemListByWeather" parameterType="String" resultType="nemo.dto.ItemDto">
 	select * from item
