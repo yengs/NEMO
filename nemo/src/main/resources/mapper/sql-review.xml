@@ -6,17 +6,17 @@
 	<!-- 내가 작성한 후기 목록 -->
 	<select id="selectMyReviewList" resultType="nemo.dto.ReviewDto">
 		SELECT REVIEW_NUM,
+		REVIEW_PRODUCTIDX,
 		REVIEW_WRITER,
 		REVIEW_SATISFACTION,
 		REVIEW_CONTENTS, REVIEW_FILES FROM
 		review
 		WHERE REVIEW_WRITER= #{reviewWriter} ORDER BY REVIEW_NUM DESC;
 	</select>
-
+ 
 	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
-	<select id="selectYourReviewList"
-		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_ID,
+	<select id="selectYourReviewList" resultType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM, REVIEW_FILES, REVIEW_ID,
 		REVIEW_SATISFACTION, REVIEW_FILES
 		FROM REVIEW
 		WHERE REVIEW_ID= #{reviewId}
@@ -56,18 +56,37 @@
 	<!-- 후기 수정 -->
 	<update id="updateReview" parameterType="nemo.dto.ReviewDto">
 		UPDATE REVIEW SET
-		REVIEW_CONTENTS = #{reviewContents}, REVIEW_SATISFACTION =
-		#{reviewSatisfaction},
-		REVIEW_FILES = #{reviewFiles}
-		where REVIEW_NUM =
-		#{reviewNum}
+		REVIEW_FILES = #{reviewFiles},
+		REVIEW_CONTENTS = #{reviewContents}, 
+		REVIEW_SATISFACTION = #{reviewSatisfaction}
+		where REVIEW_WRITER = ${reviewWriter} and REVIEW_NUM = #{reviewNum}
 	</update>
 
 	<!-- 후기 삭제 -->
-	<delete id="deleteReview" parameterType="int">
+	<delete id="deleteReview" parameterType="nemo.dto.ReviewDto">
 		DELETE FROM REVIEW
 		WHERE
-		REVIEW_NUM=#{reviewNum}
+		REVIEW_WRITER=#{reviewWriter} and REVIEW_NUM=#{reviewNum}
 	</delete>
+	
+	<!-- 내 상점 리뷰 중 가장 최근 후기 하나 -->
+	<select id="mostRecentReviewOfMyStore" parameterType="nemo.dto.ReviewDto"> 
+		SELECT REVIEW_NUM, REVIEW_FILES, REVIEW_ID,
+		REVIEW_SATISFACTION
+		FROM REVIEW
+		WHERE REVIEW_ID=#{reviewId}
+		ORDER BY REVIEW_NUM
+		DESC LIMIT 1;
+	</select>
+	
+	<!-- 내가 쓴 후기 중 가장 최근 후기 둘 -->
+	<select id="twoOfMyMostRecentReviews" parameterType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM,
+		REVIEW_WRITER,
+		REVIEW_SATISFACTION, REVIEW_FILES,
+		REVIEW_CONTENTS FROM
+		review
+		WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC ;
+	</select>
 
 </mapper>
