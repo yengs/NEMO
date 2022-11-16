@@ -10,7 +10,7 @@ public class MemberResponseVo {
 	private String memberNickname;
 	private String memberName;
 	private String memberId;
-	private String memberPw;
+//	private String memberPw;
 	private String memberPhone;
 	private String memberEmail;
 	private String memberAddress;
@@ -18,8 +18,8 @@ public class MemberResponseVo {
 	private int memberWarning;
 	private String memberZipCode;
 	
-	private String memberLat;
-	private String memberLon;
+//	private String memberLat;
+//	private String memberLon;
 	
 	private String memberSigungu;
 	

@@ -3,6 +3,19 @@
 
 <mapper namespace="nemo.mapper.ItemMapper">
 
+<!-- 로그인 안되어있을 때 메인 날씨추천리스트에 아이템 랜덤으로 띄워주기 -->
+<select id="selectItemListRandom" resultType="nemo.dto.ItemDto">
+	select * from item
+       order by RAND();
+</select>
+
+<!-- 주간베스트아이템 조회 -->
+<!-- <select id="selectItemListRandom" resultType="nemo.dto.ItemDto"> -->
+<!-- select * from item  -->
+<!-- WHERE YEARWEEK(item_rentalstart) = YEARWEEK(now()) -->
+<!-- order by item_rentcount; -->
+<!-- </select> -->
+
 <!-- 기온별 상품 조회 -->
 <select id="selectItemListByWeather" parameterType="String" resultType="nemo.dto.ItemDto">
 	select * from item
@@ -52,10 +65,10 @@
    <insert id="insertItem" parameterType="nemo.dto.ItemDto">
       insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
                     item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
-                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
+                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files,item_rentcount) 
       values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
             #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},"1","1",
-            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
+            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files},0)
    </insert>
    
    
