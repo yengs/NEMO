@@ -41,28 +41,6 @@ public class RestReviewApiController {
 		reviewService.insertReview(review, files);
 	}
 
-//	/* 내가 쓴 후기 상세 페이지 */
-//	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.GET)
-//	public ResponseEntity<ReviewDto> myReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
-//		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
-//		if (reviewDto == null) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		} else {
-//			return ResponseEntity.ok(reviewDto);
-//		}
-//	}
-//
-//	/* 내 상품에 대한 상대방의 후기 상세 페이지 */
-//	@RequestMapping(value = "/review/yourReview/{reviewNum}", method = RequestMethod.GET)
-//	public ResponseEntity<ReviewDto> yourReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
-//		ReviewDto reviewDto = reviewService.selectYourReviewDetail(reviewNum);
-//		if (reviewDto == null) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		} else {
-//			return ResponseEntity.ok(reviewDto);
-//		}
-//	}
-
 	/* 후기 수정 */
 	@RequestMapping(value = "/review/myReview/update/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
 	public void updateReview(@PathVariable("reviewWriter") String reviewWriter, @PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto)
