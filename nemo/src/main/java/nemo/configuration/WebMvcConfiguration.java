@@ -44,7 +44,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //	@Override 
 //	public void addCorsMappings(CorsRegistry registry) {
 //		
-////		CorsConfiguration config = new CorsConfiguration();
+//		CorsConfiguration config = new CorsConfiguration();
 //		
 //		registry.addMapping("/**")
 //			.allowedOrigins("*")
@@ -52,9 +52,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //			.allowedHeaders("*")
 //			.exposedHeaders("jwtToken");
 //		
-////		headers.add("Access-Control-Expose-Headers", "jwtToken");
+//		headers.add("Access-Control-Expose-Headers", "jwtToken");
 //	}
-//	
+	
 	
 
 	
