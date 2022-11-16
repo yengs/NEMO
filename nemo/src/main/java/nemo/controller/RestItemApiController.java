@@ -38,6 +38,14 @@ public class RestItemApiController {
 	   return itemService.selectItemListByWeather(itemWeather);
    }
    
+   // 조회
+   @RequestMapping(value = "/item/best", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListWeeklyBest() throws Exception {
+	   return itemService.selectItemListWeeklyBest();
+   }
+   
+//   selectItemListWeeklyBest
+   
    
    // 상품리스트 main 조회
    @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
