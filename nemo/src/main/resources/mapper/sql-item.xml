@@ -58,10 +58,10 @@
    <insert id="insertItem" parameterType="nemo.dto.ItemDto">
       insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
                     item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
-                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
+                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files,item_rentcount) 
       values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
             #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},"1","1",
-            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
+            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files},0)
    </insert>
    
    
