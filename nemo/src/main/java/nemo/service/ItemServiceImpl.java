@@ -33,6 +33,12 @@ public class ItemServiceImpl implements ItemService{
         return itemMapper.selectItemListByWeather(itemWeather);
      }
    
+   //주간베스트 아이템 리스트
+   @Override
+    public List<ItemDto> selectItemListWeeklyBest() throws Exception {
+        return itemMapper.selectItemListWeeklyBest();
+     }
+   
    //상품 main 리스트
    @Override
     public List<ItemDto> selectItemList(String itemMaincategory) throws Exception {
