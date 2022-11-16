@@ -33,7 +33,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public void insertReview(@RequestPart("reviewData") ReviewDto review, @RequestPart("reviewFiles") MultipartFile files) throws Exception {
-		String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files";
+		if(files!=null) {
+		String projectpath = "C:\\nemo\\git\\NEMO-react\\nemo-project\\public\\reviewFiles";
 		UUID uuid = UUID.randomUUID();
 		   String filename = uuid+"_"+files.getOriginalFilename();
 		   File saveFile = new File(projectpath,filename);
@@ -45,6 +46,7 @@ public class ReviewServiceImpl implements ReviewService {
 		      } catch (IOException e) {
 		         e.printStackTrace();
 		      }
+	}
 		reviewMapper.insertReview(review);
 	}
 	
@@ -60,6 +62,11 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public void updateReview(ReviewDto reviewDto) throws Exception {
+//		ReviewDto reviewDto1 = new ReviewDto();
+//		reviewDto1.setReviewFiles(null);
+//		reviewDto1.setReviewContents(null);
+//		reviewDto1.setReviewSatisfaction(0);
+//		reviewMapper.updateReview(reviewDto1);
 		reviewMapper.updateReview(reviewDto);
 	}
 
