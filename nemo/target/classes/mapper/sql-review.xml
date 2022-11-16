@@ -28,9 +28,9 @@
 	<insert id="insertReview" parameterType="nemo.dto.ReviewDto">
 		INSERT INTO REVIEW
 		(REVIEW_CONTENTS,
-		REVIEW_SATISFACTION, REVIEW_WRITER, REVIEW_FILES)
+		REVIEW_SATISFACTION, REVIEW_WRITER, REVIEW_FILES , REVIEW_ID , REVIEW_PRODUCTIDX )
 		VALUES (#{reviewContents}, #{reviewSatisfaction},
-		#{reviewWriter}, #{reviewFiles});
+		#{reviewWriter}, #{reviewFiles} , #{reviewId} , #{reviewProductIdx});
 	</insert>
 
 	<!-- 내가 쓴 후기 상세 페이지 -->
