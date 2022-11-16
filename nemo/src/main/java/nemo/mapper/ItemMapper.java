@@ -7,6 +7,7 @@ import nemo.dto.ItemDto;
 @Mapper
 public interface ItemMapper {
    
+	List<ItemDto> selectItemListRandom() throws Exception;
 	List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception;
     List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
     List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception;

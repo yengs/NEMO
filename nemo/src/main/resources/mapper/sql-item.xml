@@ -3,6 +3,12 @@
 
 <mapper namespace="nemo.mapper.ItemMapper">
 
+<!-- 로그인 안되어있을 때 메인 날씨추천리스트에 아이템 랜덤으로 띄워주기 -->
+<select id="selectItemListRandom" resultType="nemo.dto.ItemDto">
+	select * from item
+       order by RAND();
+</select>
+
 <!-- 기온별 상품 조회 -->
 <select id="selectItemListByWeather" parameterType="String" resultType="nemo.dto.ItemDto">
 	select * from item

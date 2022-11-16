@@ -21,6 +21,12 @@ public class ItemServiceImpl implements ItemService{
    @Autowired
    private ItemMapper itemMapper;
    
+   //로그인 안했을 때 메인 날씨추천리스트에 랜덤으로 뿌려줄 데이터
+   @Override
+    public List<ItemDto> selectItemListRandom() throws Exception {
+        return itemMapper.selectItemListRandom();
+     }
+   
    //상품 날씨별 리스트
    @Override
     public List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception {
