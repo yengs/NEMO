@@ -64,9 +64,10 @@ public class RestReviewApiController {
 	}
 
 	/* 후기 수정 */
-	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.PUT)
-	public void updateReview(@PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto)
+	@RequestMapping(value = "/review/myReview/update/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
+	public void updateReview(@PathVariable("reviewWriter") String reviewWriter, @PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto)
 			throws Exception {
+		System.out.println("리뷰 수정 컨트롤러");
 		reviewDto.setReviewNum(reviewNum);
 		reviewService.updateReview(reviewDto);
 	}
@@ -77,10 +78,8 @@ public class RestReviewApiController {
 		reviewService.deleteReview(reviewWriter, reviewNum);
 	}
 
-	// -------------
-
 	// 내 상품에 대한 리뷰 중 가장 최근 리뷰 1개
-	@RequestMapping(value = "/mypage/review1/{reviewWriter}", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/review1/{reviewId}", method = RequestMethod.GET)
 	public List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception {
 		return reviewService.mostRecentReviewOfMyStore(reviewId);
 	}
