@@ -30,7 +30,7 @@ public class RestReviewApiController {
 
 	/* 내 상품에 대해 상대방이 쓴 후기 목록 */
 	@RequestMapping(value = "/review/yourReview/{reviewId}", method = RequestMethod.GET)
-	public List<ReviewDto> yourReviewList(@PathVariable("reveiwId") String reviewId) throws Exception {
+	public List<ReviewDto> yourReviewList(@PathVariable("reviewId") String reviewId) throws Exception {
 		System.out.println(reviewId);
 		return reviewService.selectYourReviewList(reviewId);
 	}

@@ -11,4 +11,7 @@ public class ReviewDto {
     private String reviewContents;
     private int reviewSatisfaction;
     private String reviewFiles;
+    private String reviewItemfiles;
+    private String reviewItemname;
+    private int reviewItemprice;
 };
