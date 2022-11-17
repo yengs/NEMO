@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data
+@Component
 public class MemberDto {
 	private int memberNum;
 	private String memberNickname;
@@ -21,6 +22,7 @@ public class MemberDto {
 	private int memberWarning;
 	private int memberClean;
 	private String memberZipCode;
+	private String memberImg;
 	
 	private String memberLat;
 	private String memberLon;

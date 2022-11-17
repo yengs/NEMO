@@ -82,7 +82,7 @@ public class RestItemApiController {
 
 
    //상품리스트 상세
-   @RequestMapping(value = "/item/{itemNum}", method = RequestMethod.GET)
+   @RequestMapping(value = "/item/detail/{itemNum}", method = RequestMethod.GET)
    public ResponseEntity<ItemDto> selectItemDetail (@PathVariable("itemNum") int itemNum) throws Exception {
       ItemDto itemDto = itemService.selectItemDetail(itemNum);
       if (itemDto == null) {
