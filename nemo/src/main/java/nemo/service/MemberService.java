@@ -35,4 +35,8 @@ public interface MemberService {
 
 	// 비밀번호 찾기 결과창
 	public MemberDto findPwResult(String memberId) throws Exception;
+
+	// 피신고자 이름 불러오기
+	public MemberDto selectPiName(String memberName) throws Exception;
+
 }
