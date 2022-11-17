@@ -42,13 +42,24 @@ public class RestReviewApiController {
 	}
 
 	/* 후기 수정 */
-	@RequestMapping(value = "/review/myReview/update/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
 	public void updateReview(@PathVariable("reviewWriter") String reviewWriter, @PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto)
 			throws Exception {
 		System.out.println("리뷰 수정 컨트롤러");
 		reviewDto.setReviewNum(reviewNum);
 		reviewService.updateReview(reviewDto);
 	}
+	
+//	/* 내가 쓴 후기 상세 페이지 */
+//	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.GET)
+//	public ResponseEntity<ReviewDto> myReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
+//		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
+//		if (reviewDto == null) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//		} else {
+//			return ResponseEntity.ok(reviewDto);
+//		}
+//	}
 
 	/* 후기 삭제 */
 	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.DELETE)
