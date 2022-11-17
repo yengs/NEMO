@@ -38,6 +38,13 @@ public class ItemServiceImpl implements ItemService{
     public List<ItemDto> selectItemListWeeklyBest() throws Exception {
         return itemMapper.selectItemListWeeklyBest();
      }
+
+   //주간베스트 아이템 리스트
+   @Override
+   public List<ItemDto> selectItemListWeeklyBestByReadcount() throws Exception {
+	   return itemMapper.selectItemListWeeklyBestByReadcount();
+   }
+   
    
    //상품 main 리스트
    @Override

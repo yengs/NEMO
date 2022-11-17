@@ -22,4 +22,6 @@ public interface ReviewService {
 	List<ReviewDto> mostRecentReviewOfMyStore(String reviewId) throws Exception; // 내 상품에 대한 리뷰 중 가장 최근 리뷰 1개
 	List<ReviewDto> twoOfMyMostRecentReviews(String reviewWriter) throws Exception; // 내가 작성한 리뷰 중 가장 최근 리뷰 2개
 	
+	public List<ReviewDto> ItemReview(int reviewProductIdx) throws Exception;	//아이템 밑에 후기 조회
+	
 }

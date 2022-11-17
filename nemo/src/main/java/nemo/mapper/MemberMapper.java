@@ -30,4 +30,8 @@ public interface MemberMapper {
 	// 비밀번호 찾기
 	MemberDto findPw(MemberDto member) throws Exception;
 	MemberDto findPwResult(String memberId) throws Exception;
+
+	// 피신고자 이름 불러오기
+	MemberDto selectPiName(String memberId) throws Exception;
+
 }
