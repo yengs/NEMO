@@ -23,12 +23,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 import nemo.service.MailSenderRunner;
 import nemo.service.MemberService;
@@ -99,7 +102,7 @@ public class RestMemberApiController {
 			String jwtToken = Jwts.builder()
 					.claim("memberName", responseVo.getMemberName())
 					.claim("memberEmail", responseVo.getMemberEmail())
-					.setSubject(String.valueOf(responseVo.getMemberNum()))
+					.setSubject(String.valueOf(responseVo.getMemberImg()))
 					.setId(UUID.randomUUID().toString())
 					.setIssuedAt(Date.from(now))
 					.setExpiration(Date.from(now.plus(expirationTime, ChronoUnit.MILLIS)))
@@ -144,7 +147,6 @@ public class RestMemberApiController {
 		System.out.println(memberDto);
 		memberService.memberUpdate(memberDto);
 	}
-	
 	
 	
 	@Autowired
