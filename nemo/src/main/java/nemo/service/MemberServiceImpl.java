@@ -129,4 +129,10 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberName);
 	}
+	
+	//회원 탈퇴
+	@Override
+	public int delete(MemberDto member) {
+	      return memberMapper.delete(member);
+	   }
 }
