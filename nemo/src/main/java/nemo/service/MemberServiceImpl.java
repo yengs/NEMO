@@ -121,4 +121,12 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto findPwResult(String memberId) throws Exception {
 		return memberMapper.findPwResult(memberId);
 	}
+	
+	// 신고 - 피신고자 이름 불러오기
+	@Override
+	public MemberDto selectPiName(String memberName) throws Exception {
+		MemberDto memberDto = new MemberDto();
+		System.out.println("피신고자 이름::::::::::::" + memberDto);
+		return memberMapper.selectPiName(memberName);
+	}
 }
