@@ -13,7 +13,7 @@ public interface ReviewMapper {
 	List<ReviewDto> selectYourReviewList(String reviewId) throws Exception; // 내 상품에 대한 리뷰
 
 	void insertReview(ReviewDto review) throws Exception; // 리뷰 작성
-	void updateReview(ReviewDto reviewDto) throws Exception; // 리뷰 업데이트
+	int updateReview(ReviewDto reviewDto) throws Exception; // 리뷰 업데이트
 	void deleteReview(ReviewDto reviewDto) throws Exception; // 리뷰 삭제
 
 	ReviewDto selectMyReviewDetail(int reviewNum) throws Exception; // 내가 작성한 리뷰 상세
