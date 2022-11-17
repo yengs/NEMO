@@ -95,7 +95,7 @@ public class ItemServiceImpl implements ItemService{
    
    
    
-   
+   //상품수정
    @Override
 	public void updateItem(@RequestPart("data") ItemDto itemDto, @RequestPart("files") MultipartFile files) throws Exception {
 		
@@ -118,7 +118,7 @@ public class ItemServiceImpl implements ItemService{
 		System.out.println("***************** " + count);
 	}
    
-
+   //상품삭제
 	@Override
 	public void deleteItem(int itemNum) throws Exception {
 		int count = itemMapper.deleteItem(itemNum);

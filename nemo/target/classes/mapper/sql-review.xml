@@ -29,8 +29,7 @@
 	<!-- 내가 쓴 후기 상세 페이지 -->
 	<select id="selectMyReviewDetail" parameterType="int"
 		resultType="nemo.dto.ReviewDto">
-		SELECT REVIEW_NUM, REVIEW_WRITER,
-		REVIEW_CONTENTS, REVIEW_SATISFACTION
+		SELECT *
 		FROM review
 		WHERE
 		REVIEW_NUM=#{reviewNum}
@@ -49,10 +48,15 @@
 	<!-- 후기 수정 -->
 	<update id="updateReview" parameterType="nemo.dto.ReviewDto">
 		UPDATE REVIEW SET
-		REVIEW_FILES = #{reviewFiles},
 		REVIEW_CONTENTS = #{reviewContents}, 
 		REVIEW_SATISFACTION = #{reviewSatisfaction}
-		where REVIEW_WRITER = ${reviewWriter} and REVIEW_NUM = #{reviewNum}
+		
+		<if test="reviewFiles != null">
+		,review_files=#{reviewFiles}
+		</if>
+		
+		where REVIEW_NUM = #{reviewNum}
+		
 	</update>
 
 	<!-- 후기 삭제 -->

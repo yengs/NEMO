@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.ItemDto;
 import nemo.dto.ReviewDto;
 import nemo.mapper.ReviewMapper;
 
@@ -34,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void insertReview(@RequestPart("reviewData") ReviewDto review, @RequestPart("reviewFiles") MultipartFile files) throws Exception {
 		if(files!=null) {
-		String projectpath = "C:\\Users\\hi\\git\\NEMO-react\\nemo-project\\public\\files_review";
+		String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files_review";
 		UUID uuid = UUID.randomUUID();
 		   String filename = uuid+"_"+files.getOriginalFilename();
 		   File saveFile = new File(projectpath,filename);
@@ -50,25 +51,41 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewMapper.insertReview(review);
 	}
 	
+	
 	@Override
 	public ReviewDto selectMyReviewDetail(int reviewNum) throws Exception {
 		return reviewMapper.selectMyReviewDetail(reviewNum);
 	}
+	
+	//리뷰수정
+	 @Override
+		public void updateReview(@RequestPart("data") ReviewDto reviewDto, @RequestPart("reviewFiles") MultipartFile reviewFiles) throws Exception {
+			
+		   if ( reviewFiles != null) {
+		      String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files_review";
+			   
+			   UUID uuid = UUID.randomUUID();
+			   String filename = uuid+"_"+reviewFiles.getOriginalFilename();
+			   File saveFile = new File(projectpath,filename);
+			   reviewDto.setReviewFiles(filename);
+			   try {
+				   reviewFiles.transferTo(saveFile);
+			      } catch (IllegalStateException e) {
+			         e.printStackTrace();
+			      } catch (IOException e) {
+			         e.printStackTrace();
+			      }	
+		   }
+		   int count = reviewMapper.updateReview(reviewDto);
+			System.out.println("***************** " + count);
+		}
 
 	@Override
 	public ReviewDto selectYourReviewDetail(int reviewNum) throws Exception {
 		return reviewMapper.selectYourReviewDetail(reviewNum);
 	}
 
-	@Override
-	public void updateReview(ReviewDto reviewDto) throws Exception {
-//		ReviewDto reviewDto1 = new ReviewDto();
-//		reviewDto1.setReviewFiles(null);
-//		reviewDto1.setReviewContents(null);
-//		reviewDto1.setReviewSatisfaction(0);
-//		reviewMapper.updateReview(reviewDto1);
-		reviewMapper.updateReview(reviewDto);
-	}
+	
 
 	@Override
 	public void deleteReview(String reviewWriter, int reviewNum) throws Exception {
