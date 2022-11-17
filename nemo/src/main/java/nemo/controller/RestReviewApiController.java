@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.ItemDto;
 import nemo.dto.ReviewDto;
 import nemo.service.ReviewService;
 
@@ -40,14 +41,24 @@ public class RestReviewApiController {
 	public void insertReview(@RequestPart(value="reviewData",required=false) ReviewDto review, @RequestPart(value="reviewFiles",required=false) MultipartFile files) throws Exception {
 		reviewService.insertReview(review, files);
 	}
-
+	
+	/* 후기 상세 */
+	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.GET)
+	public ResponseEntity<ReviewDto> selectMyReviewDetail (@PathVariable("reviewNum") int reviewNum) throws Exception {
+		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
+		if (reviewDto == null) {
+	         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	      } else {
+	         return ResponseEntity.ok(reviewDto);
+	         
+	      }
+	   }
 	/* 후기 수정 */
-	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
-	public void updateReview(@PathVariable("reviewWriter") String reviewWriter, @PathVariable("reviewNum") int reviewNum, @RequestBody ReviewDto reviewDto)
+	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.PUT)
+	public void updateReview(@PathVariable("reviewNum") int reviewNum, @RequestPart("data") ReviewDto reviewDto, @RequestPart(value = "reviewFiles", required = false) MultipartFile reviewFiles)
 			throws Exception {
-		System.out.println("리뷰 수정 컨트롤러");
 		reviewDto.setReviewNum(reviewNum);
-		reviewService.updateReview(reviewDto);
+		reviewService.updateReview(reviewDto,reviewFiles);
 	}
 	
 //	/* 내가 쓴 후기 상세 페이지 */
