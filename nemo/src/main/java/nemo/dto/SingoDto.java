@@ -13,5 +13,6 @@ public class SingoDto {
 	private String singoContent;
 	private Date singoDate;
 	private String singoImage;
+	private String singoPisingoja;
 
 }
