@@ -81,5 +81,14 @@
 		review
 		WHERE REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC ;
 	</select>
+	
+	<!-- 아이템 밑에 후기 조회 -->
+		<select id="ItemReview" parameterType="int" resultType="nemo.dto.ReviewDto">
+			SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_SATISFACTION,
+				   REVIEW_FILES, REVIEW_CONTENTS 
+			FROM review
+			WHERE REVIEW_PRODUCTIDX=#{reviewProductIdx} ORDER BY REVIEW_NUM DESC ;
+	</select>
+	
 
 </mapper>

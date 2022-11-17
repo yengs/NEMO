@@ -68,4 +68,9 @@ public class RestReviewApiController {
 		return reviewService.twoOfMyMostRecentReviews(reviewWriter);
 	}
 
+	//아이템 밑에 후기 조회
+	@RequestMapping(value = "/itemreview/{reviewProductIdx}", method = RequestMethod.GET)
+	public List<ReviewDto> ItemReview(@PathVariable("reviewProductIdx") int reviewProductIdx) throws Exception {
+		return reviewService.ItemReview(reviewProductIdx);
+	}
 }
