@@ -154,27 +154,21 @@ public class RestMemberApiController {
 	
 	//이메일 받는
 	@RequestMapping(value="/mail")
-	public void tomail(@RequestParam String memberEmail) throws Exception {
+	public String tomail(@RequestParam String memberEmail) throws Exception {
 		
 		   System.out.println("aaaaaaaaaaaaaaaaa:"+memberEmail);
-		mail.run(applicationArguments,memberEmail);
+		return mail.run(applicationArguments,memberEmail);
+		
 	}
 	
 	//코드 생성
-	static private int num = new Random().nextInt(10000) + 10000;
-	private String joinCode = String.valueOf(num);
+	private int num = new Random().nextInt(10000) + 10000;
+	private String code = String.valueOf(num);
 	
 	
-	//코드 보내는
-	@RequestMapping(value="/code")
-	public String code() throws Exception {
-		System.out.println("asmfdlkamflk" + joinCode);
-		return joinCode;
-		
-	}
-
+	//코드 전달
 	public String getJoinCode() {
-		return this.joinCode;
+		return this.code;
 	}
 	
 	// 회원가입 로그인 중복여부
