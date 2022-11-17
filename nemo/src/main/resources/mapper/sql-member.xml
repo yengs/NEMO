@@ -78,4 +78,9 @@
 		select member_pw from member where member_id = #{memberId}
 	</select>
 
+	<!-- 회원탈퇴 -->
+	<delete id="delete" parameterType="nemo.dto.MemberDto">
+      DELETE FROM member 
+      WHERE member_id = #{memberId} AND member_pw =#{memberPw}
+   </delete>
 </mapper>

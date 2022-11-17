@@ -33,5 +33,8 @@ public interface MemberMapper {
 
 	// 피신고자 이름 불러오기
 	MemberDto selectPiName(String memberId) throws Exception;
+	
+	//회원 탈퇴
+	 int delete(MemberDto member);
 
 }

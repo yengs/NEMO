@@ -235,5 +235,8 @@ public class RestMemberApiController {
 			System.out.println(memberId);
 			return memberService.findPwResult(memberId);
 		}
+		
+		//회원 탈퇴
+
 
 }
