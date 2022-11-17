@@ -25,5 +25,7 @@ public class ItemDto {
    private Date itemRentalstart;
    private Date itemRentalend;
    private String files;
-
+   
+   private String MemberImg;
+   
 }
