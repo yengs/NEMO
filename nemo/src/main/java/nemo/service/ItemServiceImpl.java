@@ -21,6 +21,23 @@ public class ItemServiceImpl implements ItemService{
    @Autowired
    private ItemMapper itemMapper;
    
+   //로그인 안했을 때 메인 날씨추천리스트에 랜덤으로 뿌려줄 데이터
+   @Override
+    public List<ItemDto> selectItemListRandom() throws Exception {
+        return itemMapper.selectItemListRandom();
+     }
+   
+   //상품 날씨별 리스트
+   @Override
+    public List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception {
+        return itemMapper.selectItemListByWeather(itemWeather);
+     }
+   
+   //주간베스트 아이템 리스트
+   @Override
+    public List<ItemDto> selectItemListWeeklyBest() throws Exception {
+        return itemMapper.selectItemListWeeklyBest();
+     }
    
    //상품 main 리스트
    @Override
@@ -43,7 +60,7 @@ public class ItemServiceImpl implements ItemService{
    @Override
      public int insertItem( @RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {
 	   
-	   String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files";
+	   String projectpath = "C:/nemo/git/NEMO-react/NEMO-react/nemo-project/public/files";
 	   
 	   UUID uuid = UUID.randomUUID();
 	   String filename = uuid+"_"+files.getOriginalFilename();
