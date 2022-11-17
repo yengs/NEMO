@@ -23,7 +23,7 @@ public class MailSenderRunner implements ApplicationRunner {
 	@Value("${spring.mail.username}")
 	private String from;
 
-	public void run(ApplicationArguments args, String memberEmail) throws Exception {
+	public String run(ApplicationArguments args, String memberEmail) throws Exception {
 		
 		
 		RestMemberApiController code = new RestMemberApiController();
@@ -37,6 +37,7 @@ public class MailSenderRunner implements ApplicationRunner {
 		h.setText("인증 번호 :" + joinCode + "입니다");
 		mailSender.send(m);
 		System.out.println("bbbbbbbbb:" + joinCode);
+		return joinCode;
 
 	}
 
