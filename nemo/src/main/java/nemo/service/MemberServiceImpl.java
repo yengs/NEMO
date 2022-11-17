@@ -1,10 +1,15 @@
 package nemo.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import nemo.dto.MemberDto;
 import nemo.mapper.MemberMapper;
@@ -39,6 +44,7 @@ public class MemberServiceImpl implements MemberService {
 		responseVo.setMemberAddress(resultDto.getMemberAddress());
 		responseVo.setMemberClean(resultDto.getMemberClean());
 		responseVo.setMemberZipCode(resultDto.getMemberZipCode());
+		responseVo.setMemberImg(resultDto.getMemberImg());
 
 		return responseVo;
 	}
@@ -47,11 +53,13 @@ public class MemberServiceImpl implements MemberService {
 	public int join(MemberDto member) throws Exception {
 		return memberMapper.join(member);
 	}
-
+	
+	//회원수정
 	@Override
 	public void memberUpdate(MemberDto memberDto) throws Exception {
 		memberMapper.memberUpdate(memberDto);
 	}
+	
 
 	@Override
 //	회원정보 조회
@@ -129,10 +137,15 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberName);
 	}
+<<<<<<< HEAD
 	
 	//회원 탈퇴
 	@Override
 	public int delete(MemberDto member) {
 	      return memberMapper.delete(member);
 	   }
+=======
+
+	
+>>>>>>> refs/remotes/origin/develop
 }
