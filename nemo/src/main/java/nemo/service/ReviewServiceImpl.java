@@ -88,4 +88,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMapper.twoOfMyMostRecentReviews(reviewWriter);
 	}
 	
+	
+	//아이템 밑에 후기 조회
+	@Override
+	public List<ReviewDto> ItemReview(int reviewProductIdx) throws Exception {
+		return reviewMapper.ItemReview(reviewProductIdx);
+	}
 }
