@@ -41,7 +41,12 @@ public class RestItemApiController {
    // 주간베스트 아이템 조회
    @RequestMapping(value = "/item/best", method = RequestMethod.GET)
    public List<ItemDto> selectItemListWeeklyBest() throws Exception {
-	   return itemService.selectItemListWeeklyBest();
+	   // 이번주 대여이력이 있으면 대여횟수가 많은 순서대로 정렬하고, 대여이력이 없으면 조회순으로 정렬해서 보여준다
+	   if(itemService.selectItemListWeeklyBest().isEmpty()) {
+		   return itemService.selectItemListWeeklyBestByReadcount();
+	   }else {
+		   return itemService.selectItemListWeeklyBest();
+	   }
    }
    
    

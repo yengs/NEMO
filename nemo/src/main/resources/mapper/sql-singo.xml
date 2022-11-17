@@ -3,9 +3,19 @@
 <mapper namespace="nemo.mapper.SingoMapper">
 
 
-<!-- 신고하기 -->
-<insert id="insertSingo" parameterType="nemo.dto.SingoDto">
-		insert into singo(singo_writer, singo_reason, singo_content, singo_date, singo_image)
-		values(#{singoWriter}, #{singoReason}, #{singoContent}, now(), #{singoImage})
+	<!-- 신고하기 -->
+	<insert id="insertSingo" parameterType="nemo.dto.SingoDto">
+		insert into
+		singo(singo_writer, singo_reason, singo_content, singo_date,
+		singo_image, singo_pisingoja)
+		values(#{singoWriter}, #{singoReason}, #{singoContent},
+		now(), #{singoImage}, #{singoPisingoja})
 	</insert>
+	
+	<!-- 피신고자 이름 가져오기 -->
+	<select id="selectPiName" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select member_name from member where member_id = #{memberId}
+	</select>
+	
 </mapper>
