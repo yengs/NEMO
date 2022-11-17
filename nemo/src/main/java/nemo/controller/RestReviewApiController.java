@@ -88,7 +88,6 @@ public class RestReviewApiController {
 	// 클린지수 조회
 	@RequestMapping(value = "/clean/{reviewId}", method = RequestMethod.GET)
 	public List<ReviewDto> selectSatisfaction(@PathVariable("reviewId") String reviewId) throws Exception {
-		System.out.println("클린 ~~~~~~ !");
 		return reviewService.selectSatisfaction(reviewId);
 	};
 	
