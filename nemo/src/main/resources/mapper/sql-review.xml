@@ -85,10 +85,15 @@
 	<!-- 아이템 밑에 후기 조회 -->
 		<select id="ItemReview" parameterType="int" resultType="nemo.dto.ReviewDto">
 			SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_SATISFACTION,
-				   REVIEW_FILES, REVIEW_CONTENTS 
+			REVIEW_FILES, REVIEW_CONTENTS 
 			FROM review
 			WHERE REVIEW_PRODUCTIDX=#{reviewProductIdx} ORDER BY REVIEW_NUM DESC ;
 	</select>
 	
+	<!-- 클린지수 조회 -->
+	<select id="selectSatisfaction" parameterType="nemo.dto.ReviewDto">
+		select review_satisfaction from review 
+		where review_id = #{reviewId};
+	</select>
 
 </mapper>
