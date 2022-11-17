@@ -43,34 +43,23 @@ public class RestReviewApiController {
 	}
 	
 	/* 후기 상세 */
-	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> selectMyReviewDetail (@PathVariable("reviewNum") int reviewNum) throws Exception {
 		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
 		if (reviewDto == null) {
 	         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	      } else {
 	         return ResponseEntity.ok(reviewDto);
-	         
 	      }
 	   }
+	
 	/* 후기 수정 */
-	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
 	public void updateReview(@PathVariable("reviewNum") int reviewNum, @RequestPart("data") ReviewDto reviewDto, @RequestPart(value = "reviewFiles", required = false) MultipartFile reviewFiles)
 			throws Exception {
 		reviewDto.setReviewNum(reviewNum);
 		reviewService.updateReview(reviewDto,reviewFiles);
 	}
-	
-//	/* 내가 쓴 후기 상세 페이지 */
-//	@RequestMapping(value = "/review/myReview/{reviewNum}", method = RequestMethod.GET)
-//	public ResponseEntity<ReviewDto> myReviewDetail(@PathVariable("reviewNum") int reviewNum) throws Exception {
-//		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
-//		if (reviewDto == null) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		} else {
-//			return ResponseEntity.ok(reviewDto);
-//		}
-//	}
 
 	/* 후기 삭제 */
 	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.DELETE)
@@ -99,6 +88,7 @@ public class RestReviewApiController {
 	// 클린지수 조회
 	@RequestMapping(value = "/clean/{reviewId}", method = RequestMethod.GET)
 	public List<ReviewDto> selectSatisfaction(@PathVariable("reviewId") String reviewId) throws Exception {
+		System.out.println("클린 ~~~~~~ !");
 		return reviewService.selectSatisfaction(reviewId);
 	};
 	

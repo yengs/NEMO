@@ -114,7 +114,6 @@ public class ReviewServiceImpl implements ReviewService {
 	// 클린지수 조회
 	@Override
 	public List<ReviewDto> selectSatisfaction(String reviewId) throws Exception {
-		
 		return reviewMapper.selectSatisfaction(reviewId);
 	}
 }
