@@ -26,15 +26,26 @@ public class RestItemApiController {
    private ItemService itemService;
    
    
-   // 상품리스트 조회
-//   @RequestMapping(value = "/item", method = RequestMethod.GET)
-//   public List<ItemDto> selectItemList() throws Exception {
-//      return itemService.selectItemList();
-//   }
+   //메인페이지 로그인 안되어있을 때 날씨추천리스트에 랜덤으로 띄워줄 데이터조회
+   @RequestMapping(value = "/item/random", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListRandom() throws Exception {
+	   return itemService.selectItemListRandom();
+   }
+   
+   //날씨별 상품리스트 조회
+   @RequestMapping(value = "/item/weather/{itemWeather}", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListByWeather(@PathVariable("itemWeather") String itemWeather) throws Exception {
+	   return itemService.selectItemListByWeather(itemWeather);
+   }
+   
+   // 주간베스트 아이템 조회
+   @RequestMapping(value = "/item/best", method = RequestMethod.GET)
+   public List<ItemDto> selectItemListWeeklyBest() throws Exception {
+	   return itemService.selectItemListWeeklyBest();
+   }
    
    
    // 상품리스트 main 조회
-
    @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
    public List<ItemDto> selectItemList(@PathVariable("itemMaincategory") String itemMaincategory) throws Exception {
       return itemService.selectItemList(itemMaincategory);

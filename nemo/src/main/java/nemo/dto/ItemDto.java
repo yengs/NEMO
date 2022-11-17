@@ -26,5 +26,4 @@ public class ItemDto {
    private Date itemRentalend;
    private String files;
 
-
 }
