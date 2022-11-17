@@ -13,7 +13,7 @@ public interface ReviewService {
 	public List<ReviewDto> selectYourReviewList(String reviewId) throws Exception;
 
 	public void insertReview(@RequestPart("reviewData") ReviewDto review,@RequestPart("reviewFiles") MultipartFile files) throws Exception;
-	public void updateReview(ReviewDto reviewDto) throws Exception;
+	public void updateReview(@RequestPart("data") ReviewDto reviewDto, @RequestPart("reviewFiles") MultipartFile reviewFiles) throws Exception;
 	public void deleteReview(String reviewWriter, int reviewNum) throws Exception;
 	
 	public ReviewDto selectMyReviewDetail(int reviewNum) throws Exception;
