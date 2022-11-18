@@ -21,7 +21,11 @@ public interface MemberService {
 	public MemberResponseVo login(MemberRequestVo requestVo) throws Exception;
 
 	public void memberUpdate(MemberDto memberDto) throws Exception;
-
+	//프사수정
+	public void memberImgUpdate(@RequestPart("data") MemberDto memberDto, @RequestPart("memberImg") MultipartFile memberImg) throws Exception;
+	//프사get
+	public MemberDto selectMyImg(int memberNum) throws Exception;
+	
 	// 아이디 중복
 	public int checkMemberId(String memberId) throws Exception;
 

@@ -237,5 +237,19 @@ public class RestMemberApiController {
 			System.out.println(memberId);
 			return memberService.findPwResult(memberId);
 		}
+		
+		//프로필 사진 수정
+		//프사 GET
+		@RequestMapping(value = "/memberimg/{memberNum}", method = RequestMethod.GET)
+		public MemberDto selectMyImg(@PathVariable("memberNum") int memberNum) throws Exception {
+			return memberService.selectMyImg(memberNum);
+		}
+			
+		//프사 수정
+		   @RequestMapping(value = "/memberimg/update/{memberNum}", method = RequestMethod.PUT)
+		   public void memberImgUpdate(@PathVariable("memberNum") int memberNum, @RequestPart("data") MemberDto memberDto, @RequestPart(value = "memberImg", required = false) MultipartFile memberImg) throws Exception {
+		      memberDto.setMemberNum(memberNum);
+		      memberService.memberImgUpdate(memberDto, memberImg);
+		   }
 
 }

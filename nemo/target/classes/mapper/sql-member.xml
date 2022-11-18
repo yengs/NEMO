@@ -39,6 +39,19 @@
 		where member_num = #{memberNum}
 	</update>
 	
+	<!-- 프사 수정 -->
+	<update id="memberImgUpdate" parameterType="nemo.dto.MemberDto">
+		update member set member_img = #{memberImg}
+		where member_num = #{memberNum}
+	</update>
+	
+	<!--프사 GET-->
+  	 <select id="selectMyImg" parameterType="int" resultType="nemo.dto.MemberDto">
+		select member_img
+		from member
+		where member_num = #{memberNum}
+  	 </select>
+	
 
 	<!-- 아이디 중복 -->
 	<select id="checkMemberId" resultType="int">
