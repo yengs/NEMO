@@ -35,6 +35,6 @@ public interface MemberMapper {
 	MemberDto selectPiName(String memberId) throws Exception;
 	
 	//회원 탈퇴
-	 int delete(MemberDto member);
+	 int delete(int memberNum);
 
 }

@@ -44,6 +44,6 @@ public interface MemberService {
 	public MemberDto selectPiName(String memberName) throws Exception;
 	
 	//회원탈퇴
-	public int delete(MemberDto member);
+	public int delete(int memberNum);
 
 }
