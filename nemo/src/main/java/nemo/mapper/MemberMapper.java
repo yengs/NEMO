@@ -21,7 +21,7 @@ public interface MemberMapper {
 	void memberUpdate(MemberDto memberDto) throws Exception;
 	int memberImgUpdate(MemberDto memberDto) throws Exception; //프사수정
 	MemberDto selectMyImg(int memberNum) throws Exception; //프사 get
-	
+
 	int checkMemberId(String memberId) throws Exception;
 
 	int checkEmail(String memberEmail) throws Exception;
@@ -39,5 +39,6 @@ public interface MemberMapper {
 	
 	//회원 탈퇴
 	 int delete(int memberNum);
+
 
 }
