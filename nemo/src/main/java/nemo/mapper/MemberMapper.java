@@ -17,7 +17,7 @@ public interface MemberMapper {
 
 	MemberDto selectMemberInfo(int memberNum) throws Exception;
 
-	void memberUpdate(MemberDto memberDto) throws Exception;
+	int memberUpdate(MemberDto memberDto) throws Exception;
 
 	int checkMemberId(String memberId) throws Exception;
 
@@ -33,5 +33,6 @@ public interface MemberMapper {
 
 	// 피신고자 이름 불러오기
 	MemberDto selectPiName(String memberId) throws Exception;
+
 
 }
