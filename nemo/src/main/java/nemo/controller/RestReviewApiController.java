@@ -43,18 +43,18 @@ public class RestReviewApiController {
 	}
 	
 	/* 후기 상세 */
-	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.GET)
 	public ResponseEntity<ReviewDto> selectMyReviewDetail (@PathVariable("reviewNum") int reviewNum) throws Exception {
 		ReviewDto reviewDto = reviewService.selectMyReviewDetail(reviewNum);
 		if (reviewDto == null) {
 	         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	      } else {
 	         return ResponseEntity.ok(reviewDto);
-	         
 	      }
 	   }
+	
 	/* 후기 수정 */
-	@RequestMapping(value = "/review/rupdate/{reviewNum}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.PUT)
 	public void updateReview(@PathVariable("reviewNum") int reviewNum, @RequestPart("data") ReviewDto reviewDto, @RequestPart(value = "reviewFiles", required = false) MultipartFile reviewFiles)
 			throws Exception {
 		reviewDto.setReviewNum(reviewNum);
@@ -79,9 +79,16 @@ public class RestReviewApiController {
 		return reviewService.twoOfMyMostRecentReviews(reviewWriter);
 	}
 
-	//아이템 밑에 후기 조회
+	// 아이템 밑에 후기 조회
 	@RequestMapping(value = "/itemreview/{reviewProductIdx}", method = RequestMethod.GET)
 	public List<ReviewDto> ItemReview(@PathVariable("reviewProductIdx") int reviewProductIdx) throws Exception {
 		return reviewService.ItemReview(reviewProductIdx);
 	}
+	
+	// 클린지수 조회
+	@RequestMapping(value = "/clean/{reviewId}", method = RequestMethod.GET)
+	public List<ReviewDto> selectSatisfaction(@PathVariable("reviewId") String reviewId) throws Exception {
+		return reviewService.selectSatisfaction(reviewId);
+	};
+	
 }

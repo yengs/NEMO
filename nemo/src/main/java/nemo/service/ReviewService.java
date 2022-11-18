@@ -24,4 +24,6 @@ public interface ReviewService {
 	
 	public List<ReviewDto> ItemReview(int reviewProductIdx) throws Exception;	//아이템 밑에 후기 조회
 	
+	public List<ReviewDto> selectSatisfaction(String reviewId) throws Exception; // 클린지수 조회
+	
 }
