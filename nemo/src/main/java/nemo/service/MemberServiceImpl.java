@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 import nemo.mapper.MemberMapper;
 import nemo.vo.MemberRequestVo;
@@ -137,6 +138,39 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberName);
 	}
+	
+	
+	//프사수정
+	 @Override
+		public void memberImgUpdate(@RequestPart("data") MemberDto memberDto, @RequestPart("memberImg") MultipartFile memberImg) throws Exception {
+			
+		   if ( memberImg != null) {
+		      String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\memberImg";
+			   
+			   UUID uuid = UUID.randomUUID();
+			   String filename = uuid+"_"+memberImg.getOriginalFilename();
+			   File saveFile = new File(projectpath,filename);
+			   memberDto.setMemberImg(filename);
+			   try {
+				   memberImg.transferTo(saveFile);
+			      } catch (IllegalStateException e) {
+			         e.printStackTrace();
+			      } catch (IOException e) {
+			         e.printStackTrace();
+			      }	
+		   }
+		   	int count = memberMapper.memberImgUpdate(memberDto);
+			System.out.println("***************** " + count);
+		}
+
+	//프사 get
+	@Override
+	public MemberDto selectMyImg(int memberNum) throws Exception {
+		return memberMapper.selectMyImg(memberNum);
+	}
 
 	
+		
+		
+		
 }
