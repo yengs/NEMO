@@ -51,7 +51,7 @@ public class RestSingoApiController {
      }
 	
 	// 피신고자 이름 불러오기
-	@RequestMapping(value = "/userstoreinfo/warn/{memberId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/userstoreinfo/{memberId}", method = RequestMethod.GET)
 	public MemberDto selectPiName(@PathVariable("memberId") String memberId) throws Exception {
 		System.out.println(memberId);
 		return memberService.selectPiName(memberId);
