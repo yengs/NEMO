@@ -1,5 +1,7 @@
 package nemo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,12 @@ public class RestSingoApiController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MemberDto memberDto;
+	
+	@Autowired
+	private SingoDto singoDto;
+	
 	// 신고접수
 	@RequestMapping(value = "/singo/take", method = RequestMethod.POST)
 	public ResponseEntity<String> insertSingo(@RequestPart("data") SingoDto singoDto, @RequestPart("singoImage") MultipartFile singoImage) throws Exception {
@@ -43,10 +51,37 @@ public class RestSingoApiController {
      }
 	
 	// 피신고자 이름 불러오기
-	@RequestMapping(value = "/userstoreinfo/warn/{memberId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/userstoreinfo/{memberId}", method = RequestMethod.GET)
 	public MemberDto selectPiName(@PathVariable("memberId") String memberId) throws Exception {
 		System.out.println(memberId);
 		return memberService.selectPiName(memberId);
+	}
+	
+	// 관리자 - 접수하기 (warning +1)
+//	@RequestMapping(value = "/dec/dec/{memberId}", method = RequestMethod.PUT)
+//	public void confirmWarn(@PathVariable("memberId") String memberId, @RequestBody MemberDto memberDto) throws Exception{
+//		System.out.println("***** WARNING + 1 *****");
+//		memberService.confirmWarn(memberDto);
+//	}
+	
+	// 관리자 - 신고 취소하기
+//	@RequestMapping(value = "/dec/dec/{memberId}", method = RequestMethod.DELETE)
+//	public void deleteWarn(@PathVariable("memberId") String memberId) throws Exception{
+//		memberService.deleteWarn(memberId);
+//	}
+	
+	// 관리자페이지로 피신고자 이름 가져오기
+	@RequestMapping(value = "/dec/dec/{memberId}", method = RequestMethod.GET)
+	public List<SingoDto> ReasonNwriter(@PathVariable("memberId") String memberId) throws Exception{
+		System.out.println("***** 신고당한 사람 아이디 >>> " + memberId + " <<< *****");
+		return singoService.ReasonNwriter(memberId);
+	}
+	
+	// 신고 상세보기 가져오기
+	@RequestMapping(value = "/dec/detail/{singoNum}", method = RequestMethod.GET)
+	public List<SingoDto> selectDetail(@PathVariable("singoNum") int singoNum) throws Exception{
+		System.out.println(">>> " + singoNum + " <<< 자세히 보기 !!");
+		return singoService.selectDetail(singoNum);
 	}
 
 }

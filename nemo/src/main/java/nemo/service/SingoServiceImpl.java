@@ -1,5 +1,7 @@
 package nemo.service;
 
+import java.util.List;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 import nemo.dto.SingoDto;
 import nemo.mapper.MemberMapper;
@@ -23,6 +26,7 @@ public class SingoServiceImpl implements SingoService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	// 신고 insert
 	@Override
 	public int insertSingo(@RequestPart("data") SingoDto singoDto, @RequestPart("singoImage") MultipartFile singoImage) throws Exception {
 		 String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files_singo";
@@ -42,6 +46,7 @@ public class SingoServiceImpl implements SingoService {
 		return singoMapper.insertSingo(singoDto);
 	}
 
+	// 피신고자 이름 불러오기
 	@Override
 	public MemberDto selectPiName(String memberId) throws Exception {
 		MemberDto memberDto = new MemberDto();
@@ -49,5 +54,25 @@ public class SingoServiceImpl implements SingoService {
 		return memberMapper.selectPiName(memberId);
 	}
 
+	
+	// 관리자 - 접수하기 (warning +1)
+	@Override
+	public void confirmWarn(MemberDto memberDto) throws Exception{
+		memberMapper.memberUpdate(memberDto);
+		System.out.println("누적횟수 추가됨");
+	}
+	
+	// 관리자페이지로 피신고자 이름 가져오기
+	@Override
+	public List<SingoDto> ReasonNwriter(String memberId) throws Exception {
+		return singoMapper.ReasonNwriter(memberId);
+	}
+
+	// 신고 상세보기 가져오기
+	@Override
+	public List<SingoDto> selectDetail(int singoNum) throws Exception {
+		SingoDto singoDto = new SingoDto();
+		return singoMapper.selectDetail(singoNum);
+	}
 
 }
