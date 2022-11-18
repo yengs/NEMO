@@ -169,8 +169,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectMyImg(memberNum);
 	}
 
-	
-		
-		
-		
+	//회원 탈퇴
+	@Override
+	public int delete(int memberNum) {
+	      return memberMapper.delete(memberNum);
+	   }
+
 }
