@@ -16,11 +16,11 @@
 		member(member_nickname, member_name, member_id, member_pw,
 		member_date, member_user, member_phone, member_mailauth,
 		member_mailkey, member_email, member_address, member_warning,
-		member_clean, member_zipcode, member_sigungu)
+		member_clean, member_zipcode, member_sigungu, member_img)
 		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw},
 		now(), 1, #{memberPhone}, 0,
 		#{memberMailkey}, #{memberEmail},
-		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu})
+		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu}, concat('store',ROUND(RAND()*3),'.jpg') );
 	</insert>
 
 	<!-- 로그인 -->
@@ -38,7 +38,20 @@
 		#{memberAddress}, member_zipcode = #{memberZipCode}, member_sigungu = #{memberSigungu}
 		where member_num = #{memberNum}
 	</update>
-
+	
+	<!-- 프사 수정 -->
+	<update id="memberImgUpdate" parameterType="nemo.dto.MemberDto">
+		update member set member_img = #{memberImg}
+		where member_num = #{memberNum}
+	</update>
+	
+	<!--프사 GET-->
+  	 <select id="selectMyImg" parameterType="int" resultType="nemo.dto.MemberDto">
+		select member_img
+		from member
+		where member_num = #{memberNum}
+  	 </select>
+	
 
 	<!-- 아이디 중복 -->
 	<select id="checkMemberId" resultType="int">
@@ -78,4 +91,9 @@
 		select member_pw from member where member_id = #{memberId}
 	</select>
 
+	<!-- 회원탈퇴 -->
+	<delete id="delete" parameterType="int">
+      delete from member 
+      WHERE member_num = #{memberNum}
+   </delete>
 </mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nemo.mapper.CleanGMapper">
+
+	<!-- 각 멤버의 클린지수 도출 후 평균값 계산 + 올림처리 -->
+	<select id="selectSatisfaction" parameterType="nemo.dto.ReviewDto">
+		select CEIL(avg(review_satisfaction)) from review 
+		where review_id = #{reviewId};
+	</select>
+
+</mapper>

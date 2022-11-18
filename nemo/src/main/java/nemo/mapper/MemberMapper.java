@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 
 @Mapper
@@ -17,7 +18,9 @@ public interface MemberMapper {
 
 	MemberDto selectMemberInfo(int memberNum) throws Exception;
 
-	int memberUpdate(MemberDto memberDto) throws Exception;
+	void memberUpdate(MemberDto memberDto) throws Exception;
+	int memberImgUpdate(MemberDto memberDto) throws Exception; //프사수정
+	MemberDto selectMyImg(int memberNum) throws Exception; //프사 get
 
 	int checkMemberId(String memberId) throws Exception;
 
@@ -33,6 +36,9 @@ public interface MemberMapper {
 
 	// 피신고자 이름 불러오기
 	MemberDto selectPiName(String memberId) throws Exception;
+	
+	//회원 탈퇴
+	 int delete(int memberNum);
 
 
 }

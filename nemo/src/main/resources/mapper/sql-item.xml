@@ -77,12 +77,10 @@ select * from item order by item_readcount desc
    
    <!--상품리스트 상세-->
    <select id="selectItemDetail" parameterType="int" resultType="nemo.dto.ItemDto">
-      select item_num, item_maincategory, item_subcategory,item_name,item_price,item_deposit
-           ,item_date,item_readcount,item_detail 
-           ,item_writer, item_weather, item_image,item_imagepath, item_topsize, item_bottomsize,
-           item_etcsize,item_rentalstart,item_rentalend,files
-        from item
-      where item_num =#{itemNum}
+      select i.*, m.member_img
+        from item i left join member m
+        on i.item_writer = m.member_id
+      where item_num =#{itemNum};
    </select>
 
 
