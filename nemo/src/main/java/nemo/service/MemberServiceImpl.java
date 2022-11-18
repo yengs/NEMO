@@ -129,4 +129,12 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberName);
 	}
+
+	// 관리자 - 접수하기 (warning +1)
+	@Override
+	public void confirmWarn(MemberDto memberDto) throws Exception{
+		int count = memberMapper.memberUpdate(memberDto);
+		System.out.println("누적횟수 " + count + "회 추가됨");
+	}
+
 }

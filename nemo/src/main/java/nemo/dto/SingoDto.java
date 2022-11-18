@@ -2,9 +2,12 @@ package nemo.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Component
 public class SingoDto {
 	
 	private int singoNum;
@@ -14,5 +17,9 @@ public class SingoDto {
 	private Date singoDate;
 	private String singoImage;
 	private String singoPisingoja;
+	private int singoWarning;
+	
+	private int memberNum;
+	private String memberName;
 
 }
