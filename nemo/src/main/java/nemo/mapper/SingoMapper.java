@@ -11,7 +11,7 @@ import nemo.dto.SingoDto;
 public interface SingoMapper {
 	
 	// 신고 insert
-	void insertSingo(SingoDto singoDto) throws Exception;
+	int insertSingo(SingoDto singoDto) throws Exception;
 
 	// 피신고자 이름 가져오기
 	MemberDto selectPiName(String memberId) throws Exception;

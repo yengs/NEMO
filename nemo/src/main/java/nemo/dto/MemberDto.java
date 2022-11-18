@@ -22,6 +22,7 @@ public class MemberDto {
 	private int memberWarning;
 	private int memberClean;
 	private String memberZipCode;
+	private String memberImg;
 	
 	private String memberLat;
 	private String memberLon;

@@ -1,11 +1,17 @@
 package nemo.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 import nemo.mapper.MemberMapper;
 import nemo.vo.MemberRequestVo;
@@ -39,6 +45,7 @@ public class MemberServiceImpl implements MemberService {
 		responseVo.setMemberAddress(resultDto.getMemberAddress());
 		responseVo.setMemberClean(resultDto.getMemberClean());
 		responseVo.setMemberZipCode(resultDto.getMemberZipCode());
+		responseVo.setMemberImg(resultDto.getMemberImg());
 
 		return responseVo;
 	}
@@ -47,11 +54,13 @@ public class MemberServiceImpl implements MemberService {
 	public int join(MemberDto member) throws Exception {
 		return memberMapper.join(member);
 	}
-
+	
+	//회원수정
 	@Override
 	public void memberUpdate(MemberDto memberDto) throws Exception {
 		memberMapper.memberUpdate(memberDto);
 	}
+	
 
 	@Override
 //	회원정보 조회
@@ -129,12 +138,41 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberName);
 	}
+	
+	
+	//프사수정
+	 @Override
+		public void memberImgUpdate(@RequestPart("data") MemberDto memberDto, @RequestPart("memberImg") MultipartFile memberImg) throws Exception {
+			
+		   if ( memberImg != null) {
+		      String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\memberImg";
+			   
+			   UUID uuid = UUID.randomUUID();
+			   String filename = uuid+"_"+memberImg.getOriginalFilename();
+			   File saveFile = new File(projectpath,filename);
+			   memberDto.setMemberImg(filename);
+			   try {
+				   memberImg.transferTo(saveFile);
+			      } catch (IllegalStateException e) {
+			         e.printStackTrace();
+			      } catch (IOException e) {
+			         e.printStackTrace();
+			      }	
+		   }
+		   	int count = memberMapper.memberImgUpdate(memberDto);
+			System.out.println("***************** " + count);
+		}
 
-	// 관리자 - 접수하기 (warning +1)
+	//프사 get
 	@Override
-	public void confirmWarn(MemberDto memberDto) throws Exception{
-		int count = memberMapper.memberUpdate(memberDto);
-		System.out.println("누적횟수 " + count + "회 추가됨");
+	public MemberDto selectMyImg(int memberNum) throws Exception {
+		return memberMapper.selectMyImg(memberNum);
 	}
+
+	//회원 탈퇴
+	@Override
+	public int delete(int memberNum) {
+	      return memberMapper.delete(memberNum);
+	   }
 
 }

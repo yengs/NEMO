@@ -17,6 +17,7 @@ public class MemberResponseVo {
 	private int memberClean;
 	private int memberWarning;
 	private String memberZipCode;
+	private String memberImg;
 	
 //	private String memberLat;
 //	private String memberLon;
