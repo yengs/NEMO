@@ -238,6 +238,7 @@ public class RestMemberApiController {
 			return memberService.findPwResult(memberId);
 		}
 		
+
 		//프로필 사진 수정
 		//프사 GET
 		@RequestMapping(value = "/memberimg/{memberNum}", method = RequestMethod.GET)
@@ -251,5 +252,13 @@ public class RestMemberApiController {
 		      memberDto.setMemberNum(memberNum);
 		      memberService.memberImgUpdate(memberDto, memberImg);
 		   }
+
+		//회원 탈퇴
+		 @RequestMapping(value = "/member/delete/{memberNum}", method = RequestMethod.DELETE)
+		   public void delete(@PathVariable("memberNum") int memberNum) throws Exception {
+			 memberService.delete(memberNum);
+		   }
+		   
+
 
 }

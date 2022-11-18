@@ -46,5 +46,8 @@ public interface MemberService {
 
 	// 피신고자 이름 불러오기
 	public MemberDto selectPiName(String memberName) throws Exception;
+	
+	//회원탈퇴
+	public int delete(int memberNum);
 
 }
