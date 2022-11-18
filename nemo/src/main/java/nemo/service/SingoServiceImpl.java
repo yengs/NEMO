@@ -56,11 +56,11 @@ public class SingoServiceImpl implements SingoService {
 
 	
 	// 관리자 - 접수하기 (warning +1)
-//	@Override
-//	public void confirmWarn(MemberDto memberDto) throws Exception{
-//		int count = memberMapper.memberUpdate(memberDto);
-//		System.out.println("누적횟수 " + count + "회 추가됨");
-//	}
+	@Override
+	public void confirmWarn(MemberDto memberDto) throws Exception{
+		memberMapper.memberUpdate(memberDto);
+		System.out.println("누적횟수 추가됨");
+	}
 	
 	// 관리자페이지로 피신고자 이름 가져오기
 	@Override
