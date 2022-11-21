@@ -45,6 +45,12 @@ public class ItemServiceImpl implements ItemService{
 	   return itemMapper.selectItemListWeeklyBestByReadcount();
    }
    
+ //베스트 스토어 리스트
+   @Override
+   public List<ItemDto> selectItemBestStoreByReadcount() throws Exception {
+	   return itemMapper.selectItemBestStoreByReadcount();
+   }
+   
    
    //상품 main 리스트
    @Override
@@ -89,15 +95,8 @@ public class ItemServiceImpl implements ItemService{
    //상품리스트상세 
    @Override
      public ItemDto selectItemDetail(int itemNum) throws Exception {
-//         public ItemDto selectItemDetail(int iNum, String loginId) throws Exception {
-//
-//        ItemDto item = itemMapper.selectItemDetail(iNum);
-//        if(loginId != null && loginId.equals(item.getItemWriter())) {
-//           return item;
-//        }else {
            itemMapper.updateReadCount(itemNum);
            return itemMapper.selectItemDetail(itemNum);
-//        }
      }
    
    
