@@ -49,6 +49,12 @@ public class RestItemApiController {
 	   }
    }
    
+   //베스트 스토어
+   @RequestMapping(value = "/item/beststore", method = RequestMethod.GET)
+   public List<ItemDto> selectItemBestStoreByReadcount() throws Exception {
+		   return itemService.selectItemBestStoreByReadcount();
+   }
+   
    
    // 상품리스트 main 조회
    @RequestMapping(value = "/item/cate/{itemMaincategory}", method = RequestMethod.GET)
@@ -67,7 +73,6 @@ public class RestItemApiController {
    public List<ItemDto> myItemList(@PathVariable("itemWriter") String itemWriter) throws Exception {
       return itemService.myItemList(itemWriter);
    }
-  
 
    //상품 등록 
    @RequestMapping(value = "/item", method = RequestMethod.POST)
