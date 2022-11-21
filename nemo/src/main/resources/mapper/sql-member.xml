@@ -20,7 +20,8 @@
 		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw},
 		now(), 1, #{memberPhone}, 0,
 		#{memberMailkey}, #{memberEmail},
-		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu}, concat('store',ROUND(RAND()*3),'.jpg') );
+		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu},
+		concat('store',ROUND(RAND()*3),'.jpg') );
 	</insert>
 
 	<!-- 로그인 -->
@@ -33,25 +34,30 @@
 
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate" parameterType="nemo.dto.MemberDto">
-		update member set member_nickname = #{memberNickname}, member_pw =
-		#{memberPw}, member_phone = #{memberPhone}, member_address =
-		#{memberAddress}, member_zipcode = #{memberZipCode}, member_sigungu = #{memberSigungu}
+		update member set
+		member_nickname = #{memberNickname}, member_pw =
+		#{memberPw},
+		member_phone = #{memberPhone}, member_address =
+		#{memberAddress},
+		member_zipcode = #{memberZipCode}, member_sigungu = #{memberSigungu}
 		where member_num = #{memberNum}
 	</update>
-	
+
 	<!-- 프사 수정 -->
 	<update id="memberImgUpdate" parameterType="nemo.dto.MemberDto">
-		update member set member_img = #{memberImg}
+		update member set
+		member_img = #{memberImg}
 		where member_num = #{memberNum}
 	</update>
-	
-	<!--프사 GET-->
-  	 <select id="selectMyImg" parameterType="int" resultType="nemo.dto.MemberDto">
+
+	<!--프사 GET -->
+	<select id="selectMyImg" parameterType="int"
+		resultType="nemo.dto.MemberDto">
 		select member_img
 		from member
 		where member_num = #{memberNum}
-  	 </select>
-	
+	</select>
+
 
 	<!-- 아이디 중복 -->
 	<select id="checkMemberId" resultType="int">
@@ -68,32 +74,37 @@
 	<!-- 아이디 찾기 입력창 -->
 	<select id="findId" resultType="nemo.dto.MemberDto"
 		parameterType="nemo.dto.MemberDto">
-		select * from member where member_name = #{memberName} and member_email =
+		select * from member where member_name = #{memberName}
+		and member_email =
 		#{memberEmail}
 	</select>
 
 	<!-- 아이디 찾기 결과창 -->
 	<select id="findResult" resultType="nemo.dto.MemberDto"
 		parameterType="nemo.dto.MemberDto">
-		select member_id from member where member_email = #{memberEmail}
+		select member_id from member where member_email =
+		#{memberEmail}
 	</select>
 
 	<!-- 비밀번호 찾기 입력창 -->
 	<select id="findPw" resultType="nemo.dto.MemberDto"
 		parameterType="nemo.dto.MemberDto">
-		select * from member where member_id = #{memberId} and member_email =
+		select * from member where member_id = #{memberId} and
+		member_email =
 		#{memberEmail}
 	</select>
 
 	<!-- 비밀번호 찾기 결과창 -->
 	<select id="findPwResult" resultType="nemo.dto.MemberDto"
 		parameterType="nemo.dto.MemberDto">
-		select member_pw from member where member_id = #{memberId}
+		select member_pw from member where member_id =
+		#{memberId}
 	</select>
 
 	<!-- 회원탈퇴 -->
 	<delete id="delete" parameterType="int">
-      delete from member 
-      WHERE member_num = #{memberNum}
-   </delete>
+		delete from member
+		WHERE member_num = #{memberNum}
+	</delete>
+
 </mapper>

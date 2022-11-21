@@ -259,6 +259,5 @@ public class RestMemberApiController {
 			 memberService.delete(memberNum);
 		   }
 		   
-
-
+		 
 }

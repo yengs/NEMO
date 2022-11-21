@@ -18,30 +18,33 @@
 	</select>
 	
 	<!-- 관리자 - 신고 접수하기 -->
-	<update id="confirmWarn" parameterType="nemo.dto.MemberDto">
-		update member set member_warning = member_warning + 1 where member_id = #{memberId}
+	<update id="confirmWarn" parameterType="nemo.dto.SingoDto">
+	update member right outer join singo on member_id = singo_pisingoja
+	set member_warning = member_warning + 1 where singo_num = #{singoNum};
 	</update>
 	
 	<!-- 관리자 - 신고 취소하기 -->
 	<delete id="deleteWarn" parameterType="int">
-		delete from item where member_id = #{memberId}
+		delete from singo where singo_num = #{singoNum}
 	</delete>
-	
-	<!-- <select id="selectWarning" resultType="nemo.dto.MemberDto"
-		parameterType="nemo.dto.MemberDto">
-		<![CDATA[
-			select * from member where member_warning <> 0
-		]]>
-	</select> -->
 	
 	<!--  관리자페이지로 피신고자 이름 가져오기 -->
 	<select id="ReasonNwriter" resultType="nemo.dto.SingoDto" parameterType="nemo.dto.SingoDto">
-		select * from member right outer join singo on member_id = singo_pisingoja
+		select * from member right outer join singo on member_id = singo_pisingoja order by singo_date desc
 	</select>
 	
 	<!-- 신고 상세보기 가져오기 -->
 	<select id="selectDetail" resultType="nemo.dto.SingoDto" parameterType="nemo.dto.SingoDto">
-		select * from singo where singo_Num = #{singoNum}
+		select * from singo where singo_num = #{singoNum}
 	</select>
+	
+	<!-- 신고 5번 이상 회원 정지(+신고글도 함께 삭제) -->
+	<delete id="deleteMember" parameterType="int">
+		<![CDATA[
+		delete member, singo from member right join singo
+		on member.member_id = singo.singo_pisingoja
+		where singo_num = #{singoNum} and member_warning >= 5
+		]]>
+	</delete>
 	
 </mapper>

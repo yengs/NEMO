@@ -57,9 +57,9 @@ public class SingoServiceImpl implements SingoService {
 	
 	// 관리자 - 접수하기 (warning +1)
 	@Override
-	public void confirmWarn(MemberDto memberDto) throws Exception{
-		memberMapper.memberUpdate(memberDto);
-		System.out.println("누적횟수 추가됨");
+	public void confirmWarn(SingoDto singoDto) throws Exception {
+		singoMapper.confirmWarn(singoDto);
+		singoMapper.deleteMember(singoDto.getSingoNum());
 	}
 	
 	// 관리자페이지로 피신고자 이름 가져오기
@@ -75,4 +75,17 @@ public class SingoServiceImpl implements SingoService {
 		return singoMapper.selectDetail(singoNum);
 	}
 
+	// 관리자 신고 취소
+	@Override
+	public void deleteWarn(int singoNum) throws Exception {
+		singoMapper.deleteWarn(singoNum);
+	}
+
+	// 신고 5번 이상 회원 정지
+	@Override
+	public void deleteMember(int singoNum) throws Exception {
+		singoMapper.deleteMember(singoNum);
+	}
+
+	
 }
