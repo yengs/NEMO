@@ -84,13 +84,13 @@ public class RestMemberApiController {
 	
 	
 //	jwt위한 추가 10.28 오전 12:04
-	@RequestMapping(value="member/login", method = RequestMethod.POST)
+	@RequestMapping(value="/member/login", method = RequestMethod.POST)
 	public ResponseEntity<MemberResponseVo> login(@RequestBody MemberRequestVo requestVo, HttpServletResponse response) throws Exception {
 		MemberResponseVo responseVo = memberService.login(requestVo);
 		if(responseVo == null) {
 			System.out.println(responseVo);
 			System.out.println(requestVo);
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
 		} else {
 			String secret = env.getProperty("token.secret");
 			Key hmacKey = new SecretKeySpec(
