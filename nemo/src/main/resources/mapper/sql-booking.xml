@@ -24,7 +24,7 @@
     
     <!-- 빌려왔어요 -->
     <select id="myBookingList" parameterType="String" resultType="nemo.dto.BookingDto">
-            select * from booking
+            select *, REPLACE(booking_depositstate, '(', '\n(') as booking_depositstate_n from booking
                where booking_member = #{bookingMember}
                 order by booking_num desc;
     </select>

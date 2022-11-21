@@ -19,5 +19,6 @@ import lombok.Data;
         private String bookingItemfiles;
         private String bookingYn;
         
+        private String bookingDepositstateN;
 
 }
