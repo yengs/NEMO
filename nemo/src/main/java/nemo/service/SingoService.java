@@ -31,10 +31,10 @@ public interface SingoService {
 	// 관리자 접수 취소
 	public void deleteWarn(int singoNum) throws Exception;
 
-	// 신고 5번 이상 회원 정지
+	// 신고 5번 이상 회원 신고내역에서 지우기
 	public void deleteMember(int singoNum) throws Exception;
 	
-	// 정지 회원 작성글 삭제
-//	public void deletePost(int singoNum) throws Exception;
+	// 신고 5번 누적 -> 정지회원(Y) 값으로 바꾸기
+	public void currentState(SingoDto singoDto) throws Exception;
 	
 }

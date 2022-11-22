@@ -21,5 +21,6 @@ public class SingoDto {
 	
 	private int memberNum;
 	private String memberName;
+	private String currentState;
 
 }
