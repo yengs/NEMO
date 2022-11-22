@@ -2,10 +2,12 @@ package nemo.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import nemo.dto.ReviewDto;
+
 
 public interface ReviewService {
 	

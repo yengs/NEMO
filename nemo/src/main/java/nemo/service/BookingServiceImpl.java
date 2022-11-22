@@ -15,6 +15,7 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingMapper bookingMapper;
 	
+	
 	 //상품등록
 	   @Override
 	     public void insertBooking(BookingDto bookingDto) throws Exception {
@@ -65,6 +66,8 @@ public class BookingServiceImpl implements BookingService {
         public List<BookingDto> allBooking(int bookingItemnum) throws Exception {
             return bookingMapper.allBooking(bookingItemnum);
        }
+       
+
 	   
 	   
 

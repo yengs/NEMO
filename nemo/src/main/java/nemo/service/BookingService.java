@@ -19,5 +19,6 @@ public interface BookingService {
 	public void updateBookingstate() throws Exception;  //예약중->대여중
     public void updateBookingstate2() throws Exception;  //대여중 -> 기간만료
 
-    public     List<BookingDto> allBooking(int bookingItemnum) throws Exception; //모든 대여날짜
+    public List<BookingDto> allBooking(int bookingItemnum) throws Exception; //모든 대여날짜
+    
 }
