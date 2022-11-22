@@ -68,6 +68,7 @@ public class SingoServiceImpl implements SingoService {
 	@Override
 	public void confirmWarn(SingoDto singoDto) throws Exception {
 		singoMapper.confirmWarn(singoDto);
+		singoMapper.currentState(singoDto);
 		singoMapper.deleteMember(singoDto.getSingoNum());
 		memberService.deletePost(memberDto.getMemberId());
 	}
@@ -91,10 +92,15 @@ public class SingoServiceImpl implements SingoService {
 		singoMapper.deleteWarn(singoNum);
 	}
 
-	// 신고 5번 이상 회원 정지
+	// 신고 5번 이상 회원글 신고내역에서 삭제
 	@Override
 	public void deleteMember(int singoNum) throws Exception {
 		singoMapper.deleteMember(singoNum);
 	}
 
+	// 정지회원 state Y로 바꾸기
+	@Override
+	public void currentState(SingoDto singoDto) throws Exception {
+		singoMapper.currentState(singoDto);
+	}
 }

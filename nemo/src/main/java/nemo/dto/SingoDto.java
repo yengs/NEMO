@@ -18,8 +18,10 @@ public class SingoDto {
 	private String singoImage;
 	private String singoPisingoja;
 	private int singoWarning;
+	private String singo_yn;
 	
 	private int memberNum;
 	private String memberName;
+	private String currentState;
 
 }
