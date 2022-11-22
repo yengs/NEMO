@@ -85,9 +85,9 @@ public class RestSingoApiController {
 		singoService.deleteWarn(singoNum);
 	}
 	
-	// 신고 5번 이상 회원 정지
-	@RequestMapping(value = "/dec/dec/{singoNum}", method = RequestMethod.DELETE)
-	public void deleteMember(@PathVariable("singoNum") int singoNum) throws Exception{
-		singoService.deleteMember(singoNum);
-	}
+//	// 신고 5번 이상 회원 정지
+//	@RequestMapping(value = "/dec/dec/{singoNum}", method = RequestMethod.DELETE)
+//	public void deleteMember(@PathVariable("singoNum") int singoNum) throws Exception{
+//		singoService.deleteMember(singoNum);
+//	}
 }

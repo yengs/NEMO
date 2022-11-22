@@ -20,7 +20,6 @@ public interface SingoService {
 	public MemberDto selectPiName(String memberId) throws Exception;
 	
 	// 관리자 접수 - 누적횟수 +1
-//	public void confirmWarn(MemberDto memberDto) throws Exception;
 	public void confirmWarn(SingoDto singoDto) throws Exception;
 
 	//  관리자페이지로 피신고자 이름 가져오기
@@ -34,4 +33,8 @@ public interface SingoService {
 
 	// 신고 5번 이상 회원 정지
 	public void deleteMember(int singoNum) throws Exception;
+	
+	// 정지 회원 작성글 삭제
+//	public void deletePost(int singoNum) throws Exception;
+	
 }

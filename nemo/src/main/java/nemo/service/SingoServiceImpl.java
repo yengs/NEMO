@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import nemo.dto.ItemDto;
 import nemo.dto.MemberDto;
 import nemo.dto.SingoDto;
+import nemo.mapper.ItemMapper;
 import nemo.mapper.MemberMapper;
 import nemo.mapper.SingoMapper;
 
@@ -25,6 +26,15 @@ public class SingoServiceImpl implements SingoService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private ItemMapper itemMapper;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private MemberDto memberDto;
 	
 	// 신고 insert
 	@Override
@@ -53,13 +63,13 @@ public class SingoServiceImpl implements SingoService {
 		System.out.println("피신고자 이름::::::::::::" + memberDto);
 		return memberMapper.selectPiName(memberId);
 	}
-
 	
 	// 관리자 - 접수하기 (warning +1)
 	@Override
 	public void confirmWarn(SingoDto singoDto) throws Exception {
 		singoMapper.confirmWarn(singoDto);
 		singoMapper.deleteMember(singoDto.getSingoNum());
+		memberService.deletePost(memberDto.getMemberId());
 	}
 	
 	// 관리자페이지로 피신고자 이름 가져오기
@@ -87,5 +97,4 @@ public class SingoServiceImpl implements SingoService {
 		singoMapper.deleteMember(singoNum);
 	}
 
-	
 }
