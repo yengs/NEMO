@@ -18,6 +18,7 @@ import lombok.Data;
         private String bookingItemwriter;
         private String bookingItemfiles;
         private String bookingYn;
+        private int reviewCount;
         
         private String bookingDepositstateN;
 
