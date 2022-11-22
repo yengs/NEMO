@@ -20,7 +20,7 @@
 	<!-- 관리자 - 신고 접수하기 -->
 	<update id="confirmWarn" parameterType="nemo.dto.SingoDto">
 	update member right outer join singo on member_id = singo_pisingoja
-	set member_warning = member_warning + 1 where singo_num = #{singoNum};
+	set member_warning = member_warning + 1 , singo_yn = 'Y' where singo_num = #{singoNum};
 	</update>
 	
 	<!-- 관리자 - 신고 취소하기 -->
@@ -30,7 +30,9 @@
 	
 	<!--  관리자페이지로 피신고자 이름 가져오기 -->
 	<select id="ReasonNwriter" resultType="nemo.dto.SingoDto" parameterType="nemo.dto.SingoDto">
-		select * from member right outer join singo on member_id = singo_pisingoja order by singo_date desc
+		select * from member right outer join singo on member_id = singo_pisingoja 
+		where singo_yn = 'N'
+		order by singo_date desc
 	</select>
 	
 	<!-- 신고 상세보기 가져오기 -->
