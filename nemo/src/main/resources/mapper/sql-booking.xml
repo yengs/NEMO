@@ -61,7 +61,7 @@
             where booking_itemnum  = #{bookingItemnum} and booking_yn = 'N';
     </select>
     
-    <!--후기작성 -->
+    <!--후기작성 여부-->
     <update id="updateReviewCount" parameterType="int">
 		update booking set review_count = review_count + 1  where booking_num = #{bookingNum};
 	</update>
