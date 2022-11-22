@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import nemo.dto.BookingDto;
 import nemo.dto.ItemDto;
 import nemo.dto.ReviewDto;
+import nemo.mapper.BookingMapper;
+import nemo.service.BookingService;
 import nemo.service.ReviewService;
 
 @RestController
@@ -22,6 +25,8 @@ public class RestReviewApiController {
 
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private BookingMapper bookingMapper;
 
 	/* 내가 작성한 후기 목록 */
 	@RequestMapping(value = "/review/myReview/{reviewWriter}", method = RequestMethod.GET)
@@ -37,10 +42,13 @@ public class RestReviewApiController {
 	}
 
 	/* 후기 등록 */
-	@RequestMapping(value = "/review/reviewWrite", method = RequestMethod.POST)
-	public void insertReview(@RequestPart(value="reviewData",required=false) ReviewDto review, @RequestPart(value="reviewFiles",required=false) MultipartFile files) throws Exception {
+	@RequestMapping(value = "/review/reviewWrite/{bookingNumm}", method = RequestMethod.POST)
+	public void insertReview(@PathVariable("bookingNumm") int bookingNum, @RequestPart(value="reviewData",required=false) ReviewDto review, @RequestPart(value="reviewFiles",required=false) MultipartFile files) throws Exception {
+	
+		bookingMapper.updateReviewCount(bookingNum);
 		reviewService.insertReview(review, files);
 	}
+
 	
 	/* 후기 상세 */
 	@RequestMapping(value = "/review/myReview/{reviewWriter}/{reviewNum}", method = RequestMethod.GET)
