@@ -40,4 +40,7 @@ public interface MemberMapper {
 	//회원 탈퇴
 	 int delete(int memberNum);
 
+	// 정지회원 작성글 삭제
+	void deletePost(String memberId) throws Exception;
+
 }
