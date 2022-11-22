@@ -29,4 +29,5 @@ public class MemberDto {
 	
 	private String memberSigungu;
 
+	private String currentState;
 }
