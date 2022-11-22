@@ -40,5 +40,4 @@ public interface MemberMapper {
 	//회원 탈퇴
 	 int delete(int memberNum);
 
-
 }
