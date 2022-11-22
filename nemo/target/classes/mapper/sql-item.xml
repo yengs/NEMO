@@ -11,12 +11,20 @@
 
 <!-- 주간베스트아이템 조회 -->
 <select id="selectItemListWeeklyBest" resultType="nemo.dto.ItemDto">
-select *, count(booking_itemnum) from item LEFT JOIN booking on item.item_num = booking.booking_itemnum where YEARWEEK(booking_date) = YEARWEEK(now()) group by booking_itemnum;
+	select *, count(booking_itemnum) from item LEFT JOIN booking on item.item_num = booking.booking_itemnum where YEARWEEK(booking_date) = YEARWEEK(now()) group by booking_itemnum;
 </select>
 
 <!-- 주간베스트아이템 존재하지 않을 때 조회해 올 조회수순으로 정렬한 아이템 -->
 <select id="selectItemListWeeklyBestByReadcount" resultType="nemo.dto.ItemDto">
-select * from item order by item_readcount desc
+	select * from item order by item_readcount desc
+</select>
+
+<!-- 베스트 스토어 -->
+<select id="selectItemBestStoreByReadcount" resultType="nemo.dto.ItemDto">
+		select DISTINCT i.item_writer, m.member_img
+		 from item i  left join  member m 
+		 on i.item_writer = m.member_id
+		 order by item_readcount desc Limit 5;
 </select>
 
 <!-- 기온별 상품 조회 -->
@@ -104,6 +112,7 @@ select * from item order by item_readcount desc
    <delete id="deleteItem" parameterType="int">
       delete from item where item_num = #{itemNum}
    </delete>
+   
    </mapper>
    
    

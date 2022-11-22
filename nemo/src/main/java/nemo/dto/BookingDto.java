@@ -20,5 +20,6 @@ import lombok.Data;
         private String bookingYn;
         private int reviewCount;
         
+        private String bookingDepositstateN;
 
 }

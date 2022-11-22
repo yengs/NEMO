@@ -13,6 +13,7 @@ public interface ItemService {
    public List<ItemDto> selectItemListByWeather(String itemWeather) throws Exception;
    public List<ItemDto> selectItemListWeeklyBest() throws Exception;
    public List<ItemDto> selectItemListWeeklyBestByReadcount() throws Exception;
+   public List<ItemDto> selectItemBestStoreByReadcount() throws Exception; //베스트 스토어
    public List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
    public List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception;
    public List<ItemDto> myItemList(String itemWriter) throws Exception;
