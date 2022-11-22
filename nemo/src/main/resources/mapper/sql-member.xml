@@ -106,5 +106,12 @@
 		delete from member
 		WHERE member_num = #{memberNum}
 	</delete>
+	
+	<!-- 정지 회원 글 삭제 (정지회원의 id값이 null이면 item도 삭제)-->
+	<delete id="deletePost" parameterType="String">
+		delete item from item left join member
+		on member.member_id = item.item_writer
+		where member.member_id is null;
+	</delete>
 
 </mapper>
