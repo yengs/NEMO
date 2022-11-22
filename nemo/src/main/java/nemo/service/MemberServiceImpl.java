@@ -175,4 +175,10 @@ public class MemberServiceImpl implements MemberService {
 	      return memberMapper.delete(memberNum);
 	   }
 
+	// 정지회원 작성글 삭제
+	@Override
+	public void deletePost(String memberId) throws Exception {
+		memberMapper.deletePost(memberId);
+	}
+
 }

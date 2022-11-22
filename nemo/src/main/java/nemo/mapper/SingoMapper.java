@@ -27,8 +27,11 @@ public interface SingoMapper {
 
 	// 관리자 신고 취소
 	int deleteWarn(int singoNum) throws Exception;
-
+	
 	// 신고 5번 이상 회원 정지
 	void deleteMember(int singoNum) throws Exception;
+
+	// 정지 회원 작성글 삭제
+//	void deletePost(int singoNum) throws Exception;
 
 }

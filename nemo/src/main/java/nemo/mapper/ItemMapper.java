@@ -21,6 +21,6 @@ public interface ItemMapper {
     ItemDto selectItemDetail(int itemNum) throws Exception;
     
     int updateItem(ItemDto itemDto) throws Exception;
-	int deleteItem(int itemNum) throws Exception;
+    int deleteItem(int itemNum) throws Exception;
 	
 }
