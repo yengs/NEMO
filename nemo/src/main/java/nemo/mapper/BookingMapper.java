@@ -25,4 +25,6 @@ public interface BookingMapper {
     void updateBookingstate2() throws Exception;  //대여중 -> 기간만료
 
     List<BookingDto> allBooking(int bookingItemnum) throws Exception; //모든 대여날짜
+    
+    void updateReviewCount(int bookingNum) throws Exception; //후기작성 여부
 }

@@ -8,11 +8,13 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import nemo.dto.ItemDto;
 import nemo.dto.ReviewDto;
+import nemo.mapper.BookingMapper;
 import nemo.mapper.ReviewMapper;
 
 @Service
@@ -20,6 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private ReviewMapper reviewMapper;
+	private BookingMapper bookingMapper;
 	
 	// 내가 쓴 리뷰 전체 불러오기 
 	@Override
