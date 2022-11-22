@@ -49,6 +49,9 @@ public interface MemberService {
 	
 	// 회원탈퇴
 	public int delete(int memberNum);
+	
+	// 정지회원 작성글 삭제
+	public void deletePost(String memberId) throws Exception;
 
 
 }
