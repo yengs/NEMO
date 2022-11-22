@@ -31,7 +31,7 @@ public interface SingoMapper {
 	// 신고 5번 이상 회원 정지
 	void deleteMember(int singoNum) throws Exception;
 
-	// 정지 회원 작성글 삭제
-//	void deletePost(int singoNum) throws Exception;
+	// 정지 회원 Y로 바꾸기
+	void currentState(SingoDto singoDto) throws Exception;
 
 }
