@@ -197,6 +197,18 @@ public class RestMemberApiController {
 			}
 		}
 		
+		// 회원가입 닉네임 중복여부
+		@RequestMapping(value = "/member/join/checknickname", method = RequestMethod.POST)
+		public String checkNickname(@ModelAttribute("memberNickname") String memberNickname) throws Exception {
+			System.out.println(memberNickname);
+			int nickname = memberService.checkNickname(memberNickname);
+			System.out.println(nickname);
+			if (nickname > 0) {
+				return "fail";
+			} else {
+				return "success";
+			}
+		}
 		// 아이디 비밀번호 찾기 ----------------------------------------------------
 		// 아이디 찾기 입력창
 		@RequestMapping(value = "/member/id", method = RequestMethod.POST)

@@ -79,6 +79,11 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(String memberEmail) throws Exception {
 		return memberMapper.checkEmail(memberEmail);
 	}
+	
+	// 닉네임 중복
+	public int checkNickname(String memberNickname) throws Exception {
+		return memberMapper.checkNickname(memberNickname);
+	}
 
 	// 아이디 비밀번호 찾기 ---------------------------------------------------------
 	// 아이디 찾기 입력창
