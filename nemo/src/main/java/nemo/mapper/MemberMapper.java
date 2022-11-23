@@ -22,9 +22,14 @@ public interface MemberMapper {
 	int memberImgUpdate(MemberDto memberDto) throws Exception; //프사수정
 	MemberDto selectMyImg(int memberNum) throws Exception; //프사 get
 
+	// 아이디 중복
 	int checkMemberId(String memberId) throws Exception;
-
+	
+	// 이메일 중복
 	int checkEmail(String memberEmail) throws Exception;
+	
+	// 닉네임 중복 
+	int checkNickname(String memberNickname) throws Exception;
 
 	// 아이디 찾기
 	MemberDto findId(MemberDto member) throws Exception;
@@ -42,5 +47,7 @@ public interface MemberMapper {
 
 	// 정지회원 작성글 삭제
 	void deletePost(String memberId) throws Exception;
+	
+
 
 }

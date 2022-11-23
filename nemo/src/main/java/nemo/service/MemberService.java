@@ -31,7 +31,10 @@ public interface MemberService {
 
 	// 이메일 중복
 	public int checkEmail(String memberEmail) throws Exception;
-
+	
+	// 닉네임 중복
+	public int checkNickname(String memberNickname) throws Exception;
+	
 	// 아이디 찾기 입력창
 	public MemberResponseVo findId(MemberRequestVo requestVo) throws Exception;
 
