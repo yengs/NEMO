@@ -26,6 +26,7 @@ public class ItemDto {
    private Date itemRentalend;
    private String files;
    
-   private String MemberImg;
+   private String memberImg;
+   private String memberNickname;
    
 }
