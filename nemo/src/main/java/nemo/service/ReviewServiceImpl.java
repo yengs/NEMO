@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public void insertReview(@RequestPart("reviewData") ReviewDto review, @RequestPart("reviewFiles") MultipartFile files) throws Exception {
 		if(files!=null) {
 
-		String projectpath = "C:\\Users\\hi\\git\\NEMO-react\\nemo-project\\public\\files_review";
+		String projectpath = "C:\\nemo\\git\\NEMO-react\\NEMO-react\\nemo-project\\public\\files_review";
 
 		UUID uuid = UUID.randomUUID();
 		   String filename = uuid+"_"+files.getOriginalFilename();
@@ -67,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
 		public void updateReview(@RequestPart("data") ReviewDto reviewDto, @RequestPart("reviewFiles") MultipartFile reviewFiles) throws Exception {
 			
 		   if ( reviewFiles != null) {
-		      String projectpath = "C:\\Users\\hi\\git\\NEMO-react\\nemo-project\\public\\files_review";
+		      String projectpath = "C:\\nemo\\git\\NEMO-react\\NEMO-react\\nemo-project\\public\\files_review";
 			   
 			   UUID uuid = UUID.randomUUID();
 			   String filename = uuid+"_"+reviewFiles.getOriginalFilename();

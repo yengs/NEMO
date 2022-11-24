@@ -11,4 +11,5 @@ public class MemberRequestVo {
 	private String memberId;
 	private String memberPw;
 	private String memberEmail;
+	private String currentState;
 }

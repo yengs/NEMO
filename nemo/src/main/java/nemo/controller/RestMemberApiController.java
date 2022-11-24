@@ -87,6 +87,7 @@ public class RestMemberApiController {
 	@RequestMapping(value="/member/login", method = RequestMethod.POST)
 	public ResponseEntity<MemberResponseVo> login(@RequestBody MemberRequestVo requestVo, HttpServletResponse response) throws Exception {
 		MemberResponseVo responseVo = memberService.login(requestVo);
+		MemberDto memberDto = new MemberDto();
 		if(responseVo == null) {
 			System.out.println(responseVo);
 			System.out.println(requestVo);
@@ -130,6 +131,7 @@ public class RestMemberApiController {
 			
 			
 			log.debug("토큰~~~~~~~!!!!!!!!!!!!!!---------------"+jwtToken);
+			log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+memberDto);
 			response.setHeader("jwtToken", jwtToken);
 //			response.getWriter().write(jwtToken);
 			return ResponseEntity.status(HttpStatus.OK).body(responseVo);
