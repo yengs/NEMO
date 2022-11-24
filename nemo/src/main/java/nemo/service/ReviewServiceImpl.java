@@ -38,7 +38,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void insertReview(@RequestPart("reviewData") ReviewDto review, @RequestPart("reviewFiles") MultipartFile files) throws Exception {
 		if(files!=null) {
-		String projectpath = "C:\\nemo\\git\\NEMO-react\\NEMO-react\\nemo-project\\public\\files_review";
+
+		String projectpath = "C:\\Users\\hi\\git\\NEMO-react\\nemo-project\\public\\files_review";
+
 		UUID uuid = UUID.randomUUID();
 		   String filename = uuid+"_"+files.getOriginalFilename();
 		   File saveFile = new File(projectpath,filename);
