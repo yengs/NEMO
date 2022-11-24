@@ -21,5 +21,8 @@ import lombok.Data;
         private int reviewCount;
         
         private String bookingDepositstateN;
+        
+        private String memberNickname;
+        private String memberImg;
 
 }

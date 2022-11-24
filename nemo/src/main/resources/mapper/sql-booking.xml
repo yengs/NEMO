@@ -17,14 +17,18 @@
 	
 	<!-- 빌려줬어요 -->
 	<select id="myLendList" parameterType="String" resultType="nemo.dto.BookingDto">
-      select * from booking
+      select b.*, m.member_nickname , m.member_img
+      from booking b left join member m 
+      on b.booking_member = m.member_id
       	where booking_itemwriter = #{bookingItemwriter}
        order by booking_num desc;
     </select>
     
     <!-- 빌려왔어요 -->
     <select id="myBookingList" parameterType="String" resultType="nemo.dto.BookingDto">
-            select *, REPLACE(booking_depositstate, '(', '\n(') as booking_depositstate_n from booking
+            select m.member_nickname, b.*, REPLACE(booking_depositstate, '(', '\n(') as booking_depositstate_n 
+            from booking b left join member m
+            on b.booking_itemwriter = m.member_id
                where booking_member = #{bookingMember}
                 order by booking_num desc;
     </select>
