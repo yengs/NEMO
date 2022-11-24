@@ -23,5 +23,5 @@ public class MemberResponseVo {
 //	private String memberLon;
 	
 	private String memberSigungu;
-	
+	private String currentState;
 }

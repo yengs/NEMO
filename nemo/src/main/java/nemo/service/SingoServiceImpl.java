@@ -39,7 +39,7 @@ public class SingoServiceImpl implements SingoService {
 	// 신고 insert
 	@Override
 	public int insertSingo(@RequestPart("data") SingoDto singoDto, @RequestPart("singoImage") MultipartFile singoImage) throws Exception {
-		 String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\files_singo";
+		 String projectpath = "C:\\nemo\\git\\NEMO-react\\NEMO-react\\nemo-project\\public\\files_singo";
 		   
 		   UUID uuid = UUID.randomUUID();
 		   String filename = uuid+"_"+singoImage.getOriginalFilename();

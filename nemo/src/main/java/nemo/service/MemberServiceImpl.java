@@ -46,6 +46,8 @@ public class MemberServiceImpl implements MemberService {
 		responseVo.setMemberClean(resultDto.getMemberClean());
 		responseVo.setMemberZipCode(resultDto.getMemberZipCode());
 		responseVo.setMemberImg(resultDto.getMemberImg());
+		responseVo.setCurrentState(resultDto.getCurrentState());
+		
 
 		return responseVo;
 	}
@@ -150,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 		public void memberImgUpdate(@RequestPart("data") MemberDto memberDto, @RequestPart("memberImg") MultipartFile memberImg) throws Exception {
 			
 		   if ( memberImg != null) {
-		      String projectpath = "C:\\react\\NEMO-react\\nemo-project\\public\\memberImg";
+		      String projectpath = "C:\\nemo\\git\\NEMO-react\\NEMO-react\\nemo-project\\public\\memberImg";
 			   
 			   UUID uuid = UUID.randomUUID();
 			   String filename = uuid+"_"+memberImg.getOriginalFilename();
