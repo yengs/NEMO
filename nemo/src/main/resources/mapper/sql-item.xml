@@ -85,7 +85,7 @@
    
    <!--상품리스트 상세-->
    <select id="selectItemDetail" parameterType="int" resultType="nemo.dto.ItemDto">
-      select i.*, m.member_img,m.member_nickname
+      select i.*, m.member_img, m.member_nickname
         from item i left join member m
         on i.item_writer = m.member_id
       where item_num =#{itemNum};
