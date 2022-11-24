@@ -28,5 +28,6 @@ public class ItemDto {
    
    private String memberImg;
    private String memberNickname;
+
    
 }
