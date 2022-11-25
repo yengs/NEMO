@@ -13,21 +13,16 @@ public class MemberDto {
 	private String memberId;
 	private String memberPw;
 	private String memberDate;
-	private String memberUser;
 	private String memberPhone;
-	private int memberMailauth;
-	private String memberMailkey;
 	private String memberEmail;
 	private String memberAddress;
 	private int memberWarning;
 	private int memberClean;
 	private String memberZipCode;
+	private String memberSigungu;
 	private String memberImg;
+	private String currentState;
 	
 	private String memberLat;
 	private String memberLon;
-	
-	private String memberSigungu;
-
-	private String currentState;
 }

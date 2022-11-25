@@ -17,8 +17,6 @@ public class ItemDto {
    private String itemDetail;
    private String itemWriter;
    private String itemWeather;
-   private String itemImage;
-   private String itemImagepath;
    private String itemTopsize;
    private String itemBottomsize;
    private String itemEtcsize;

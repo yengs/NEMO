@@ -75,10 +75,10 @@
    <!-- 상품등록 -->
    <insert id="insertItem" parameterType="nemo.dto.ItemDto">
       insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
-                    item_date,item_readcount,item_detail ,item_writer,item_weather,item_image,item_imagepath,
+                    item_date,item_readcount,item_detail ,item_writer,item_weather,
                     item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
       values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
-            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},"1","1",
+            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},
             #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
    </insert>
    

@@ -14,12 +14,10 @@
 	<insert id="join" parameterType="nemo.dto.MemberDto">
 		insert into
 		member(member_nickname, member_name, member_id, member_pw,
-		member_date, member_user, member_phone, member_mailauth,
-		member_mailkey, member_email, member_address, member_warning,
+		member_date, member_phone, member_email, member_address, member_warning,
 		member_clean, member_zipcode, member_sigungu, member_img)
 		values(#{memberNickname}, #{memberName}, #{memberId}, #{memberPw},
-		now(), 1, #{memberPhone}, 0,
-		#{memberMailkey}, #{memberEmail},
+		now(), #{memberPhone}, #{memberEmail},
 		#{memberAddress}, 0, 50, #{memberZipCode}, #{memberSigungu},
 		concat('store',ROUND(RAND()*3),'.jpg') );
 	</insert>
