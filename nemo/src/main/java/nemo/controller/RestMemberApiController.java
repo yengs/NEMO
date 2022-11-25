@@ -76,9 +76,6 @@ public class RestMemberApiController {
 	
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
    public void join(@RequestBody MemberDto member) throws Exception {
-		int randomMailKey = (int)(Math.random()*100000);
-		String to = Integer.toString(randomMailKey);
-		member.setMemberMailkey(to);
 		memberService.join(member);
    }
 	
@@ -143,9 +140,6 @@ public class RestMemberApiController {
 	public void updateMember(@PathVariable("memberNum") int memberNum, @RequestBody MemberDto memberDto) throws Exception {
 		System.out.println("회원정보 업데이트 컨트롤러");
 		memberDto.setMemberNum(memberNum);
-//		memberDto.setMemberDate(memberDto.getMemberDate());
-//		memberDto.setMemberUser(memberDto.getMemberUser());
-//		memberDto.setMemberMailkey(memberDto.getMemberMailkey());
 		System.out.println(memberDto);
 		memberService.memberUpdate(memberDto);
 	}
