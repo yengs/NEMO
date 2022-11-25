@@ -8,11 +8,11 @@ import lombok.Data;
 	public class BookingDto {
 		
 		private int bookingNum;
-		private int bookingItemnum;
         private String bookingMember; 
         private String bookingBookingstate;
         private String bookingDepositstate;
         private Date bookingDate;
+        private int bookingItemnum;
         private String bookingItemname;
         private int bookingItemprice;
         private String bookingItemwriter;

@@ -17,7 +17,6 @@ public class SingoDto {
 	private Date singoDate;
 	private String singoImage;
 	private String singoPisingoja;
-	private int singoWarning;
 	private String singo_yn;
 	
 	private int memberNum;
