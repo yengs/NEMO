@@ -21,10 +21,11 @@
 
 <!-- 베스트 스토어 -->
 <select id="selectItemBestStoreByReadcount" resultType="nemo.dto.ItemDto">
-		select DISTINCT i.item_writer, m.member_img,m.member_nickname
-		 from item i  left join  member m 
-		 on i.item_writer = m.member_id
-		 order by item_readcount desc Limit 5;
+		select i.item_writer, m.member_img,m.member_nickname, sum(item_readcount)
+         from item i  left join  member m 
+         on i.item_writer = m.member_id
+         group by i.item_writer
+         order by sum(item_readcount) desc Limit 5;
 </select>
 
 <!-- 기온별 상품 조회 -->
