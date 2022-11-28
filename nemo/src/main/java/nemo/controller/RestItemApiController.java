@@ -74,6 +74,12 @@ public class RestItemApiController {
       return itemService.myItemList(itemWriter);
    }
 
+   // 너의 상품리스트 조회
+   @RequestMapping(value = "/mypage/yourpageitem/{itemWriter}", method = RequestMethod.GET)
+   public List<ItemDto> yourItemList(@PathVariable("itemWriter") String itemWriter) throws Exception {
+	   return itemService.yourItemList(itemWriter);
+   }
+
    //상품 등록 
    @RequestMapping(value = "/item", method = RequestMethod.POST)
       public ResponseEntity<String> insertItem(@RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception {

@@ -17,6 +17,7 @@ public interface ItemService {
    public List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
    public List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception;
    public List<ItemDto> myItemList(String itemWriter) throws Exception;
+   public List<ItemDto> yourItemList(String itemWriter) throws Exception;
    
    public int insertItem(@RequestPart("data") ItemDto item, @RequestPart("files") MultipartFile files) throws Exception;
    public ItemDto selectItemDetail(int itemNum) throws Exception;

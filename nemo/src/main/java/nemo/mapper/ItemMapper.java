@@ -15,6 +15,7 @@ public interface ItemMapper {
     List<ItemDto> selectItemList(String itemMaincategory) throws Exception;
     List<ItemDto> selectItemsubList(String itemSubcategory) throws Exception;
     List<ItemDto> myItemList(String itemWriter) throws Exception;
+    List<ItemDto> yourItemList(String itemWriter) throws Exception;
     
     void updateReadCount(int itemNum) throws Exception;
     int insertItem(ItemDto item) throws Exception;
