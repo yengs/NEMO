@@ -57,6 +57,14 @@
        order by item_num desc;
     </select>
     
+     <!--남이 보는 페이지 대여가능 상품 -->
+   <select id="yourItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select *
+        from item
+      	where item_writer = #{itemWriter} and item_rentalend > now()
+       order by item_num desc;
+    </select>
+    
     <!--상품 조회수 -->
     <update id="updateReadCount" parameterType="int">
 		update item set item_readcount = item_readcount + 1  where item_num =#{itemNum}

@@ -48,13 +48,13 @@
 	<!-- 예약중->대여중 -->
     <update id="updateBookingstate" parameterType="nemo.dto.BookingDto">
         update booking set booking_bookingstate ="대여중" 
-        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d');
+        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d') and booking_bookingstate != '예약취소';
     </update>
 
     <!-- 대여중->기간만료 -->
     <update id="updateBookingstate2" parameterType="nemo.dto.BookingDto">
         update booking set booking_bookingstate ="기간만료" 
-        where DATE_FORMAT(now(),'%Y-%m-%d') > booking_date 
+        where DATE_FORMAT(now(),'%Y-%m-%d') > booking_date and booking_bookingstate != '예약취소';  
     </update>
 
 
