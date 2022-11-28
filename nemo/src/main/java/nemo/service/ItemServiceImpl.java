@@ -68,6 +68,12 @@ public class ItemServiceImpl implements ItemService{
    public List<ItemDto> myItemList(String itemWriter) throws Exception {
        return itemMapper.myItemList(itemWriter);
     }
+
+   //너의 상품 리스트
+   @Override
+   public List<ItemDto> yourItemList(String itemWriter) throws Exception {
+	   return itemMapper.yourItemList(itemWriter);
+   }
      
    //상품등록
    @Override
