@@ -107,8 +107,9 @@
 
 	<!-- 회원탈퇴 -->
 	<delete id="delete" parameterType="int">
-		delete from member
-		WHERE member_num = #{memberNum}
+		delete m, i from member as m left join item as i 
+		on m.member_id = i.item_writer 
+		where m.member_num = #{memberNum};
 	</delete>
 	
 	<!-- 정지 회원 글 삭제 (정지회원의 memberWarning이 5이면 item도 삭제)-->
