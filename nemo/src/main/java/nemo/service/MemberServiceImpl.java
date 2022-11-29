@@ -176,10 +176,27 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectMyImg(memberNum);
 	}
 
-	//회원 탈퇴
+	//회원 탈퇴 
 	@Override
 	public int delete(int memberNum) {
 	      return memberMapper.delete(memberNum);
+	   }
+	//회원 탈퇴시 리뷰삭제
+	@Override
+	public int delete2(int memberNum) {
+	      return memberMapper.delete2(memberNum);
+	   }
+	
+	//회원 탈퇴시 대여삭제
+	@Override
+	public int delete3(int memberNum) {
+	      return memberMapper.delete3(memberNum);
+	   }
+	
+	//회원 탈퇴시 대여삭제2
+	@Override
+	public int delete4(int memberNum) {
+	      return memberMapper.delete4(memberNum);
 	   }
 
 	// 정지회원 작성글 삭제
