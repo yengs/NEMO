@@ -114,7 +114,7 @@
 	
 	<!-- 회원탈퇴시 리뷰삭제 -->
 	<delete id="delete2" parameterType="int">
-		delete m, i from member as m left join review as i 
+		delete i from member as m left join review as i 
 		on m.member_id = i.REVIEW_ID
 		where m.member_num = #{memberNum};
 	</delete>
