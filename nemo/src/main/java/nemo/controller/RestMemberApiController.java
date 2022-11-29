@@ -264,6 +264,10 @@ public class RestMemberApiController {
 		//회원 탈퇴
 		 @RequestMapping(value = "/member/delete/{memberNum}", method = RequestMethod.DELETE)
 		   public void delete(@PathVariable("memberNum") int memberNum) throws Exception {
+			 
+			 memberService.delete3(memberNum);
+			 memberService.delete4(memberNum);
+			 memberService.delete2(memberNum);
 			 memberService.delete(memberNum);
 		   }
 		   
