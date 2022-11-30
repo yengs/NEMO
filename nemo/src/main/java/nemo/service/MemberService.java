@@ -53,6 +53,15 @@ public interface MemberService {
 	// 회원탈퇴
 	public int delete(int memberNum);
 	
+	// 회원탈퇴시 리뷰 삭제
+	public int delete2(int memberNum);
+	
+	//회원 탈퇴시 대여삭제
+	public int delete3(int memberNum);
+	
+	//회원 탈퇴시 대여삭제2
+	public int delete4(int memberNum);
+	
 	// 정지회원 작성글 삭제
 	public void deletePost(String memberId) throws Exception;
 
