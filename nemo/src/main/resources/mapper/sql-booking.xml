@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nemo.mapper.BookingMapper">
+
+
+	<!-- 대여하기 -->
+	<insert id="insertBooking" parameterType="nemo.dto.BookingDto">
+		INSERT INTO booking
+		(booking_itemnum, booking_member, booking_date
+		,booking_itemname, booking_itemprice, booking_itemwriter, booking_itemfiles)
+		VALUES
+		(#{bookingItemnum}, #{bookingMember}, #{bookingDate}
+		,#{bookingItemname}, #{bookingItemprice}, #{bookingItemwriter}, #{bookingItemfiles});
+	</insert>
+	
+	
+	<!-- 빌려줬어요 -->
+	<select id="myLendList" parameterType="String" resultType="nemo.dto.BookingDto">
+      select b.*, m.member_nickname , m.member_img
+      from booking b left join member m 
+      on b.booking_member = m.member_id
+      	where booking_itemwriter = #{bookingItemwriter}
+       order by booking_num desc;
+    </select>
+    
+    <!-- 빌려왔어요 -->
+    <select id="myBookingList" parameterType="String" resultType="nemo.dto.BookingDto">
+            select m.member_nickname, b.*, REPLACE(booking_depositstate, '(', '\n(') as booking_depositstate_n 
+            from booking b left join member m
+            on b.booking_itemwriter = m.member_id
+               where booking_member = #{bookingMember}
+                order by booking_num desc;
+    </select>
+    
+    <!-- 예약취소 -->
+    <delete id="bookingCancel" parameterType="int">
+		update booking set booking_yn = 'y', booking_bookingstate = '예약취소', booking_depositstate = '반환완료(예약취소)'
+		where booking_num = #{bookingNum};
+	</delete>
+	
+	<!-- 보증금상태 수정 -->
+	<update id="updateBooking" parameterType="nemo.dto.BookingDto">
+		update booking set booking_depositstate = #{bookingDepositstate} 
+		  where booking_num = #{bookingNum};
+	</update>
+	
+	<!-- 예약중->대여중 -->
+    <update id="updateBookingstate" parameterType="nemo.dto.BookingDto">
+        update booking set booking_bookingstate ="대여중" 
+        where booking_date = DATE_FORMAT(now(),'%Y-%m-%d') and booking_bookingstate != '예약취소';
+    </update>
+
+    <!-- 대여중->기간만료 -->
+    <update id="updateBookingstate2" parameterType="nemo.dto.BookingDto">
+        update booking set booking_bookingstate ="기간만료" 
+        where DATE_FORMAT(now(),'%Y-%m-%d') > booking_date and booking_bookingstate != '예약취소';  
+    </update>
+
+
+    <!-- 모든 대여날짜 -->
+     <select id="allBooking" parameterType="int" resultType="nemo.dto.BookingDto">
+            select booking_date
+            from booking
+            where booking_itemnum  = #{bookingItemnum} and booking_yn = 'N';
+    </select>
+    
+    <!--후기작성 여부-->
+    <update id="updateReviewCount" parameterType="int">
+		update booking set review_count = review_count + 1  where booking_num = #{bookingNum};
+	</update>
+	
+	
+</mapper>

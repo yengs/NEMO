@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nemo.mapper.ItemMapper">
+
+<!-- 로그인 안되어있을 때 메인 날씨추천리스트에 아이템 랜덤으로 띄워주기 -->
+<select id="selectItemListRandom" resultType="nemo.dto.ItemDto">
+	select * from item
+       order by RAND();
+</select>
+
+<!-- 주간베스트아이템 조회 -->
+<select id="selectItemListWeeklyBest" resultType="nemo.dto.ItemDto">
+	select *, count(booking_itemnum) from item LEFT JOIN booking on item.item_num = booking.booking_itemnum where YEARWEEK(booking_date) = YEARWEEK(now()) group by booking_itemnum;
+</select>
+
+<!-- 주간베스트아이템 존재하지 않을 때 조회해 올 조회수순으로 정렬한 아이템 -->
+<select id="selectItemListWeeklyBestByReadcount" resultType="nemo.dto.ItemDto">
+	select * from item order by item_readcount desc
+</select>
+
+<!-- 베스트 스토어 -->
+<select id="selectItemBestStoreByReadcount" resultType="nemo.dto.ItemDto">
+		select i.item_writer, m.member_img,m.member_nickname, sum(item_readcount)
+         from item i  left join  member m 
+         on i.item_writer = m.member_id
+         group by i.item_writer
+         order by sum(item_readcount) desc Limit 5;
+</select>
+
+<!-- 기온별 상품 조회 -->
+<select id="selectItemListByWeather" parameterType="String" resultType="nemo.dto.ItemDto">
+	select * from item
+       where item_weather = #{itemWeather}
+       order by item_num desc;
+</select>
+   
+   <!--상품 main 조회 -->
+   <select id="selectItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select * from item
+       where item_maincategory = #{itemMaincategory}
+       order by item_num desc;
+    </select>
+    
+    <!--상품 sub 조회 -->
+   <select id="selectItemsubList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select * from item
+       where item_subcategory = #{itemSubcategory}
+       order by item_num desc;
+    </select> 
+    
+    <!--내상품조회 -->
+   <select id="myItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select *
+        from item
+      	where item_writer = #{itemWriter}
+       order by item_num desc;
+    </select>
+    
+     <!--남이 보는 페이지 대여가능 상품 -->
+   <select id="yourItemList" parameterType="String" resultType="nemo.dto.ItemDto">
+      select *
+        from item
+      	where item_writer = #{itemWriter} and item_rentalend > now()
+       order by item_num desc;
+    </select>
+    
+    <!--상품 조회수 -->
+    <update id="updateReadCount" parameterType="int">
+		update item set item_readcount = item_readcount + 1  where item_num =#{itemNum}
+	</update>
+
+   <!-- 상품등록 -->
+   <insert id="insertItem" parameterType="nemo.dto.ItemDto">
+      insert into item (item_maincategory, item_subcategory, item_name,item_price,item_deposit,
+                    item_date,item_readcount,item_detail ,item_writer,item_weather,
+                    item_topsize,item_bottomsize,item_etcsize,item_rentalstart,item_rentalend,files) 
+      values ( #{itemMaincategory}, #{itemSubcategory},#{itemName},#{itemPrice},#{itemDeposit},now(),
+            #{itemReadcount},#{itemDetail},#{itemWriter},#{itemWeather},
+            #{itemTopsize},#{itemBottomsize},#{itemEtcsize},#{itemRentalstart},#{itemRentalend},#{files})
+   </insert>
+   
+   
+   <!--상품리스트 상세-->
+   <select id="selectItemDetail" parameterType="int" resultType="nemo.dto.ItemDto">
+      select i.*, m.member_img, m.member_nickname
+        from item i left join member m
+        on i.item_writer = m.member_id
+      where item_num =#{itemNum};
+   </select>
+
+
+	<!-- 상품 수정 -->
+	<update id="updateItem" parameterType="nemo.dto.ItemDto">
+		update item set item_name = #{itemName}, item_weather = #{itemWeather},
+		item_maincategory = #{itemMaincategory},
+		item_subcategory = #{itemSubcategory}, item_price = #{itemPrice},
+		item_deposit = #{itemDeposit}, item_topsize = #{itemTopsize},
+		item_bottomsize = #{itemBottomsize}, item_etcsize = #{itemEtcsize} , item_detail =#{itemDetail}
+		,item_rentalstart = #{itemRentalstart}, item_rentalend = #{itemRentalend}
+		
+		<if test="files != null">
+		,files=#{files}
+		</if>
+		
+		where item_num =#{itemNum}
+	</update>
+   
+   <!-- 상품 삭제 -->
+   <delete id="deleteItem" parameterType="int">
+      delete from item where item_num = #{itemNum}
+   </delete>
+   
+   </mapper>
+   
+   
+   

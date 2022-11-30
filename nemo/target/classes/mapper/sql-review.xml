@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nemo.mapper.ReviewMapper">
+
+	<!-- 내가 작성한 후기 목록 -->
+	<select id="selectMyReviewList" resultType="nemo.dto.ReviewDto">
+		SELECT * FROM
+		review
+		WHERE REVIEW_WRITER= #{reviewWriter} ORDER BY REVIEW_NUM DESC;
+	</select>
+
+	<!-- 내 상품에 대해 상대방이 쓴 후기 목록 -->
+	<select id="selectYourReviewList"
+		resultType="nemo.dto.ReviewDto">
+		SELECT * FROM
+		REVIEW
+		WHERE REVIEW_ID = #{reviewId} ORDER BY REVIEW_NUM DESC;
+	</select>
+
+	<!-- 후기 등록 -->
+	<insert id="insertReview" parameterType="nemo.dto.ReviewDto">
+		INSERT INTO REVIEW
+		(REVIEW_CONTENTS,
+		REVIEW_SATISFACTION, REVIEW_WRITER, REVIEW_FILES,
+		REVIEW_ID, REVIEW_PRODUCTIDX, REVIEW_ITEMFILES, REVIEW_ITEMNAME,
+		REVIEW_ITEMPRICE )
+		VALUES (#{reviewContents}, #{reviewSatisfaction},
+		#{reviewWriter}, #{reviewFiles} , #{reviewId} , #{reviewProductIdx},
+		#{reviewItemfiles}, #{reviewItemname}, #{reviewItemprice});
+	</insert>
+
+	<!-- 내가 쓴 후기 상세 페이지 -->
+	<select id="selectMyReviewDetail" parameterType="int"
+		resultType="nemo.dto.ReviewDto">
+		SELECT *
+		FROM review
+		WHERE
+		REVIEW_NUM=#{reviewNum}
+	</select>
+
+	<!-- 내 상품에 대한 상대방의 후기 상세 페이지 -->
+	<select id="selectYourReviewDetail" parameterType="int"
+		resultType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM,
+		REVIEW_ID, REVIEW_CONTENTS,
+		REVIEW_SATISFACTION
+		FROM REVIEW WHERE
+		REVIEW_NUM=#{reviewNum}
+	</select>
+
+	<!-- 후기 수정 -->
+	<update id="updateReview" parameterType="nemo.dto.ReviewDto">
+		UPDATE REVIEW SET
+		REVIEW_CONTENTS = #{reviewContents},
+		REVIEW_SATISFACTION = #{reviewSatisfaction}
+
+		<if test="reviewFiles != null">
+			,review_files=#{reviewFiles}
+		</if>
+
+		where REVIEW_NUM = #{reviewNum}
+
+	</update>
+
+	<!-- 후기 삭제 -->
+	<delete id="deleteReview" parameterType="nemo.dto.ReviewDto">
+		DELETE FROM REVIEW
+		WHERE
+		REVIEW_WRITER=#{reviewWriter} and REVIEW_NUM=#{reviewNum}
+	</delete>
+
+	<!-- 내 상점 리뷰 중 가장 최근 후기 하나 -->
+	<select id="mostRecentReviewOfMyStore"
+		parameterType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM, REVIEW_FILES, REVIEW_ID,
+		REVIEW_SATISFACTION
+		FROM REVIEW
+		WHERE REVIEW_ID=#{reviewId}
+		ORDER BY REVIEW_NUM
+		DESC LIMIT 1;
+	</select>
+
+	<!-- 내가 쓴 후기 중 가장 최근 후기 둘 -->
+	<select id="twoOfMyMostRecentReviews"
+		parameterType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM,
+		REVIEW_WRITER,
+		REVIEW_SATISFACTION,
+		REVIEW_FILES,
+		REVIEW_CONTENTS FROM
+		review
+		WHERE
+		REVIEW_WRITER=#{reviewWriter} ORDER BY REVIEW_NUM DESC ;
+	</select>
+
+	<!-- 아이템 밑에 후기 조회 -->
+	<select id="ItemReview" parameterType="int"
+		resultType="nemo.dto.ReviewDto">
+		SELECT REVIEW_NUM, REVIEW_WRITER, REVIEW_SATISFACTION,
+		REVIEW_FILES, REVIEW_CONTENTS
+		FROM review
+		WHERE REVIEW_PRODUCTIDX=#{reviewProductIdx} ORDER BY REVIEW_NUM DESC ;
+	</select>
+
+	<!-- 클린지수 조회 -->
+	<select id="selectSatisfaction"
+		parameterType="String" resultType="int">
+		select CEIL(avg(review_satisfaction)) as clean from review 
+		where REVIEW_ID = #{reviewId} ;
+	</select>
+
+</mapper>

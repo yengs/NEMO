@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nemo.mapper.SingoMapper">
+
+	<!-- 신고하기 -->
+	<insert id="insertSingo" parameterType="nemo.dto.SingoDto">
+		insert into
+		singo(singo_writer, singo_reason, singo_content, singo_date,
+		singo_image, singo_pisingoja)
+		values(#{singoWriter}, #{singoReason}, #{singoContent},
+		now(), #{singoImage}, #{singoPisingoja})
+	</insert>
+	
+	<!-- 피신고자 이름 가져오기 -->
+	<select id="selectPiName" resultType="nemo.dto.MemberDto"
+		parameterType="nemo.dto.MemberDto">
+		select member_name from member where member_id = #{memberId}
+	</select>
+	
+	<!-- 관리자 - 신고 접수하기 -->
+	<update id="confirmWarn" parameterType="nemo.dto.SingoDto">
+	update member right outer join singo on member_id = singo_pisingoja
+	set member_warning = member_warning + 1 , singo_yn = 'Y' where singo_num = #{singoNum};
+	</update>
+	
+	<!-- 관리자 - 신고 취소하기 -->
+	<delete id="deleteWarn" parameterType="int">
+		delete from singo where singo_num = #{singoNum}
+	</delete>
+	
+	<!--  관리자페이지로 피신고자 이름 가져오기 -->
+	<select id="ReasonNwriter" resultType="nemo.dto.SingoDto" parameterType="nemo.dto.SingoDto">
+		select * from member right outer join singo on member_id = singo_pisingoja
+		where current_state = "N" and singo_yn = 'N'
+		order by singo_date desc
+	</select>
+	
+	<!-- 신고 상세보기 가져오기 -->
+	<select id="selectDetail" resultType="nemo.dto.SingoDto" parameterType="nemo.dto.SingoDto">
+		select * from singo where singo_num = #{singoNum}
+	</select>
+	
+	<!-- 신고 5번 이상 회원의 신고글 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		<![CDATA[
+		delete singo from member right join singo
+		on member.member_id = singo.singo_pisingoja
+		where singo_num = #{singoNum} and member_warning >= 5
+		]]>
+	</delete>
+	
+	<!-- 신고 5번 이상 회원 신고상태 Y로 변경하기(추후 재가입 방지) -->
+	<update id="currentState" parameterType="nemo.dto.SingoDto">
+		<![CDATA[
+		update member right outer join singo on member_id = singo_pisingoja 
+		set current_state = 'Y' where member_warning = 5
+		]]>
+	</update>
+	
+</mapper>
