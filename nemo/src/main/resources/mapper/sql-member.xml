@@ -105,12 +105,34 @@
 		#{memberId}
 	</select>
 
-	<!-- 회원탈퇴 -->
+	<!-- 회원탈퇴시 탈퇴 &상품 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete m, i from member as m left join item as i 
 		on m.member_id = i.item_writer 
 		where m.member_num = #{memberNum};
 	</delete>
+	
+	<!-- 회원탈퇴시 리뷰삭제 -->
+	<delete id="delete2" parameterType="int">
+		delete i from member as m left join review as i 
+		on m.member_id = i.REVIEW_ID
+		where m.member_num = #{memberNum};
+	</delete>
+	
+	<!-- 회원 탈퇴시 대여삭제 -->
+	<delete id="delete3" parameterType="int">
+		delete i from member as m left join booking as i 
+		on m.member_id = i.booking_itemwriter
+		where m.member_num = #{memberNum};
+	</delete>
+	
+	<!-- 회원 탈퇴시 대여삭제2 -->
+	<delete id="delete4" parameterType="int">
+		delete i from member as m left join booking as i 
+		on m.member_id = i.booking_member
+		where m.member_num = #{memberNum};
+	</delete>
+	
 	
 	<!-- 정지 회원 글 삭제 (정지회원의 memberWarning이 5이면 item도 삭제)-->
 	<delete id="deletePost" parameterType="String">

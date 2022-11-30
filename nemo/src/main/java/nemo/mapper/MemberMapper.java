@@ -44,6 +44,15 @@ public interface MemberMapper {
 	
 	//회원 탈퇴
 	 int delete(int memberNum);
+	 
+	 // 회원탈퇴시 리뷰 삭제
+	 int delete2(int memberNum);
+	 
+	 //회원 탈퇴시 대여삭제
+	 int delete3(int memberNum);
+	 
+	//회원 탈퇴시 대여삭제2
+	 int delete4(int memberNum);
 
 	// 정지회원 작성글 삭제
 	void deletePost(String memberId) throws Exception;
